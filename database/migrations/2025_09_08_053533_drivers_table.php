@@ -15,21 +15,21 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('age');
-            $table->string('mobile_number')->unique();
-            $table->boolean('status');
+            $table->string('mobile_number',20)->unique();
+            $table->boolean('status')->default(0);
             $table->string('password');
-            $table->string('driver_license_number')->unique();
+            $table->string('driver_license_number', 100)->unique();
             $table->string('driver_image');
             $table->integer('total_experience_years');
-            $table->integer('hill_expericence');
+            $table->integer('hill_experience');
             $table->string('accident_history');
             $table->boolean('luxury_car_experience');
             $table->string('address');
-            $table->integer('pincode');
+            $table->string('pincode',10);
             $table->unsignedInteger('failed_attempts')->default(0);
-            $table->boolean('is_blocked');
+            $table->boolean('is_blocked')->default(0);
             $table->softDeletes(); 
-            $table->string('created_by');
+            $table->string('created_by')->default('admin');
             $table->timestamps();
         });
     }
