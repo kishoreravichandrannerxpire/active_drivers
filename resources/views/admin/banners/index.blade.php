@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
-        <h2>Banners</h2>
+        <h2>Banners List</h2>
         <a href="{{ route('banners.create') }}" class="btn btn-primary">+ Add Banner</a>
     </div>
 

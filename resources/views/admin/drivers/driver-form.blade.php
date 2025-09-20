@@ -15,7 +15,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('driver.submit') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.drivers.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-6">

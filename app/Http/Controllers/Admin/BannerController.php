@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::oldest()->paginate(10);
-        return view('banners.index', compact('banners'));
+        return view('admin.banners.index', compact('banners'));
     }
 
     /**
@@ -22,7 +23,7 @@ class BannerController extends Controller
     public function create()
     {
       $banner = new Banner(); // create empty model instance
-      return view('banners.create', compact('banner'));
+      return view('admin.banners.create', compact('banner'));
     }
 
     /**
@@ -53,7 +54,7 @@ class BannerController extends Controller
 
         Banner::create($data);
 
-        return redirect()->route('banners.index')
+        return redirect()->route('admin.banners.index')
             ->with('success', 'Banner created successfully.');
     }
 
@@ -62,7 +63,7 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        return view('banners.edit', compact('banner'));
+        return view('admin.banners.edit', compact('banner'));
     }
 
     /**
@@ -90,7 +91,7 @@ class BannerController extends Controller
 
         $banner->update($data);
 
-        return redirect()->route('banners.index')
+        return redirect()->route('admin.banners.index')
             ->with('success', 'Banner updated successfully.');
     }
 
@@ -101,7 +102,7 @@ class BannerController extends Controller
     {
         $banner->delete();
 
-        return redirect()->route('banners.index')
+        return redirect()->route('admin.banners.index')
             ->with('success', 'Banner deleted successfully.');
     }
     
@@ -110,7 +111,7 @@ class BannerController extends Controller
     // Fetch only active banners
         $banners = Banner::where('status', 1)->get();
 
-        return view('banners.view', compact('banners'));
+        return view('admin.banners.view', compact('banners'));
    }
 
 }
