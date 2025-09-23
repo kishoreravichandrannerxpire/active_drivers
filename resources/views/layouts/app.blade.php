@@ -35,6 +35,9 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('admin/drivers') }}"> Drivers</a>
                 </li>
+                <li>
+                    <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
+                </li>
             </ul>
         </div>
 

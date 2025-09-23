@@ -52,3 +52,8 @@ Route::get('/admin/dashboard', function () {
 
 use App\Http\Controllers\Admin\DashboardController;
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+use App\Http\Controllers\Admin\CustomerController;
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('customers', CustomerController::class)->except(['show']);
+});
