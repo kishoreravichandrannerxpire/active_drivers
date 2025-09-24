@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Driver Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-header bg-success text-white text-center rounded-top-4">
+@extends('layouts.app')
+
+@section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<style>
+    label{
+        color: #020633ff;
+    }
+</style>
+
+<div class="container mt-3">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header text-white text-center rounded-top-4" style="background: orange;">
             <h2 class="mb-0">Driver Registration Form</h2>
         </div>
         <div class="card-body p-4">
@@ -103,11 +115,14 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-success px-5">Submit Driver</button>
+                    <button type="submit" class="btn btn-success px-5" style="background: orange;">Submit Driver</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-</body>
-</html>
+</div>
+</div>
+</div>
+@endsection
+
