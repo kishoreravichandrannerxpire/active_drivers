@@ -38,6 +38,9 @@
                 <li>
                     <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
                 </li>
+                <li>
+                    <a class="nav-link text-white" href="{{ url('admin/cars') }}"> Cars</a>
+                </li>
             </ul>
         </div>
 

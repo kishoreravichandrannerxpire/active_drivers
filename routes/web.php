@@ -57,3 +57,8 @@ use App\Http\Controllers\Admin\CustomerController;
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('customers', CustomerController::class)->except(['show']);
 });
+
+use App\Http\Controllers\Admin\CarController;
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('cars', CarController::class)->except(['show']);
+});

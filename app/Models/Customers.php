@@ -12,8 +12,14 @@ class Customers extends Model
         'mobile_number',
         'password'
     ];
-    public function availalabilities()
+
+    public function cars()
     {
-        return $this->hasMany(CustomerAvailability::class, 'customers_id');
+        return $this->hasMany(Cars::class, 'customers_id');
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class, 'customers_id');
     }
 }
