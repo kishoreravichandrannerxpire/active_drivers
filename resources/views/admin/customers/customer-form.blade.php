@@ -28,19 +28,25 @@
 
     <form action="{{ route('admin.customers.store') }}" method="POST">
         @csrf
-        <div class="mb-3">
+        <div class="mb-3 row">
+        <div class="col-sm-4">
             <label class="form-label">Name *</label>
             <input type="text" name="name" class="form-control" required>
         </div>
-
-        <div class="mb-3">
+        </div>
+        
+        <div class="mb-3 row">
+        <div class="col-sm-4">
             <label class="form-label">Mobile Number *</label>
             <input type="text" name="mobile_number" class="form-control" required>
         </div>
+        </div>
 
-        <div class="mb-3">
+        <div class="mb-3 row">
+        <div class="col-sm-4">
             <label class="form-label">Password *</label>
             <input type="password" name="password" class="form-control" required>
+        </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Create Customer</button>
