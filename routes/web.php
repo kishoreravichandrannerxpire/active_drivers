@@ -23,7 +23,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 use App\Http\Controllers\Admin\BannerController;
-Route::get('/admin/banners/index', [BannerController::class, 'index']);
+Route::get('/admin/banners/index', [BannerController::class, 'index'])->name('admin.banners.index');
 Route::resource('/admin/banners', BannerController::class)->except(['show']);
 Route::get('/admin/view-banners', [BannerController::class, 'viewActive'])->name('admin.banners.view');
 
@@ -61,4 +61,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 use App\Http\Controllers\Admin\CarController;
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('cars', CarController::class)->except(['show']);
+});
+
+use App\Http\Controllers\Admin\BookingsController;
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('bookings', BookingsController::class)->except(['show']);
+    Route::get('customers/{id}/cars', [BookingsController::class, 'getCustomerCars'])->name('customers.cars');
 });
