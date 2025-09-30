@@ -18,19 +18,24 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('admin.user.submit') }}" method="POST">
+    <form action="{{ route('admin.user.store') }}" method="POST">
         @csrf
         <div class="mb-3">
+            <div class="col-sm-4">
             <label class="form-label">Name *</label>
             <input type="text" name="name" class="form-control" required>
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Email *</label>
-            <input type="email" name="email" class="form-control" required>
         </div>
 
         <div class="mb-3">
+            <div class="col-sm-4">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="col-sm-4">
             <label class="form-label">Role *</label>
             <select name="roles_id" class="form-control" required>
                 @foreach($roles as $role)
@@ -38,10 +43,13 @@
                 @endforeach
             </select>
         </div>
+        </div>
 
         <div class="mb-3">
+            <div class="col-sm-4">
             <label class="form-label">Password *</label>
             <input type="password" name="password" class="form-control" required>
+        </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Create User</button>

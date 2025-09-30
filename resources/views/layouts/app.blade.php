@@ -27,7 +27,7 @@
             <h4 class="mb-4">Dashboard</h4>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/user/form') }}"> User</a>
+                    <a class="nav-link text-white" href="{{ url('admin/user') }}"> User</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('admin/banners') }}"> Banners</a>

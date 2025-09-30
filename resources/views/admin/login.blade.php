@@ -15,12 +15,9 @@
         <div class="col-md-6">
 
             <h3 class="mb-4 text-center">Admin Login</h3>
-            @if ($errors->has('msg'))
-    <div class="alert alert-danger">
-        {{ $errors->first('msg') }}
-    </div>
-@endif
-
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <form action="{{ route('admin.login.submit') }}" method="POST">
                 @csrf
 

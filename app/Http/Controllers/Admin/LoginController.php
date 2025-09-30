@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -21,6 +22,12 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ])) {
+            return redirect()->route('admin.dashboard');
+        }
         // Fetch admin from DB
         $admin = DB::table('users')->where('email', $request->email)->first();
 
@@ -36,7 +43,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        session()->forget('admin'); // Remove session
+        Auth::logout(); 
         return redirect()->route('admin.login');
     }
 }

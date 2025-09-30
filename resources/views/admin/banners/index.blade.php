@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <h2>Banners List</h2>
-        <a href="{{ route('banners.create') }}" class="btn btn-primary">+ Add Banner</a>
+        <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">+ Add Banner</a>
     </div>
 
     @if(session('success'))
@@ -41,8 +41,8 @@
                 @endif
                 </td>
                 <td>
-                    <a href="{{ route('banners.edit', $banner->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('banners.destroy', $banner->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('admin.banners.edit', $banner->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ route('admin.banners.destroy', $banner->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">

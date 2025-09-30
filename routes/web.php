@@ -1,70 +1,74 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 use App\Http\Controllers\DriverAvailabilityController;
+use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\BookingsController;
 
-Route::get('/driver/availability/form', function () {
-    return view('driver_availability');
-});
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', fn() => view('welcome'));
 
+Route::get('/driver/availability/form', fn() => view('driver_availability'));
 Route::post('/driver/availability', [DriverAvailabilityController::class, 'store'])->name('availability.store');
 
+Route::get('/home', fn() => view('home'))->name('home');
 
-use App\Http\Controllers\Admin\DriverController;
+Route::get('/test-middleware', function () {
+    $middleware = app()->make(\App\Http\Middleware\AdminMiddleware::class);
+    return 'Middleware exists: ' . get_class($middleware);
+});
 
-Route::prefix('admin')->name('admin.')->group(function () {
+
+/*
+|--------------------------------------------------------------------------
+| Admin Authentication Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [LoginController::class, 'login'])->name('admin.login.submit');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Protected Admin Routes
+|--------------------------------------------------------------------------
+|
+| Only authenticated admins can access these routes
+|
+*/
+Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function () {
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Drivers
     Route::resource('drivers', DriverController::class)->except(['show']);
-});
 
+    // Banners
+    Route::resource('banners', BannerController::class)->except(['show']);
+    Route::get('view-banners', [BannerController::class, 'viewActive'])->name('banners.view');
 
-use App\Http\Controllers\Admin\BannerController;
-Route::get('/admin/banners/index', [BannerController::class, 'index'])->name('admin.banners.index');
-Route::resource('/admin/banners', BannerController::class)->except(['show']);
-Route::get('/admin/view-banners', [BannerController::class, 'viewActive'])->name('admin.banners.view');
+    // Users
+    Route::resource('user', UserController::class)->except(['show']);
 
-use App\Http\Controllers\HomeController;
-Route::get('/home', function () {
-    return view('home');
-});
-
-use App\Http\Controllers\Admin\UserController;
-Route::get('/admin/user/form', [UserController::class, 'showform'])->name('admin.user.form');
-Route::post('/admin/user/submit', [UserController::class, 'submitform'])->name('admin.user.submit');
-
-use App\Http\Controllers\Admin\LoginController;
-
-Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.submit');
-Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
-
-// Protect dashboard using manual session check (NOT auth middleware)
-Route::get('/admin/dashboard', function () {
-    if (!session()->has('admin')) {
-        return redirect()->route('admin.login')->withErrors(['msg' => 'Please login first']);
-    }
-    return view('admin.dashboard');
-})->name('admin.dashboard');
-
-use App\Http\Controllers\Admin\DashboardController;
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-
-use App\Http\Controllers\Admin\CustomerController;
-Route::prefix('admin')->name('admin.')->group(function () {
+    // Customers
     Route::resource('customers', CustomerController::class)->except(['show']);
-});
 
-use App\Http\Controllers\Admin\CarController;
-Route::prefix('admin')->name('admin.')->group(function () {
+    // Cars
     Route::resource('cars', CarController::class)->except(['show']);
-});
 
-use App\Http\Controllers\Admin\BookingsController;
-Route::prefix('admin')->name('admin.')->group(function () {
+    // Bookings
     Route::resource('bookings', BookingsController::class)->except(['show']);
     Route::get('customers/{id}/cars', [BookingsController::class, 'getCustomerCars'])->name('customers.cars');
 });
