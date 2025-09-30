@@ -20,6 +20,36 @@ class Customers extends Model
 
     public function histories()
     {
-        return $this->hasMany(History::class, 'customers_id');
+        return $this->hasMany(CustomerHistory::class, 'customers_id');
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($customer) {
+            $customer->histories()->create([
+                'name'            => $customer->name,
+                'mobile_number'   => $customer->mobile_number,
+                'password'        => $customer->password,
+                'action'          => 'created',
+            ]);
+        });
+
+        static::updated(function ($customer) {
+            $customer->histories()->create([
+                'name'            => $customer->name,
+                'mobile_number'   => $customer->mobile_number,
+                'password'        => $customer->password,
+                'action'          => 'updated',
+            ]);
+        });
+
+        static::deleting(function ($customer) {
+            $customer->histories()->create([
+                'name'            => $customer->name,
+                'mobile_number'   => $customer->mobile_number,
+                'password'        => $customer->password,
+                'action'          => 'deleted',
+            ]);
+        });
     }
 }

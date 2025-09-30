@@ -17,5 +17,44 @@ class DriverAvailability extends Model
     {
         return $this->belongsTo(Drivers::class, 'drivers_id');
     }
+    public function histories()
+    {
+        return $this->hasMany(DriverAvailabilityHistory::class, 'driver_availability_id');
+    }
+    protected static function booted()
+    {
+        static::created(function ($availability) {
+            $availability->histories()->create([
+                'drivers_id'      => $availability->drivers_id,
+                'available_date'  => $availability->available_date,
+                'start_time'      => $availability->start_time,
+                'end_time'        => $availability->end_time,
+                'status'          => $availability->status,
+                'action'          => 'created',
+            ]);
+        });
+
+        static::updated(function ($availability) {
+            $availability->histories()->create([
+                'drivers_id'      => $availability->drivers_id,
+                'available_date'  => $availability->available_date,
+                'start_time'      => $availability->start_time,
+                'end_time'        => $availability->end_time,
+                'status'          => $availability->status,
+                'action'          => 'updated',
+            ]);
+        });
+
+        static::deleting(function ($availability) {
+            $availability->histories()->create([
+                'drivers_id'      => $availability->drivers_id,
+                'available_date'  => $availability->available_date,
+                'start_time'      => $availability->start_time,
+                'end_time'        => $availability->end_time,
+                'status'          => $availability->status,
+                'action'          => 'deleted',
+            ]);
+        });
+    }
 }
 ?>
