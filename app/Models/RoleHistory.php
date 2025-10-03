@@ -9,7 +9,7 @@ class RoleHistory extends Model
     protected $table = 'roles_history';
     protected $fillable = [
         'roles_id',
-        'name',
+        'role_name',
         'action'
     ];
 
