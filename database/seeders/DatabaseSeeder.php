@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use Database\Seeders\userseeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +26,8 @@ class DatabaseSeeder extends Seeder
         Role::create([
             'role_name' => 'Anonymous',   
         ]);
-
+        
+        $this->call(userseeder::class);
         //$this->call(BannersTableSeeder::class);
         //$this->call(BannersTableSeeder::class);
 
