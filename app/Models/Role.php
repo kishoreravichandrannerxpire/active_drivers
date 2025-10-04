@@ -26,21 +26,21 @@ class Role extends Model
     {
         static::created(function ($role) {
             $role->histories()->create([
-                'name'   => $role->name,
+                'role_name'   => $role->role_name,
                 'action' => 'created',
             ]);
         });
 
         static::updated(function ($role) {
             $role->histories()->create([
-                'name'   => $role->name,
+                'role_name'   => $role->role_name,
                 'action' => 'updated',
             ]);
         });
 
         static::deleting(function ($role) {
             $role->histories()->create([
-                'name'   => $role->name,
+                'role_name'   => $role->role_name,
                 'action' => 'deleted',
             ]);
         });
