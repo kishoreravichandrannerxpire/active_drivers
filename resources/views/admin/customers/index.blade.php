@@ -2,16 +2,17 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Customers List</h2>
+    <div class="mb-3 d-flex justify-content-between">
+        <h2>Customers List</h2>
+        <a href="{{ route('admin.customers.create') }}" class="btn btn-primary mb-2">Add New Customer</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('admin.customers.create') }}" class="btn btn-primary mb-3">Add New Customer</a>
-
     <table class="table table-bordered table-striped">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Name</th>

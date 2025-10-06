@@ -2,13 +2,14 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">User List</h2>
+    <div class="mb-3 d-flex justify-content-between">
+        <h2>User List</h2>
+        <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-2">Add User</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
-     <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3">Add User</a>
 
      <table class="table table-bordered table-striped">
         <thead class="table-dark">

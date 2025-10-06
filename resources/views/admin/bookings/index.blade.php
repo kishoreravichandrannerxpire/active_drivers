@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Booking List</h2>
+<div class="container mt-4">
+    <div class="mb-3 d-flex justify-content-between">
+        <h2>Booking List</h2>
+        <a href="{{ route('admin.bookings.create') }}" class="btn btn-primary mb-2">Add Booking</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    
-    <a href="{{ route('admin.bookings.create') }}" class="btn btn-primary mb-3">Add Booking</a>
-
+    <div class="table-responsive">
     <table class="table table-bordered table-striped">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Customer</th>
@@ -58,5 +59,6 @@
             @endforelse
         </tbody>
     </table>
+    <div>
 </div>
 @endsection

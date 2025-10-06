@@ -2,13 +2,14 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Drivers List</h2>
+    <div class="mb-3 d-flex justify-content-between">
+        <h2>Drivers List</h2>
+        <a href="{{ route('admin.drivers.create') }}" class="btn btn-primary mb-2">Add New Driver</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
-     <a href="{{ route('admin.drivers.create') }}" class="btn btn-primary mb-3">Add New Driver</a>
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">

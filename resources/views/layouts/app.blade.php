@@ -53,9 +53,9 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                     <!-- Sidebar toggle button (only on mobile) -->
-                    <button class="btn btn-outline-light d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"> </button>
+                    <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><span class="navbar-toggler-icon"></span> </button>
 
-                    <a class="navbar-brand" href="{{ url('/') }}">Active Drivers</a>
+                    <a class="navbar-brand">Active Drivers</a>
                     <a class="navbar-brand" href="{{ url('admin/logout') }}">Logout</a>
                 </div>
             </nav>

@@ -2,9 +2,10 @@
 
 @section('content')
 <div class="container mt-4">
-    <div class="d-flex justify-content-between mb-3">
-        <h2>Banners List</h2>
-        <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">+ Add Banner</a>
+    <div class="mb-3">
+        <h2 class="float-start">Banners List</h2>
+        <a href="{{ route('admin.banners.create') }}" class="btn btn-primary mb-2 mx-4 float-end">+ Add Banner</a>
+        <a href="{{ route('admin.banners.view') }}" class="btn btn-secondary mb-2 float-end">View Banners</a>
     </div>
 
     @if(session('success'))
