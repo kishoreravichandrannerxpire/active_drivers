@@ -37,6 +37,8 @@
         <option value="">Select Your Car</option>
         <!-- Options will be filled via AJAX -->
     </select>
+    <!-- Store old input for car -->
+    <input type="hidden" id="old_cars_id" value="{{ old('cars_id') }}">
     </div>
     </div>
 
@@ -56,7 +58,7 @@
 
     <div class="col-sm-4">
         <label for="">Passengers</label>
-        <input type="number" name="passengers" class="form-control">
+        <input type="number" name="passengers" class="form-control" value="{{ old('passengers') }}" min="1">
     </div>
     </div>
 
@@ -71,33 +73,35 @@
     </div>
     <div class="col-sm-4">
         <label for="">Pickup Date & Time</label>
-        <input type="datetime-local" name="pickup_date_time" class="form-control">
+        <input type="datetime-local" name="pickup_date_time" class="form-control" value="{{ old('pickup_date_time') }}">
     </div>
     </div>
 
     <div class="mb-3 row">
     <div class="col-sm-4">
         <label for="">Pickup Location</label>
-        <input type="text" name="pickup_location" class="form-control">
+        <input type="text" name="pickup_location" class="form-control" value="{{ old('pickup_location') }}">
     </div>
     <div class="col-sm-4">
         <label for="">Drop Location</label>
-        <input type="text" name="drop_location" class="form-control">
+        <input type="text" name="drop_location" class="form-control" value="{{ old('drop_location') }}">
     </div>
     </div>
 
     <div class="mb-3 row">
     <div class="col-sm-4">
         <label for="">From Postcode</label>
-        <input type="text" name="from_postcode" class="form-control">
+        <input type="text" name="from_postcode" class="form-control" value="{{ old('from_postcode') }}">
     </div>
     <div class="col-sm-4">
         <label for="">To Postcode</label>
-        <input type="text" name="to_postcode" class="form-control">
+        <input type="text" name="to_postcode" class="form-control" value="{{ old('to_postcode') }}">
     </div>
     </div>
-    
+
+    <div class="col-sm-12 mb-3">
     <button type="submit" class="btn btn-primary">Booking</button>
+    </div>
 
 </form>
 
@@ -105,10 +109,19 @@
 <script>
 $(document).ready(function() {
     $('#customers_id').on('change', function() {
-        var customerId = $(this).val();
+        loadCars($(this).val());
+    });
+
+    //Run once on page load in case old customer/car exists
+    var initialCustomerId = $('#customers_id').val();
+    if(initialCustomerId) {
+        loadCars(initialCustomerId);
+    }
+
+    function loadCars(customerId) {
         var $carSelect = $('#cars_id');
-        $carSelect.empty(); // clear previous options
-        $carSelect.append('<option value="">  </option>');
+        var oldCarId = $('#old_cars_id').val();
+        $carSelect.empty().append('<option value="">Select Your Car</option>');
 
         if(customerId) {
             $.ajax({
@@ -117,9 +130,14 @@ $(document).ready(function() {
                 success: function(cars) {
                     if(cars.length > 0){
                         $.each(cars, function(index, car){
-                            $carSelect.append('<option value="'+car.id+'">'+car.name+'</option>');
+                            var selected = (car.id == oldCarId) ? 'selected' : '';
+                            $carSelect.append('<option value="'+car.id+'" '+selected+'>'+car.name+'</option>');
                         });
-                        $carSelect.val(cars[0].id); // select first car by default
+
+                        // If no old car selected, select the first car by default
+                        if(!oldCarId) {
+                            $carSelect.val(cars[0].id); 
+                        }
                     }
                 },
                 error: function() {
@@ -127,7 +145,7 @@ $(document).ready(function() {
                 }
             });
         }
-    });
+    }
 });
 </script>
 

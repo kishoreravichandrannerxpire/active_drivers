@@ -32,7 +32,7 @@
         </div>
 
         <!-- Mobile Number -->
-         <div class="mb-3 row">
+        <div class="mb-3 row">
         <div class="col-sm-4">
             <label for="mobile_number" class="form-label">Mobile Number</label>
             <input type="text" class="form-control" id="mobile_number" name="mobile_number"
@@ -43,7 +43,7 @@
         <!-- Password -->
         <div class="mb-3 row">
         <div class="col-sm-4">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">Password (leave blank to keep old)</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
         </div>

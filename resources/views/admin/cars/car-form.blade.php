@@ -10,7 +10,7 @@
 
     @section('content')
     <div class="container mt-4">
-        <h2>Customer Form</h2>
+        <h2>Cars Form</h2>
 
         @if ($errors->any())
         <div class="alert alert-danger">

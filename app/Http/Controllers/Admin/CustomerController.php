@@ -26,7 +26,7 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'           => 'required|string|max:255',
-            'mobile_number'  => 'required|string|max:20|unique:customers,mobile_number',
+            'mobile_number'  => 'required|string|max:10|unique:customers,mobile_number',
             'password'       => 'required|string|min:6'
         ]);
 
@@ -47,7 +47,7 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'           => 'required|string|max:255',
-            'mobile_number'  => 'required|string|max:20|unique:customers,mobile_number,' . $customer->id,
+            'mobile_number'  => 'required|string|max:10|unique:customers,mobile_number,' . $customer->id,
             'password'       => 'nullable|string|min:6'
         ]);
 

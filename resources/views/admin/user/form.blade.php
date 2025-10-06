@@ -23,23 +23,23 @@
         <div class="mb-3">
             <div class="col-sm-4">
             <label class="form-label">Name *</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
         </div>
         </div>
 
         <div class="mb-3">
             <div class="col-sm-4">
             <label class="form-label">Email *</label>
-            <input type="email" name="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
         </div>
         </div>
 
         <div class="mb-3">
             <div class="col-sm-4">
             <label class="form-label">Role *</label>
-            <select name="roles_id" class="form-control" required>
+            <select name="roles_id" class="form-control" value="{{ old('roles_id') }}" required>
                 @foreach($roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                    <option value="{{ $role->id }}" {{ old('roles_id') == $role->id ? 'selected' : '' }}>{{ $role->role_name }}</option>
                 @endforeach
             </select>
         </div>

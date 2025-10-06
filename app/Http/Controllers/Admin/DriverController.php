@@ -28,7 +28,7 @@ class DriverController extends Controller
         $validator = Validator::make($request->all(), [
             'name'           => 'required|string|max:255',
             'age'            => 'required|integer|min:18',
-            'mobile_number'  => 'required|string|max:20|unique:drivers,mobile_number',
+            'mobile_number'  => 'required|string|max:10|unique:drivers,mobile_number',
             'password'       => 'required|string|min:6',
             'driver_license_number' => 'required|string|max:50|unique:drivers,driver_license_number',
             'driver_image'   => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -68,7 +68,7 @@ class DriverController extends Controller
         $request->validate([
             'name'           => 'required|string|max:255',
             'age'            => 'required|integer|min:18',
-            'mobile_number'  => 'required|string|max:20|unique:drivers,mobile_number,' . $driver->id,
+            'mobile_number'  => 'required|string|max:10|unique:drivers,mobile_number,' . $driver->id,
             'password'       => 'nullable|string|min:6',
             'driver_license_number' => 'required|string|max:50|unique:drivers,driver_license_number,' . $driver->id,
             'driver_image'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
