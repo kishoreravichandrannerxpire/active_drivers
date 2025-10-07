@@ -11,7 +11,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" id="table">
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
@@ -43,4 +43,19 @@
         </tbody>
     </table>
 </div>
+
+<!-- DataTables JS and CSS link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable(
+            {
+                info: false,
+            }
+        );
+    });
+</script>
+
 @endsection    
