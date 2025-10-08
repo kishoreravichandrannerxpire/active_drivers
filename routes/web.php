@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\BookingsController;
+use App\Http\Controllers\Admin\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,7 @@ Route::prefix('admin')->group(function () {
 | Only authenticated admins can access these routes
 |
 */
-Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['admin_or_anonymous'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -71,4 +72,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
     // Bookings
     Route::resource('bookings', BookingsController::class)->except(['show']);
     Route::get('customers/{id}/cars', [BookingsController::class, 'getCustomerCars'])->name('customers.cars');
+
+    //Permissions
+    Route::resource('permissions', PermissionController::class)->except(['show']);
 });

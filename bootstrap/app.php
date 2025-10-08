@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (\Illuminate\Foundation\Configuration\Middleware $middleware) {
         $middleware->alias([
+            'admin_or_anonymous' => AdminMiddleware::class,
             'admin' => AdminMiddleware::class,
         ]);
     })

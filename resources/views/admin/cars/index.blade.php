@@ -34,8 +34,8 @@
                 <td>{{ $car->car_model }}</td>
                 <td>{{ $car->car_type }}</td>
                 <td>{{ $car->car_number }}</td>
-                <td>{{ $car->insurance }}</td>
-                <td>{{ $car->fastag }}</td>
+                <td>{{ $car->insurance ? 'Yes' : 'No' }}</td>
+                <td>{{ $car->fastag ? 'Yes' : 'No' }}</td>
                 <td>{{ $car->transmission_type }}</td>
                 <td>{{ $car->fuel_type }}</td>
                 <td>
