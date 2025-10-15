@@ -49,7 +49,7 @@ Route::prefix('admin')->group(function () {
 | Only authenticated admins can access these routes
 |
 */
-Route::prefix('admin')->name('admin.')->middleware(['admin_or_anonymous'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['admin_or_anonymous','prevent-back-history'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
