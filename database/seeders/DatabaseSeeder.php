@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Role;
 use Database\Seeders\userseeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+         
        //User::factory(10)->create();
         // User::factory()->create([
         //     'name' => 'Test User',
@@ -22,6 +25,12 @@ class DatabaseSeeder extends Seeder
         // ]);
          Role::create([
             'role_name' => 'Admin',   
+        ]);
+        Role::create([
+            'role_name' => 'Driver',   
+        ]);
+        Role::create([
+            'role_name' => 'Customer',   
         ]);
         Role::create([
             'role_name' => 'Anonymous',   

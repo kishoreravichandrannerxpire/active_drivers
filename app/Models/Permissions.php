@@ -22,6 +22,11 @@ class Permissions extends Model
         return $this->hasMany(PermissionHistory::class, 'permissions_id');
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id','id');
+    }
+
     protected static function booted()
     {
         static::created(function($permissions) {

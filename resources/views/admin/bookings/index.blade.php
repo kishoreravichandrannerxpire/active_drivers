@@ -68,11 +68,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script>
     $(document).ready(function () {
+        if($('#table tbody tr').length > 1 || !$('#table tbody td').attr('colspan')) {
         $('#table').DataTable(
             {
                 info: false,
             }
         );
+    }
     });
 </script>
 

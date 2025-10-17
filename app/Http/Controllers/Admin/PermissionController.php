@@ -23,9 +23,9 @@ class PermissionController extends Controller
     {
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
-            'permission' => 'required|boolean',
+            'permission' => 'required|string',
             'module' => 'required|string',
-            'effect' => 'required|string',
+            'effect' => 'required|boolean',
         ]);
 
         Permissions::create([
@@ -48,9 +48,9 @@ class PermissionController extends Controller
 
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
-            'permission' => 'required|boolean',
+            'permission' => 'required|string',
             'module' => 'required|string',
-            'effect' => 'required|string',
+            'effect' => 'required|boolean',
         ]);
 
         $permissions->roles_id = $request->roles_id;
