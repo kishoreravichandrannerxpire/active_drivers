@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\PermissionController;
 | Public Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn() => view('home')); //removed welcome page
 
 Route::get('/driver/availability/form', fn() => view('driver_availability'));
 Route::post('/driver/availability', [DriverAvailabilityController::class, 'store'])->name('availability.store');
