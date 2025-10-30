@@ -36,13 +36,13 @@
             </div>
         @endif
 
-        <form action="{{ route('availability.store') }}" method="POST">
+        <form action="{{ route('availability.store') }}" method="POST" class="form-responsive">
             @csrf
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="drivers_id" class="form-label">Driver ID</label>
                 <input type="number" name="drivers_id" id="drivers_id" class="form-control" required>
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <label for="available_date" class="form-label">Available Date</label>

@@ -14,12 +14,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalUsers = User::count();
-        $totalDrivers = Drivers::count();
-        $totalBanners = Banner::count();
-        $totalAvailableDrivers = DriverAvailability::where('status', true)->count();
-
-        return view('admin.dashboard', compact('totalUsers', 'totalDrivers', 'totalBanners', 'totalAvailableDrivers'));
+        return view('admin.dashboard' );
     }
+
+   public function dashboard()
+   {
+    return view('admin.dashboard');
+   }
+
+
+
 
 }

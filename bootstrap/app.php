@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin_or_anonymous' => AdminMiddleware::class,
             'admin' => AdminMiddleware::class,
             'prevent-back-history' => PreventBackHistory::class,
+            'Customer' => AdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

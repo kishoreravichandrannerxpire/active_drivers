@@ -18,5 +18,6 @@ class AuthServiceProvider extends ServiceProvider
         // Example gates
         Gate::define('permissions', fn($user) => $user->role->role_name === 'Admin');
         Gate::define('dashboard-rest', fn($user) => in_array($user->role->role_name, ['Admin', 'Anonymous']));
+        Gate::define('customer', fn($user) => in_array($user->role->role_name, ['Customer']));
     }
 }

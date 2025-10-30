@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Active Drivers</title>
+    <title>Customers </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -23,19 +23,10 @@
 <body>
     <div class="d-flex">
         <!-- Sidebar (visible on desktop) -->
-        <div class="sidebar bg-dark text-white p-3 d-none d-lg-block">
-           <h4> <a class="nav-link text-white mb-4" href="{{ url('admin/dashboard') }}"> Dashboard</a> </h4>
+        <div class="sidebar bg-secondary text-white p-3 d-none d-lg-block">
+           <h4> <a class="nav-link text-white mb-4" href="{{ url('customer/dashboard') }}"> Dashboard</a> </h4>
             <ul class="nav flex-column">
-                @can('dashboard-rest')
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/user') }}"> User</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/banners') }}"> Banners</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/drivers') }}"> Drivers</a>
-                </li>
+                @can('customer')
                 <li>
                     <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
                 </li>
@@ -46,18 +37,13 @@
                     <a class="nav-link text-white" href="{{url('admin/bookings')}}">Bookings</a>
                 </li>
                  @endcan
-                 @can('permissions')
-                <li>
-                    <a class="nav-link text-white" href="{{url('admin/permissions')}}">Permissions</a>
-                </li>
-                 @endcan
             </ul>
         </div>
 
         <!-- Main content -->
         <div class="flex-grow-1">
             <!-- Top Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
                 <div class="container-fluid">
                     <!-- Sidebar toggle button (only on mobile) -->
                     <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><span class="navbar-toggler-icon"></span> </button>
@@ -82,16 +68,7 @@
         </div>
         <div class="offcanvas-body">
             <ul class="nav flex-column">
-                @can('dashboard-rest')
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/user/form') }}"> User</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/banners') }}"> Banners</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('admin/drivers') }}"> Drivers</a>
-                </li>
+                @can('customer')
                 <li>
                     <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
                 </li>
@@ -102,19 +79,11 @@
                     <a class="nav-link text-white" href="{{url('admin/bookings')}}">Bookings</a>
                 </li>
                 @endcan
-                @can('permissions')
-                <li>
-                    <a class="nav-link text-white" href="{{url('admin/permissions')}}">Permissions</a>
-                </li>
-                @endcan
             </ul>
         </div>
     </div>
 
-    @include('layouts.footer')
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
 @yield('scripts')

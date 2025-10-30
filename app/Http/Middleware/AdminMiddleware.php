@@ -22,7 +22,7 @@ class AdminMiddleware
     }
 
     // Logged in but role not Admin → forbid access
-    if (!Auth::user()->role || !in_array(Auth::user()->role->role_name, ['Admin', 'Anonymous'])) {
+    if (!Auth::user()->role || !in_array(Auth::user()->role->role_name, ['Admin', 'Anonymous','Customer'])) {
         abort(403, 'Unauthorized action.');
     }
 
