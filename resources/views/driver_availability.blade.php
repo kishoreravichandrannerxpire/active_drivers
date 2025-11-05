@@ -5,10 +5,20 @@
     <title>Driver Availability</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<style>
+    #background {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    #form {
+        opacity: 0.9;
+    }
+</style>
+<body class="bg-light" id="background">
 
-<div class="container mt-5">
-    <div class="card shadow p-4">
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div style="color:white">
         <h2 class="mb-4">Driver Availability</h2>
 
         {{-- ✅ Success message --}}
@@ -36,7 +46,7 @@
             </div>
         @endif
 
-        <form action="{{ route('availability.store') }}" method="POST" class="form-responsive">
+        <form action="{{ route('availability.store') }}" method="POST" class="form-responsive" id="form">
             @csrf
 
             <!-- <div class="mb-3">
@@ -59,7 +69,7 @@
                 <input type="time" name="end_time" id="end_time" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit Availability</button>
+            <button type="submit" class="btn btn-dark" style="color:white">Submit Availability</button>
         </form>
     </div>
 </div>

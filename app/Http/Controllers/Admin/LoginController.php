@@ -38,7 +38,7 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return back()->withErrors(['msg' => 'Invalid email or password']);
+        return back()->with(['error' => 'Invalid email or password'])->withInput();
     }
 
     public function logout()
