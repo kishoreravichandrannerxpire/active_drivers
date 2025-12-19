@@ -22,6 +22,8 @@ Route::get('/', fn() => view('home')); //removed welcome page
 Route::get('/driver/availability/form', fn() => view('driver_availability'));
 Route::post('/driver/availability', [DriverAvailabilityController::class, 'store'])->name('availability.store');
 
+Route::get('/customer/create/form', fn() => view('customer_create_form'));
+
 Route::get('/home', fn() => view('home'))->name('home');
 
 Route::get('/test-middleware', function () {
@@ -76,5 +78,4 @@ Route::prefix('admin')->name('admin.')->middleware(['admin','Customer','prevent-
     //Permissions
     Route::resource('permissions', PermissionController::class)->except(['show']);
 });
-
-Route::get('/customer/dashboard', fn() => view('customer.dashboard'));
+Route::resource('cvs', App\Http\Controllers\CvsController::class);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Drivers</title>
-    
+   
     <!-- Bootstrap CSS -->
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -19,7 +19,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   </head>
-
+ 
   <style>
   .carousel-item img {
     width: 100%;      /* make image span full width */
@@ -27,7 +27,7 @@
     object-fit: contain; /* fills container, crops if needed */
   }
   </style>
-
+ 
   <body>
    <nav class="nav-responsive">
      <div class="container-fluid text-white wow fadeIn" data-wow-delay="0.1s" style="background: rgb(12 ,12 ,46);">
@@ -36,7 +36,7 @@
           <h2 class="text-white fw-bold m-0">ACTIVE DRIVERS</h2>
           <div class="ms-auto d-flex align-items-center">
             <!-- hide content info on small screens-->
-            <div class ="d-none d-lg-flex"> 
+            <div class ="d-none d-lg-flex">
               <small class="ms-4"><i class="fa fa-envelope me-3"></i>nerxpire@gmail.com</small>
               <small class="ms-4"><i class="fa fa-phone-alt me-3"></i>+91 123456789</small>
             </div>
@@ -47,13 +47,13 @@
       </div>
     </div>
    </nav>
-
+ 
     @php
        $banners = \App\Models\Banner::where('status', 1)->get();
     @endphp
-    
+   
   @if($banners->count())
-    
+   
     <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         @foreach($banners as $index => $banner)
@@ -73,24 +73,24 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    
+   
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6 border-end">
           {{-- Left form --}}
-          
+         
           @include('driver_availability')
         </div>
-        
+       
         <div class="col-md-6">
-          
+         
         {{-- Right form --}}
-        
+       
         @include('customer_availability')
       </div>
     </div>
   </div>
-  
+ 
   <div class="text-center my-5" style="font-family: Arial, sans-serif; color: #ff8801ff; ">
     <h1>OUR SERVICES</h1>
     <div class="container mt-4">
@@ -103,7 +103,7 @@
             </div>
           </div>
         </div>
-        
+       
         <div class="col">
           <div class="card">
             <div class="card-body">
@@ -112,7 +112,7 @@
             </div>
           </div>
         </div>
-        
+       
         <div class="col">
           <div class="card">
             <div class="card-body">
@@ -121,7 +121,7 @@
             </div>
           </div>
         </div>
-        
+       
         <div class="col">
           <div class="card">
             <div class="card-body">
@@ -133,10 +133,11 @@
       </div>
     </div>
   </div>
-  
+ 
   @endif
-
+ 
+  @extends('partials.footer')
 </body>
 </html>
-
+ 
  
