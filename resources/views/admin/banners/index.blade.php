@@ -61,9 +61,7 @@
         </tbody>
     </table>
 
-    <div>
-        {{ $banners->links() }}
-    </div>
+    
 </div>
 
 @endsection

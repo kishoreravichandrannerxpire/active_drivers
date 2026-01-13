@@ -27,18 +27,17 @@
     object-fit: contain; /* fills container, crops if needed */
   }
   </style>
- 
   <body>
-   <nav class="nav-responsive">
+    <nav class="nav-responsive">
      <div class="container-fluid text-white wow fadeIn" data-wow-delay="0.1s" style="background: rgb(12 ,12 ,46);">
       <div class="container py-3">
         <div class="d-flex align-items-center">
           <h2 class="text-white fw-bold m-0">ACTIVE DRIVERS</h2>
           <div class="ms-auto d-flex align-items-center">
             <!-- hide content info on small screens-->
-            <div class ="d-none d-lg-flex">
-              <small class="ms-4"><i class="fa fa-envelope me-3"></i>nerxpire@gmail.com</small>
-              <small class="ms-4"><i class="fa fa-phone-alt me-3"></i>+91 123456789</small>
+            <div class ="d-none d-lg-flex menu-links">
+              <small class="nav-link-custom ms-4">Home</small>
+              <small class="nav-link-custom ms-4">My Bookings</small>
             </div>
             <!-- Always visible -->
             <a href="{{url ('admin/login') }}" class="btn btn-outline-light ms-4">LOGIN</a>
@@ -47,46 +46,20 @@
       </div>
     </div>
    </nav>
- 
-    @php
-       $banners = \App\Models\Banner::where('status', 1)->get();
-    @endphp
-   
-  @if($banners->count())
-   
-    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        @foreach($banners as $index => $banner)
-        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-          <img src="{{ asset('storage/' . $banner->image) }}"class="d-block w-100 img-fluid"alt="{{ $banner->title }}" >
-        </div>
-  @endforeach
-      </div>
- 
-      <!-- Controls -->
-       <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+    <div>
+    <!-- Carousel Image -->
+    @include('partials.slide_image')
     </div>
-   
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-md-6 border-end">
+    
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 border-end">
           {{-- Left form --}}
-         
           @include('driver_availability')
-        </div>
-       
-        <div class="col-md-6">
-         
-        {{-- Right form --}}
-       
-        @include('customer_availability')
+      </div>
+      <div class="col-md-6">
+         {{-- Right form --}}
+         @include('customer_availability')
       </div>
     </div>
   </div>
@@ -133,8 +106,6 @@
       </div>
     </div>
   </div>
- 
-  @endif
  
   @extends('partials.footer')
 </body>

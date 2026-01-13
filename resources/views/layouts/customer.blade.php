@@ -24,17 +24,17 @@
     <div class="d-flex">
         <!-- Sidebar (visible on desktop) -->
         <div class="sidebar bg-secondary text-white p-3 d-none d-lg-block">
-           <h4> <a class="nav-link text-white mb-4" href="{{ url('customer/dashboard') }}"> Dashboard</a> </h4>
+           <h4> <a class="nav-link text-white mb-4" href="{{ url('customer/dashboard') }}">Dashboard</a> </h4>
             <ul class="nav flex-column">
                 @can('customer')
                 <li>
                     <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
                 </li>
                 <li>
-                    <a class="nav-link text-white" href="{{ url('admin/cars') }}"> Cars</a>
+                    <a class="nav-link text-white" href="{{ url('customer/cars') }}"> Cars</a>
                 </li>
                 <li>
-                    <a class="nav-link text-white" href="{{url('admin/bookings')}}">Bookings</a>
+                    <a class="nav-link text-white" href="{{url('customer/bookings')}}">Bookings</a>
                 </li>
                  @endcan
             </ul>
@@ -48,8 +48,8 @@
                     <!-- Sidebar toggle button (only on mobile) -->
                     <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><span class="navbar-toggler-icon"></span> </button>
 
-                    <a class="navbar-brand">Active Drivers</a>
-                    <a class="navbar-brand" href="{{ url('admin/logout') }}">Logout</a>
+                    <a class="navbar-brand" href="{{ url('home/customer') }}">Active Drivers</a>
+                    <a class="navbar-brand" href="{{ url('customer/logout') }}">Logout</a>
                 </div>
             </nav>
 
