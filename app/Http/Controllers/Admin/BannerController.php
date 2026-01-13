@@ -13,7 +13,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners = Banner::oldest()->paginate(10);
+        $banners = Banner::all();
         return view('admin.banners.index', compact('banners'));
     }
 
@@ -35,7 +35,7 @@ class BannerController extends Controller
             'title'       => 'required|string|max:255',
             'type'        => 'required|string|max:100',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif|max:4096',
             'alt_text'    => 'nullable|string|max:255',
             'link'        => 'nullable|url',
             'status'      => 'required|in:active,inactive',
@@ -75,7 +75,7 @@ class BannerController extends Controller
             'title'       => 'required|string|max:255',
             'type'        => 'required|string|max:100',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif|max:4096',
             'alt_text'    => 'nullable|string|max:255',
             'link'        => 'nullable|url',
             'status'      => 'required|in:active,inactive',

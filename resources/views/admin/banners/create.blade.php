@@ -58,6 +58,7 @@
         <div class="col-sm-4">
             <label class="form-label">Status *</label>
             <select name="status" class="form-control" required>
+                <option value="">---select---</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
             </select>

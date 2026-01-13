@@ -1,5 +1,6 @@
 <?php
 
+// Admin Routes
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DriverAvailabilityController;
 use App\Http\Controllers\Admin\DriverController;
@@ -30,6 +31,8 @@ Route::get('/test-middleware', function () {
     $middleware = app()->make(\App\Http\Middleware\AdminMiddleware::class);
     return 'Middleware exists: ' . get_class($middleware);
 });
+
+Route::get('/home/driver', fn() => view('driver_home'))->name('driver.home');
 
 
 /*
@@ -79,6 +82,24 @@ Route::prefix('admin')->name('admin.')->middleware(['admin','Customer','prevent-
     Route::resource('permissions', PermissionController::class)->except(['show']);
 });
 Route::resource('cvs', App\Http\Controllers\CvsController::class);
+
+// Customer Routes
+use App\Http\Controllers\Customer\LoginCustomer;
+
+Route::get('/home/customer', fn() => view('customer/customer_home'))->name('customer.home');
+
+Route::prefix('customer')->group(function () {
+    Route::get('/login', [LoginCustomer::class, 'showLoginForm'])->name('customer.login');
+    Route::post('login', [LoginCustomer::class, 'login'])->name('customer.login.submit');
+    Route::get('/logout', [LoginCustomer::class, 'logout'])->name('customer.logout');
+});
+Route::prefix('customer')->name('customer.')->middleware(['Customer','prevent-back-history'])->group(function () {
+    
+    Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardCustomer::class, 'index'])->name('dashboard');
+
+    Route::resource('profile', App\Http\Controllers\Customer\CustomerProfile::class);
+
+});
 
 use App\Http\Controllers\TrialController;
 
