@@ -79,3 +79,10 @@ Route::prefix('admin')->name('admin.')->middleware(['admin','Customer','prevent-
     Route::resource('permissions', PermissionController::class)->except(['show']);
 });
 Route::resource('cvs', App\Http\Controllers\CvsController::class);
+
+use App\Http\Controllers\TrialController;
+
+Route::get('/trial', [TrialController::class, 'index'])
+    ->name('trial');
+Route::get('/trial2', [TrialController::class, 'second'])
+    ->name('trial2');        

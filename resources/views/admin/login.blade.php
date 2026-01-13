@@ -8,13 +8,27 @@
 
 </head>
 <body>
+
+<style>
+    body {
+        background-color: #223a53ff;
+    }
+    .login-box {
+        background: #bb763dff;
+        margin-top: 100px;
+            border-radius: 12px;
+    }
+</style>
     
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
 
-            <h3 class="mb-4 text-center">Admin Login</h3>
+          <div class="card login-box p-4">
+            <h4 class="text-center text-dark mb-1">Welcome Back</h4>
+            <p class="text-center text-muted mb-4">Login to your admin account</p>
+
             @if(session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
@@ -23,8 +37,7 @@
 
                 {{-- Email field --}}
                 <div class="mb-3">
-                    <label class="form-label">Email *</label>
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" >
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" value="{{ old('email') }}" >
                     @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -32,8 +45,7 @@
 
                 {{-- Password field --}}
                 <div class="mb-3">
-                    <label class="form-label">Password *</label>
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" >
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -41,10 +53,10 @@
 
                 {{-- Submit button --}}
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-dark w-100 btn-lg">Login</button>
                 </div>
             </form>
-
+          </div>
         </div>
     </div>
 </div>
