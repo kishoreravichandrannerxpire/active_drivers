@@ -12,4 +12,9 @@ class TrialController extends Controller
     {
         return view('trial2');
     }
+
+    public function login_form()
+    {
+        return view('login_form');
+    }
 }

@@ -25,9 +25,9 @@ class CustomerController extends Controller
     public function store (Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'           => 'required|string|max:255',
-            'mobile_number'  => 'required|string|max:10|unique:customers,mobile_number',
-            'password'       => 'required|string|min:6'
+            // 'user_id'        => 'required|exists:users,id',
+            'first_name'     => 'required|string|max:255',
+            'last_name'      => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -46,9 +46,9 @@ class CustomerController extends Controller
     public function update(Request $request, Customers $customer)
     {
         $validator = Validator::make($request->all(), [
-            'name'           => 'required|string|max:255',
-            'mobile_number'  => 'required|string|max:10|unique:customers,mobile_number,' . $customer->id,
-            'password'       => 'nullable|string|min:6'
+            // 'user_id'        => 'required|exists:users,id',
+            'first_name'     => 'required|string|max:255',
+            'last_name'      => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -56,9 +56,6 @@ class CustomerController extends Controller
         }
 
         $data = $request->all();
-        if (empty($data['password'])) {
-            unset($data['password']); // Don't update password if not provided
-        }
 
         $customer->update($data);
         return redirect()->route('admin.customers.index')->with('success', 'Customer updated successfully!');

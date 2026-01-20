@@ -22,8 +22,8 @@
         @csrf
         <div class="mb-3">
             <div class="col-sm-4">
-            <label class="form-label">Name *</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+            <label class="form-label">Mobile Number *</label>
+            <input type="text" name="mobile_number" class="form-control" value="{{ old('mobile_number') }}" required>
         </div>
         </div>
 

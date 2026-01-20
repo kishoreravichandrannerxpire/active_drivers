@@ -9,9 +9,9 @@ class CustomerHistory extends Model
     protected $table = 'customers_history';
     protected $fillable = [
         'customers_id',
-        'name',
-        'mobile_number',
-        'password',
+        'user_id',
+        'first_name',
+        'last_name',
         'action'
     ];
 

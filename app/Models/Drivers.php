@@ -7,10 +7,10 @@ class Drivers extends Model
 {
     protected $table = 'drivers';
     protected $fillable = [
-        'name',
+        'user_id',
+        'first_name',
+        'last_name',
         'age',
-        'mobile_number',
-        'password',
         'driver_license_number',
         'driver_image',
         'total_experience_years',
@@ -32,10 +32,10 @@ class Drivers extends Model
     {
         static::created(function ($driver) {
             $driver->histories()->create([
-                'name'                      => $driver->name,
+                'user_id'                   => $driver->user_id,
+                'first_name'                => $driver->first_name,
+                'last_name'                 => $driver->last_name,
                 'age'                       => $driver->age,
-                'mobile_number'             => $driver->mobile_number,
-                'password'                  => $driver->password,
                 'driver_license_number'     => $driver->driver_license_number,
                 'driver_image'              => $driver->driver_image,
                 'total_experience_years'    => $driver->total_experience_years,
@@ -50,10 +50,10 @@ class Drivers extends Model
 
         static::updated(function ($driver) {
             $driver->histories()->create([
-                'name'                      => $driver->name,
+                'user_id'                   => $driver->user_id,
+                'first_name'                => $driver->first_name,
+                'last_name'                 => $driver->last_name,
                 'age'                       => $driver->age,
-                'mobile_number'             => $driver->mobile_number,
-                'password'                  => $driver->password,
                 'driver_license_number'     => $driver->driver_license_number,
                 'driver_image'              => $driver->driver_image,
                 'total_experience_years'    => $driver->total_experience_years,
@@ -68,10 +68,10 @@ class Drivers extends Model
 
         static::deleting(function ($driver) {
             $driver->histories()->create([
-                'name'                      => $driver->name,
+                'user_id'                   => $driver->user_id,
+                'first_name'                => $driver->first_name,
+                'last_name'                 => $driver->last_name,
                 'age'                       => $driver->age,
-                'mobile_number'             => $driver->mobile_number,
-                'password'                  => $driver->password,
                 'driver_license_number'     => $driver->driver_license_number,
                 'driver_image'              => $driver->driver_image,
                 'total_experience_years'    => $driver->total_experience_years,

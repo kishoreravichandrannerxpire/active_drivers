@@ -30,22 +30,15 @@
         @csrf
         <div class="mb-3 row">
         <div class="col-sm-4">
-            <label class="form-label">Name *</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+            <label class="form-label">First Name *</label>
+            <input type="text" name="first_name" class="form-control" value="{{ old('first_name') }}" required>
         </div>
         </div>
         
         <div class="mb-3 row">
         <div class="col-sm-4">
-            <label class="form-label">Mobile Number *</label>
-            <input type="text" name="mobile_number" class="form-control" value="{{ old('mobile_number') }}" required>
-        </div>
-        </div>
-
-        <div class="mb-3 row">
-        <div class="col-sm-4">
-            <label class="form-label">Password *</label>
-            <input type="password" name="password" class="form-control" required>
+            <label class="form-label">Last Name *</label>
+            <input type="text" name="last_name" class="form-control" value="{{ old('last_name') }}" required>
         </div>
         </div>
 

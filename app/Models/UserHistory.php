@@ -10,8 +10,8 @@ class UserHistory extends Model
     protected $fillable = [
         'users_id',
         'roles_id',
-        'name',
         'email',
+        'mobile_number',
         'password',
         'action'
     ];

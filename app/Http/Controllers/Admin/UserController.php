@@ -25,15 +25,15 @@ class UserController extends Controller
     {
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
+            'email' => 'nullable|string|email|max:255|unique:users,email',
+            'mobile_number' => 'required|string|max:10|unique:users,mobile_number',
             'password' => 'required|string|min:6',
         ]);
 
         User::create([
             'roles_id' => $request->roles_id,
-            'name' => $request->name,
             'email' => $request->email,
+            'mobile_number' => $request->mobile_number,
             'password' => bcrypt($request->password),
         ]);
 
@@ -51,14 +51,14 @@ class UserController extends Controller
 
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'moblie_number' => 'required|string|max:10|unique:users,moblie_number,' . $user->id,
             'password' => 'nullable|string|min:6',
         ]);
 
         $user->roles_id = $request->roles_id;
-        $user->name = $request->name;
         $user->email = $request->email;
+        $user->moblie_number = $request->moblie_number;
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);

@@ -81,7 +81,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin','Customer','prevent-
     //Permissions
     Route::resource('permissions', PermissionController::class)->except(['show']);
 });
-Route::resource('cvs', App\Http\Controllers\CvsController::class);
+// Route::resource('cvs', App\Http\Controllers\CvsController::class);
 
 // Customer Routes
 use App\Http\Controllers\Customer\LoginCustomer;
@@ -107,3 +107,6 @@ Route::get('/trial', [TrialController::class, 'index'])
     ->name('trial');
 Route::get('/trial2', [TrialController::class, 'second'])
     ->name('trial2');        
+
+Route::get('/login_form', [TrialController::class, 'login_form'])
+    ->name('login_form');

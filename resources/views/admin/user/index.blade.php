@@ -15,7 +15,7 @@
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Mobile Number</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Actions</th>
@@ -25,7 +25,7 @@
         @forelse($users as $user)
         <tr>
             <td>{{ $user->id }}</td>
-            <td>{{ $user->name }}</td>
+            <td>{{ $user->mobile_number }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->role ? $user->role->role_name : 'N/A'}}</td>
             <td>

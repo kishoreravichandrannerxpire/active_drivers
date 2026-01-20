@@ -12,8 +12,8 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'roles_id',
-        'name',
         'email',
+        'mobile_number',
         'password'
     ];
 
@@ -31,8 +31,8 @@ class User extends Authenticatable
         static::created(function ($user) {
             $user->histories()->create([
                 'roles_id'       => $user->roles_id,
-                'name'           => $user->name,
                 'email'          => $user->email,
+                'mobile_number'  => $user->mobile_number,
                 'password'       => $user->password,
                 'action'         => 'created',
             ]);
@@ -41,8 +41,8 @@ class User extends Authenticatable
         static::updated(function ($user) {
             $user->histories()->create([
                 'roles_id'       => $user->roles_id,
-                'name'           => $user->name,
                 'email'          => $user->email,
+                'mobile_number'  => $user->mobile_number,
                 'password'       => $user->password,
                 'action'         => 'updated',
             ]);
@@ -51,8 +51,8 @@ class User extends Authenticatable
         static::deleting(function ($user) {
             $user->histories()->create([
                 'roles_id'       => $user->roles_id,
-                'name'           => $user->name,
                 'email'          => $user->email,
+                'mobile_number'  => $user->mobile_number,
                 'password'       => $user->password,
                 'action'         => 'deleted',
             ]);

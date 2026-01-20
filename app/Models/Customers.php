@@ -8,8 +8,9 @@ class Customers extends Model
 {
     protected $table = 'customers';
     protected $fillable = [
-        'name',
-        'mobile_number',
+        'user_id',
+        'first_name',
+        'last_name',
         'password'
     ];
 
@@ -27,28 +28,25 @@ class Customers extends Model
     {
         static::created(function ($customer) {
             $customer->histories()->create([
-                'name'            => $customer->name,
-                'mobile_number'   => $customer->mobile_number,
-                'password'        => $customer->password,
-                'action'          => 'created',
+                'first_name'            => $customer->first_name,
+                'last_name'             => $customer->last_name,
+                'action'                => 'created',
             ]);
         });
 
         static::updated(function ($customer) {
             $customer->histories()->create([
-                'name'            => $customer->name,
-                'mobile_number'   => $customer->mobile_number,
-                'password'        => $customer->password,
-                'action'          => 'updated',
+                'first_name'            => $customer->first_name,
+                'last_name'             => $customer->last_name,
+                'action'                => 'updated',
             ]);
         });
 
         static::deleting(function ($customer) {
             $customer->histories()->create([
-                'name'            => $customer->name,
-                'mobile_number'   => $customer->mobile_number,
-                'password'        => $customer->password,
-                'action'          => 'deleted',
+                'first_name'            => $customer->first_name,
+                'last_name'             => $customer->last_name,
+                'action'                => 'deleted',
             ]);
         });
     }

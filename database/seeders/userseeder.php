@@ -14,10 +14,10 @@ class userseeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'anish',
             'email' => 'anishkumar15691@gmail.com',
+            'mobile_number' => '9876543210',
             'password' => bcrypt('123456'),
-            'roles_id' => 1, // Assuming '1' is the ID for the admin role
+            'roles_id' => 1,
         ]); 
     }
 }

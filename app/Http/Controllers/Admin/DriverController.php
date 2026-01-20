@@ -26,10 +26,8 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'           => 'required|string|max:255',
+            'user_id'        => 'required|exists:users,id',
             'age'            => 'required|integer|min:18',
-            'mobile_number'  => 'required|string|max:10|unique:drivers,mobile_number',
-            'password'       => 'required|string|min:6',
             'driver_license_number' => 'required|string|max:50|unique:drivers,driver_license_number',
             'driver_image'   => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'total_experience_years' => 'required|integer|min:0',
@@ -66,10 +64,8 @@ class DriverController extends Controller
     public function update(Request $request, Drivers $driver)
     {
         $request->validate([
-            'name'           => 'required|string|max:255',
+            'user_id'        => 'required|exists:users,id',
             'age'            => 'required|integer|min:18',
-            'mobile_number'  => 'required|string|max:10|unique:drivers,mobile_number,' . $driver->id,
-            'password'       => 'nullable|string|min:6',
             'driver_license_number' => 'required|string|max:50|unique:drivers,driver_license_number,' . $driver->id,
             'driver_image'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'total_experience_years' => 'required|integer|min:0',
@@ -84,10 +80,6 @@ class DriverController extends Controller
 
         if ($request->hasFile('driver_image')) {
             $data['driver_image'] = $request->file('driver_image')->store('drivers', 'public');
-        }
-
-        if (empty($data['password'])) {
-            unset($data['password']); // don’t overwrite with null
         }
 
         $driver->update($data);
