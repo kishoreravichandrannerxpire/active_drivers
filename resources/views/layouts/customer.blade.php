@@ -48,8 +48,8 @@
                     <!-- Sidebar toggle button (only on mobile) -->
                     <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><span class="navbar-toggler-icon"></span> </button>
 
-                    <a class="navbar-brand" href="{{ url('home/customer') }}">Active Drivers</a>
-                    <a class="navbar-brand" href="{{ url('customer/logout') }}">Logout</a>
+                    <a class="navbar-brand" href="">Active Drivers</a>
+                    <a class="navbar-brand" href="{{ url('customer/login') }}">Logout</a>
                 </div>
             </nav>
 

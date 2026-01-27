@@ -12,7 +12,7 @@
         <h4 class="text-center mb-4">Login</h4>
 
         <!-- LOGIN FORM -->
-        <form action="{{ route('admin.user.store') }}" method="POST">
+        <form action="{{ route('login.submit') }}" method="POST">
             @csrf
 
             <div class="mb-3">

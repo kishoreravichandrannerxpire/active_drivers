@@ -15,9 +15,8 @@
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Mobile No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>License No</th>
                 <th>Image</th>
                 <th>Experience</th>
@@ -29,9 +28,8 @@
         @forelse($drivers as $driver)
             <tr>
                 <td>{{ $driver->id }}</td>
-                <td>{{ $driver->name }}</td>
-                <td>{{ $driver->age }}</td>
-                <td>{{ $driver->mobile_number }}</td>
+                <td>{{ $driver->first_name }}</td>
+                <td>{{ $driver->last_name }}</td>
                 <td>{{ $driver->driver_license_number }}</td>
                 <td>
                     @if($driver->driver_image)

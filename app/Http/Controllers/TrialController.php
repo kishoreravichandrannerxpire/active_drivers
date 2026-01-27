@@ -13,7 +13,7 @@ class TrialController extends Controller
         return view('trial2');
     }
 
-    public function login_form()
+    public function login()
     {
         return view('login_form');
     }

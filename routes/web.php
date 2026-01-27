@@ -34,73 +34,7 @@ Route::get('/test-middleware', function () {
 
 Route::get('/home/driver', fn() => view('driver_home'))->name('driver.home');
 
-
-/*
-|--------------------------------------------------------------------------
-| Admin Authentication Routes
-|--------------------------------------------------------------------------
-*/
-Route::prefix('admin')->group(function () {
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('login', [LoginController::class, 'login'])->name('admin.login.submit');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Protected Admin Routes
-|--------------------------------------------------------------------------
-|
-| Only authenticated admins can access these routes
-|
-*/
-Route::prefix('admin')->name('admin.')->middleware(['admin','Customer','prevent-back-history'])->group(function () {
-    
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Drivers
-    Route::resource('drivers', DriverController::class)->except(['show']);
-
-    // Banners
-    Route::resource('banners', BannerController::class)->except(['show']);
-    Route::get('view-banners', [BannerController::class, 'viewActive'])->name('banners.view');
-
-    // Users
-    Route::resource('user', UserController::class)->except(['show']);
-
-    // Customers
-    Route::resource('customers', CustomerController::class)->except(['show']);
-
-    // Cars
-    Route::resource('cars', CarController::class)->except(['show']);
-
-    // Bookings
-    Route::resource('bookings', BookingsController::class)->except(['show']);
-    Route::get('customers/{id}/cars', [BookingsController::class, 'getCustomerCars'])->name('customers.cars');
-
-    //Permissions
-    Route::resource('permissions', PermissionController::class)->except(['show']);
-});
-// Route::resource('cvs', App\Http\Controllers\CvsController::class);
-
-// Customer Routes
-use App\Http\Controllers\Customer\LoginCustomer;
-
-Route::get('/home/customer', fn() => view('customer/customer_home'))->name('customer.home');
-
-Route::prefix('customer')->group(function () {
-    Route::get('/login', [LoginCustomer::class, 'showLoginForm'])->name('customer.login');
-    Route::post('login', [LoginCustomer::class, 'login'])->name('customer.login.submit');
-    Route::get('/logout', [LoginCustomer::class, 'logout'])->name('customer.logout');
-});
-Route::prefix('customer')->name('customer.')->middleware(['Customer','prevent-back-history'])->group(function () {
-    
-    Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardCustomer::class, 'index'])->name('dashboard');
-
-    Route::resource('profile', App\Http\Controllers\Customer\CustomerProfile::class);
-
-});
-
+//Trial routes
 use App\Http\Controllers\TrialController;
 
 Route::get('/trial', [TrialController::class, 'index'])
@@ -108,5 +42,21 @@ Route::get('/trial', [TrialController::class, 'index'])
 Route::get('/trial2', [TrialController::class, 'second'])
     ->name('trial2');        
 
-Route::get('/login_form', [TrialController::class, 'login_form'])
-    ->name('login_form');
+// login routes
+use App\Http\Controllers\UserLogin;
+Route::get('/login', [UserLogin::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserLogin::class, 'login'])->name('login.submit');
+Route::post('/logout', [UserLogin::class, 'logout'])->name('logout');
+
+// Protected pages
+Route::middleware(['auth', 'can:customer-home'])->group(function () {
+    Route::get('/customer/home', function () {
+        return view('customer.home');
+    })->name('customer.home');
+});
+
+Route::middleware(['auth', 'can:isDriver'])->group(function () {
+    Route::get('/driver/home', function () {
+        return view('driver.home');
+    })->name('driver.home');
+});

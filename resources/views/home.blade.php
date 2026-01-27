@@ -28,85 +28,10 @@
   }
   </style>
   <body>
-    <nav class="nav-responsive">
-     <div class="container-fluid text-white wow fadeIn" data-wow-delay="0.1s" style="background: rgb(12 ,12 ,46);">
-      <div class="container py-3">
-        <div class="d-flex align-items-center">
-          <h2 class="text-white fw-bold m-0">ACTIVE DRIVERS</h2>
-          <div class="ms-auto d-flex align-items-center">
-            <!-- hide content info on small screens-->
-            <div class ="d-none d-lg-flex menu-links">
-              <small class="nav-link-custom ms-4">Home</small>
-              <small class="nav-link-custom ms-4">My Bookings</small>
-            </div>
-            <!-- Always visible -->
-            <a href="{{url ('admin/login') }}" class="btn btn-outline-light ms-4">LOGIN</a>
-          </div>
-        </div>
-      </div>
-    </div>
-   </nav>
-    <div>
-    <!-- Carousel Image -->
-    @include('partials.slide_image')
-    </div>
+    @include('partials.navbar')
     
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-md-6 border-end">
-          {{-- Left form --}}
-          @include('driver_availability')
-      </div>
-      <div class="col-md-6">
-         {{-- Right form --}}
-         @include('customer_availability')
-      </div>
-    </div>
-  </div>
- 
-  <div class="text-center my-5" style="font-family: Arial, sans-serif; color: #ff8801ff; ">
-    <h1>OUR SERVICES</h1>
-    <div class="container mt-4">
-      <div class="row row-cols-1 row-cols-md-2 g-4" >
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Acting Driver</h5> <hr>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-       
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">24 Hours Service</h5> <hr>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-       
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Available Drivers</h5> <hr>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-          </div>
-        </div>
-       
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5> <hr>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
- 
+    @include('partials.guest')
+    
   @extends('partials.footer')
 </body>
 </html>

@@ -16,8 +16,8 @@
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Mobile No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,8 +25,8 @@
         @forelse($customers as $customer)
             <tr>
                 <td>{{ $customer->id }}</td>
-                <td>{{ $customer->name }}</td>
-                <td>{{ $customer->mobile_number }}</td>
+                <td>{{ $customer->first_name }}</td>
+                <td>{{ $customer->last_name }}</td>
                 <td>
                     <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST" style="display:inline-block;">

@@ -52,18 +52,43 @@
 
 <body>
  <div class="banner-wrapper">
-
-    <!-- NAVBAR -->
+  
+ <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-overlay navbar-brand" id="mainNavbar">
-        <div class="container py-3">
+      <div class="container ">
             <h2 class="text-dark fw-bold m-0">ACTIVE DRIVERS</h2>
+            @can('guest-home')
+            <div class="ms-auto d-flex align-items-center">
+                <a class="nav-link text-dark ms-5" href="#">Home</a>
+                <a class="nav-link text-dark ms-5" href="#">Our Services</a>
+                <a class="nav-link text-dark ms-5" href="#">Sign Up</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('login') }}">Login</a>
+            </div>
+            @endcan
 
+            @can('customer-home')
             <div class="ms-auto d-flex align-items-center">
                 <a class="nav-link text-dark ms-5" href="#">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">My Bookings</a>
-                <a class="nav-link text-dark ms-5" href="#">My Profile</a>
-                <a class="nav-link text-dark ms-5" href="#">Logout</a>
+                <a class="nav-link text-dark ms-5" href="">My Profile</a>
+                 <form method="POST" action="{{ route ('logout') }}" class="ms-5">
+                    @csrf
+                    <button class="btn nav-link text-dark p-0">Logout</button>
+                </form>
             </div>
+            @endcan
+
+            @can('isDriver')
+            <div class="ms-auto d-flex align-items-center">
+                <a class="nav-link text-dark ms-5" href="#">Home</a>
+                <a class="nav-link text-dark ms-5" href="#">My Trip</a>
+                <a class="nav-link text-dark ms-5" href="">Profile</a>
+                 <form method="POST" action="{{ route ('logout') }}" class="ms-5">
+                    @csrf
+                    <button class="btn nav-link text-dark p-0">Logout</button>
+                </form>
+            </div>
+            @endcan
         </div>
     </nav>
 
