@@ -21,7 +21,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('dashboard-rest', fn($user) => in_array($user->role->role_name, ['Admin', 'Anonymous']));
         Gate::define('customer', fn($user) => in_array($user->role->role_name, ['Customer']));
         Gate::define('guest-home', function (?User $user) { return is_null($user);}); 
-        Gate::define('customer-home', fn($user) => in_array($user->role->role_name, ['Customer']));
-        Gate::define('isDriver', fn($user) => in_array($user->role->role_name, ['Driver']));
+        Gate::define('customer-home', function ($user) { return $user->roles_id == 3;});
+        Gate::define('isDriver', function ($user) { return $user->roles_id == 2; });
     }
 }

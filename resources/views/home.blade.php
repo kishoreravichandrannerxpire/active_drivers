@@ -30,8 +30,26 @@
   <body>
     @include('partials.navbar')
     
-    @include('partials.guest')
-    
+    @can('guest-home')
+      @include('partials.guest')
+    @endcan
+
+    @can('customer-home')
+      @include('partials.customer.driver_booking_form')
+    @endcan
+
+    @can('customer-home')
+      @include('partials.customer.addcar_form')
+    @endcan
+
+    @can('customer-home')
+      @include('partials.conversation')
+    @endcan 
+
+    @can('isDriver')
+      @include('partials.conversation')
+    @endcan
+
   @extends('partials.footer')
 </body>
 </html>

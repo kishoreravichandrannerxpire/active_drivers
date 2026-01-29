@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 
@@ -30,14 +32,27 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        User::create([
+        $user = User::create([
             'roles_id' => $request->roles_id,
             'email' => $request->email,
             'mobile_number' => $request->mobile_number,
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
+        // Login the user
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        // Redirect based on role_id
+        if($request->roles_id == 3){
+            return redirect()->route('customer.home');
+        }
+        if($request->roles_id == 2){
+            return redirect()->route('driver.home');
+        } 
+        else {
+            return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
+        }
     }
     public function edit($id)
     {
@@ -52,13 +67,13 @@ class UserController extends Controller
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'moblie_number' => 'required|string|max:10|unique:users,moblie_number,' . $user->id,
+            'mobile_number' => 'required|string|max:10|unique:users,mobile_number,' . $user->id,
             'password' => 'nullable|string|min:6',
         ]);
 
         $user->roles_id = $request->roles_id;
         $user->email = $request->email;
-        $user->moblie_number = $request->moblie_number;
+        $user->mobile_number = $request->mobile_number;
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);

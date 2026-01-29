@@ -6,6 +6,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+    
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="container min-vh-100 d-flex align-items-center justify-content-center">
     <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
@@ -75,7 +85,7 @@
                 </div>
 
                 <!-- REGISTRATION FORM -->
-                <form action="{{ route('admin.user.store') }}" method="POST" id="registerForm" style="display: none;">
+                <form action="{{ route('signup.store') }}" method="POST" id="registerForm" class="card p-4 shadow mx-auto" style="display: none;">
                     @csrf
 
                     <!-- Hidden field to store role_id based on selection -->
@@ -111,18 +121,22 @@
 
 <script>
     function showRegisterForm() {
-        const selectedRole = document.querySelector('input[name="role"]:checked');
-        if (selectedRole) {
-            document.getElementById('registerForm').style.display = 'block';
-            // Set roles_id: 3 for customer, 2 for driver
-            const rolesIdField = document.getElementById('rolesIdField');
-            if (selectedRole.value === 'customer') {
-                rolesIdField.value = '3';
-            } else if (selectedRole.value === 'driver') {
-                rolesIdField.value = '2';
-            }
-        }
+            const selectedRole = document.querySelector('input[name="role"]:checked');
+    const form = document.getElementById('registerForm');
+    const rolesIdField = document.getElementById('rolesIdField');
+
+    if (!selectedRole) return;
+
+    form.style.display = 'block';
+
+    if (selectedRole.value === 'customer') {
+        rolesIdField.value = 3;
     }
+
+    if (selectedRole.value === 'driver') {
+        rolesIdField.value = 2;
+    }
+}
 </script>
 
 </body>

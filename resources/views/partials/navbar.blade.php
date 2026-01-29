@@ -61,7 +61,7 @@
             <div class="ms-auto d-flex align-items-center">
                 <a class="nav-link text-dark ms-5" href="#">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">Our Services</a>
-                <a class="nav-link text-dark ms-5" href="#">Sign Up</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('signup') }}">Sign Up</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('login') }}">Login</a>
             </div>
             @endcan

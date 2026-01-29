@@ -2,6 +2,7 @@
 
 // Admin Routes
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DriverAvailabilityController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\BannerController;
@@ -48,15 +49,7 @@ Route::get('/login', [UserLogin::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserLogin::class, 'login'])->name('login.submit');
 Route::post('/logout', [UserLogin::class, 'logout'])->name('logout');
 
-// Protected pages
-Route::middleware(['auth', 'can:customer-home'])->group(function () {
-    Route::get('/customer/home', function () {
-        return view('customer.home');
-    })->name('customer.home');
-});
 
-Route::middleware(['auth', 'can:isDriver'])->group(function () {
-    Route::get('/driver/home', function () {
-        return view('driver.home');
-    })->name('driver.home');
-});
+// Signup route
+Route::get('/signup', fn() => view('signup_form'))->name('signup');
+Route::post('/signup', [UserController::class, 'store'])->name('signup.store');

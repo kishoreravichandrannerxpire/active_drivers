@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLogin;
 use App\Http\Controllers\Customer\DashboardCustomer;
 use App\Http\Controllers\Customer\CustomerProfile;
+use Illuminate\Support\Facades\Auth; 
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,10 @@ Route::middleware(['Customer', 'prevent-back-history'])->group(function () {
     Route::get('/dashboard', [DashboardCustomer::class, 'index'])->name('dashboard');
 
     Route::resource('profile', CustomerProfile::class);
+});
+
+Route::middleware(['auth', 'can:customer-home'])->group(function () {
+    Route::get('/customer/home', function () {
+return view('customer.home');
+    })->name('customer.home');
 });
