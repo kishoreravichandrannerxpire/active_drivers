@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\Auth;
 | Customer Authentication Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware('guest')->group(function () {
-    Route::get('/login', fn() => view('login_form'))->name('login');
-});
+Route::get('/login', fn() => view('login_form'))->name('login');
 
 Route::get('/logout', fn() => redirect('/')->name('logout'))->name('logout');
 
@@ -29,8 +27,9 @@ Route::get('/logout', fn() => redirect('/')->name('logout'))->name('logout');
 Route::middleware(['Customer', 'prevent-back-history'])->group(function () {
     Route::get('/home', fn() => view('customer/home'))->name('home');
     Route::get('/dashboard', [DashboardCustomer::class, 'index'])->name('dashboard');
-
-    Route::resource('profile', CustomerProfile::class);
+    Route::get('/myprofile', [CustomerProfile::class, 'show'])->name('myprofile');
+    
+    Route::post('profile/{id}', [CustomerProfile::class, 'update'])->name('profile.update');
 });
 
 Route::middleware(['auth', 'can:customer-home'])->group(function () {

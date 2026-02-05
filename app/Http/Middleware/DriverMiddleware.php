@@ -21,8 +21,8 @@ class DriverMiddleware
             return redirect()->route('driver.login')->with('error', 'Please login to access Driver Portal');
         }
 
-        // Logged in but role not Driver → forbid access
-        if (!Auth::user()->role || Auth::user()->role->role_name !== 'Driver') {
+        // Logged in but role not Driver or Admin → forbid access
+        if (!Auth::user()->role || !in_array(Auth::user()->role->role_name, ['Driver', 'Admin'])) {
             abort(403, 'Unauthorized action.');
         }
 

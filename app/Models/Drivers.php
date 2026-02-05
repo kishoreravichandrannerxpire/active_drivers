@@ -11,6 +11,7 @@ class Drivers extends Model
         'first_name',
         'last_name',
         'age',
+        'status',
         'driver_license_number',
         'driver_image',
         'total_experience_years',
@@ -24,9 +25,24 @@ class Drivers extends Model
     {
         return $this->hasMany(DriverAvailability::class, 'drivers_id');
     }
-    public function histories()
+
+public function histories()
     {
         return $this->hasMany(DriverHistory::class, 'drivers_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getEmailAttribute()
+    {
+        return $this->user->email ?? '';
+    }
+
+    public function getMobileNumberAttribute()
+    {
+        return $this->user->mobile_number ?? '';
     }
     protected static function booted()
     {

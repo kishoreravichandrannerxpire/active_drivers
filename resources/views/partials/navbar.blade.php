@@ -70,7 +70,7 @@
             <div class="ms-auto d-flex align-items-center">
                 <a class="nav-link text-dark ms-5" href="#">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">My Bookings</a>
-                <a class="nav-link text-dark ms-5" href="">My Profile</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('customer.myprofile') }}">My Profile</a>
                  <form method="POST" action="{{ route ('logout') }}" class="ms-5">
                     @csrf
                     <button class="btn nav-link text-dark p-0">Logout</button>
@@ -82,7 +82,7 @@
             <div class="ms-auto d-flex align-items-center">
                 <a class="nav-link text-dark ms-5" href="#">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">My Trip</a>
-                <a class="nav-link text-dark ms-5" href="">Profile</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('driver.profile') }}">Profile</a>
                  <form method="POST" action="{{ route ('logout') }}" class="ms-5">
                     @csrf
                     <button class="btn nav-link text-dark p-0">Logout</button>

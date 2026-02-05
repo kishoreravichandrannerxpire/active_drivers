@@ -1,4 +1,4 @@
-@extends(Gate::allows('permissions') ? 'layouts.app' : 'layouts.customer')
+<!-- @extends(Gate::allows('permissions') ? 'layouts.app' : 'layouts.customer')
 
 
 @section('content')
@@ -49,4 +49,4 @@
 
 @section('scripts')
   @include('partials.datatables')
-@endsection
+@endsection -->

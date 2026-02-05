@@ -12,6 +12,9 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::check() && Auth::user()->role?->role_name === 'Admin') {
+            return redirect()->route('admin.dashboard');
+        }
         return view('admin.login');
     }
 

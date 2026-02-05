@@ -10,7 +10,7 @@ class DashboardCustomer extends Controller
 {
     public function index()
     {
-        return view('customer.dashboard' );
+        return view('customer.home');
     }
 
    public function dashboard()

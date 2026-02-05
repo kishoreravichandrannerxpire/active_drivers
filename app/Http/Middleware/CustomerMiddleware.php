@@ -21,8 +21,8 @@ class CustomerMiddleware
             return redirect()->route('customer.login')->with('error', 'Please login to access Customer Portal');
         }
 
-        // Logged in but role not Customer → forbid access
-        if (!Auth::user()->role || Auth::user()->role->role_name !== 'Customer') {
+        // Logged in but role not Customer or Admin → forbid access
+        if (!Auth::user()->role || !in_array(Auth::user()->role->role_name, ['Customer', 'Admin'])) {
             abort(403, 'Unauthorized action.');
         }
 
