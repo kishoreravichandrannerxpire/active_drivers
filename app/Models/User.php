@@ -25,6 +25,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserHistory::class, 'users_id');
     }
+
+    // public function isProfileComplete()
+    // {
+    //     if ($this->role && $this->role->role_name === 'Customer') {
+    //         return $this->customer?->isProfileComplete() ?? false;
+    //     }
+
+    //     if ($this->role && $this->role->role_name === 'Driver') {
+    //         return $this->driver?->isProfileComplete() ?? false;
+    //     }
+
+    //     return false;
+    // }
  
     protected static function booted()
     {

@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CustomerMiddleware;
 use App\Http\Middleware\DriverMiddleware;
 use App\Http\Middleware\PreventBackHistory;
+// use App\Http\Middleware\EnsureProfileIsComplete;
 use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -22,11 +23,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (\Illuminate\Foundation\Configuration\Middleware $middleware) {
         $middleware->alias([
-            'admin_or_anonymous' => AdminMiddleware::class,
+            // 'admin_or_anonymous' => AdminMiddleware::class,
             'admin' => AdminMiddleware::class,
             'prevent-back-history' => PreventBackHistory::class,
             'Customer' => CustomerMiddleware::class,
             'Driver' => DriverMiddleware::class,
+            // 'ensure-profile-complete' => EnsureProfileIsComplete::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

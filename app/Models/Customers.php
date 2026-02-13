@@ -10,8 +10,7 @@ class Customers extends Model
     protected $fillable = [
         'user_id',
         'first_name',
-        'last_name',
-        'password'
+        'last_name'
     ];
 
     public function cars()
@@ -103,4 +102,34 @@ class Customers extends Model
             ]);
         });
     }
+
+    // public function isProfileComplete()
+    // {
+    //     if (
+    //         empty($this->first_name) ||
+    //         empty($this->last_name)
+    //     ) {
+    //         return false;
+    //     }
+
+    //     $car = $this->cars()->first();
+
+    //     if (!$car) {
+    //         return false;
+    //     }
+
+    //     if (
+    //         empty($car->car_model) ||
+    //         empty($car->car_type) ||
+    //         empty($car->car_number) ||
+    //         empty($car->insurance) ||
+    //         empty($car->fastag) ||
+    //         empty($car->transmission_type) ||
+    //         empty($car->fuel_type)
+    //     ) {
+    //         return false;
+    //     }
+
+    //     return true;
+    // }
 }

@@ -26,7 +26,7 @@ class Drivers extends Model
         return $this->hasMany(DriverAvailability::class, 'drivers_id');
     }
 
-public function histories()
+    public function histories()
     {
         return $this->hasMany(DriverHistory::class, 'drivers_id');
     }
@@ -100,5 +100,20 @@ public function histories()
             ]);
         });
     }
+
+    // public function isProfileComplete()
+    // {
+    //     return !empty($this->first_name)
+    //         && !empty($this->last_name)
+    //         && !empty($this->age)
+    //         && !empty($this->driver_license_number)
+    //         && !empty($this->driver_image)
+    //         && !empty($this->total_experience_years)
+    //         && !empty($this->hill_experience)
+    //         && !empty($this->accident_history)
+    //         && !empty($this->luxury_car_experience)
+    //         && !empty($this->address)
+    //         && !empty($this->pincode);
+    // }
 }
 ?>
