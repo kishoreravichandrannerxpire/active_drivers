@@ -19,14 +19,24 @@ use App\Http\Controllers\Admin\PermissionController;
 | Public Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', fn() => view('home')); //removed welcome page
+Route::get('/', function () {
+    if (Auth::check() && Auth::user()->role && in_array(Auth::user()->role->role_name, ['Admin','prevent-back-history'])) {
+        return redirect()->route('admin.dashboard');
+    }
+    return view('home');
+}); //removed welcome page
 
 Route::get('/driver/availability/form', fn() => view('driver_availability'));
 Route::post('/driver/availability', [DriverAvailabilityController::class, 'store'])->name('availability.store');
 
 Route::get('/customer/create/form', fn() => view('customer_create_form'));
 
-Route::get('/home', fn() => view('home'))->name('home');
+Route::get('/home', function () {
+    if (Auth::check() && Auth::user()->role && in_array(Auth::user()->role->role_name, ['Admin','prevent-back-history'])) {
+        return redirect()->route('admin.dashboard');
+    }
+    return view('home');
+})->name('home');
 
 Route::get('/test-middleware', function () {
     $middleware = app()->make(\App\Http\Middleware\AdminMiddleware::class);

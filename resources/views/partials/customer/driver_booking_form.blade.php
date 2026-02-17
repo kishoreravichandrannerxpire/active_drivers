@@ -19,24 +19,22 @@
               <form action="{{ route('admin.customers.store') }}" method="POST">
                 @csrf
 
+                @php
+                  $from = old('from', session('from_location', ''));
+                  $to = old('to', session('to_location', ''));
+                @endphp
+
                 <div class="mb-3">
-                  <label class="form-label">Name *</label>
-                  <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                  <label class="form-label">From Location *</label>
+                  <input type="text" id="customer_from" name="from" class="form-control" value="{{ $from }}" required>
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Mobile Number *</label>
-                  <input type="text" name="mobile_number" class="form-control" value="{{ old('mobile_number') }}" required>
+                  <label class="form-label">To Location *</label>
+                  <input type="text" id="customer_to" name="to" class="form-control" value="{{ $to }}" required>
                 </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Password *</label>
-                  <input type="password" name="password" class="form-control" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                  Create Customer
-                </button>
+                <button type="submit" class="btn btn-primary w-100"> Choose Driver </button>
               </form>
             </div>
 

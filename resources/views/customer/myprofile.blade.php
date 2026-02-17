@@ -6,6 +6,7 @@
     <title>myprofile</title>
 </head>
 <body>
+    @include('partials.links')
     @include('partials.navbar')
     <div class="container mt-5">
         @if(session('success'))

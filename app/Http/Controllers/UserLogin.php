@@ -26,6 +26,13 @@ class UserLogin extends Controller
         if (Auth::attempt([$field => $request->login, 'password' => $request->password])) {
 
             $user = Auth::user();
+            // store from/to in session if provided (so customer home can auto-fill)
+            if ($request->filled('from_location')) {
+                session()->flash('from_location', $request->input('from_location'));
+            }
+            if ($request->filled('to_location')) {
+                session()->flash('to_location', $request->input('to_location'));
+            }
 
             // Role based redirect
             if ($user->role?->role_name === 'Customer') {

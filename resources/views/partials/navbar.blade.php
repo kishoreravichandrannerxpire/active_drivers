@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Active Drivers</title>
-   
-    <!-- Bootstrap CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
-  <style>
+<style>
 .navbar-overlay {
     position: fixed;
     top: 0;
@@ -19,7 +7,7 @@
 }
 
 .carousel-item img {
-    height: 750px;
+    height: 630px;
     object-fit: cover;
 }
 /* NAVBAR initial state */
@@ -45,7 +33,7 @@
 }
 
 .carousel-caption  {
-    margin-bottom: 350px;
+    margin-bottom: 275px;
     color: #fff;
 }
 </style>
@@ -137,6 +125,3 @@
 
   });
 </script>
-
- 
-</html>
