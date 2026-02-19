@@ -16,7 +16,7 @@
 
             <!-- FORM -->
             <div class="col-lg-6 col-12">
-              <form action="{{ route('admin.customers.store') }}" method="POST">
+              <form action="{{ route('customer.driver-availability') }}" method="POST">
                 @csrf
 
                 @php

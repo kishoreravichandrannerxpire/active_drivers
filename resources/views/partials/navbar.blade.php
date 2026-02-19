@@ -5,11 +5,6 @@
     width: 100%;
     z-index: 10;
 }
-
-.carousel-item img {
-    height: 630px;
-    object-fit: cover;
-}
 /* NAVBAR initial state */
 #mainNavbar {
   transition: all 0.4s ease;
@@ -31,11 +26,6 @@
   border-color: #333;
   color: #333;
 }
-
-.carousel-caption  {
-    margin-bottom: 275px;
-    color: #fff;
-}
 </style>
 
 <body>
@@ -46,7 +36,7 @@
             <h2 class="text-dark fw-bold m-0">ACTIVE DRIVERS</h2>
             @can('guest-home')
             <div class="ms-auto d-flex align-items-center">
-                <a class="nav-link text-dark ms-5" href="#">Home</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('guest.home') }}">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">Our Services</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('signup') }}">Sign Up</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('login') }}">Login</a>
@@ -55,7 +45,7 @@
 
             @can('customer-home')
             <div class="ms-auto d-flex align-items-center">
-                <a class="nav-link text-dark ms-5" href="#">Home</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('customer.home') }}">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">My Bookings</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('customer.myprofile') }}">My Profile</a>
                  <form method="POST" action="{{ route ('logout') }}" class="ms-5">
@@ -67,7 +57,7 @@
 
             @can('isDriver')
             <div class="ms-auto d-flex align-items-center">
-                <a class="nav-link text-dark ms-5" href="#">Home</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('driver.home') }}">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">My Trip</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('driver.profile') }}">Profile</a>
                  <form method="POST" action="{{ route ('logout') }}" class="ms-5">
