@@ -1,6 +1,7 @@
 @include('partials.links')
   <body>
     @include('partials.navbar')
+    @include('partials.slide_image')
     
     @can('guest-home')
       <div class="container mt-5">

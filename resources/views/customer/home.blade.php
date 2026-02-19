@@ -16,6 +16,7 @@
 </style>
 <body>
     @include('partials.navbar')
+    @include('partials.slide_image')
 
     <!-- DRIVER BOOKING FORM -->
   @can('customer-home')

@@ -39,7 +39,6 @@
 </style>
 
 <body>
- <div class="banner-wrapper">
   
  <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-overlay navbar-brand" id="mainNavbar">
@@ -79,37 +78,6 @@
             @endcan
         </div>
     </nav>
-
-    <!-- CAROUSEL -->
-
-        @php
-          $banners = \App\Models\Banner::where('status', 1)->get();
-        @endphp
-     @if($banners->count())
-    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach($banners as $index => $banner)
-                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                    <img src="{{ asset('storage/' . $banner->image)}}"
-                         class="d-block w-100"
-                         alt="{{ $banner->title }}">
-                         <div class="carousel-caption d-none d-md-block text-center">
-                          <h1>{{ $banner->title }}</h1>
-                          <p>{{ $banner->description }}</p>
-                        </div>
-                      </div>
-                      @endforeach
-                    </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-    </div>
-  </div>
-@endif
-
 
 </body>
 <script>

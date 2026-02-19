@@ -1,25 +1,33 @@
 <style>
   .carousel-item img {
-    width: 100%;      /* make image span full width */
-    height: 450px;    /* fixed height */
-    object-fit: cover; /* fills container, crops if needed */
-  }
+    height: 630px;
+    object-fit: cover;
+}
+
+.carousel-caption  {
+    margin-bottom: 275px;
+    color: #fff;
+}
   </style>
 <body>
    
-        @php
-          $banners = \App\Models\Banner::where('status', 1)->get();
-        @endphp
+       <div class="banner-wrapper">
      
     @if($banners->count())
     <div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
         @foreach($banners as $index => $banner)
         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-          <img src="{{ asset('storage/' . $banner->image) }}"class="d-block w-100 "alt="{{ $banner->title }}" >
+          <img src="{{ asset('storage/' . $banner->image)}}" class="d-block w-100" alt="{{ $banner->title }}">
+          <div class="carousel-caption d-none d-md-block text-center">
+            <h1>{{ $banner->title }}</h1>
+            <p>{{ $banner->description }}</p>
+          </div>
         </div>
-  @endforeach
+        @endforeach
       </div>
+    </div>
+    </div>
  
       <!-- Controls -->
        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
