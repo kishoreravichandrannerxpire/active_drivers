@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Customers;
+use App\Models\UserHistory;
+use App\Models\CustomerHistory;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -28,7 +32,7 @@ class UserController extends Controller
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
             'email' => 'nullable|string|email|max:255|unique:users,email',
-            'mobile_number' => 'required|string|max:10|unique:users,mobile_number',
+            'mobile_number' => 'required|string|size:10|unique:users,mobile_number',
             'password' => 'required|string|min:6',
         ]);
 
@@ -67,7 +71,7 @@ class UserController extends Controller
         $request->validate([
             'roles_id' => 'required|exists:roles,id',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'mobile_number' => 'required|string|max:10|unique:users,mobile_number,' . $user->id,
+            'mobile_number' => 'required|string|size:10|unique:users,mobile_number,' . $user->id,
             'password' => 'nullable|string|min:6',
         ]);
 
@@ -83,11 +87,24 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
     }
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
+    public function destroy(User $user)
+{
+    DB::transaction(function () use ($user) {
 
-        return redirect()->route('admin.user.index')->with('success', 'User deleted successfully!');
-    }
+        // get related customer
+        $customer = $user->customer;
+
+        // delete child first
+        if ($customer) {
+            $customer->delete();
+        }
+
+        // then delete parent
+        $user->delete();
+    });
+
+    return redirect()->route('admin.user.index')
+        ->with('success', 'User deleted successfully!');
+}
+
 }

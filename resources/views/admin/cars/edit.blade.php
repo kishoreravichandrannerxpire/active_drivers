@@ -4,16 +4,6 @@
 <div class="container mt-4">
     <h2>Edit Car</h2>
 
-     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -24,22 +14,24 @@
         <div class="mb-3 row">
 
         <div class="col-sm-4">
-            <label for="customers_id" class="form-label">Customer</label>
+            <label for="customers_id" class="form-label">Customer <span class="text-danger">*</span></label>
             <select name="customers_id" id="customers_id" class="form-select">
                 <option value="">-- Select Customer --</option>
                 @foreach($customers as $customer)
                     <option value="{{ $customer->id }}" {{ old('customers_id', $car->customers_id) == $customer->id ? 'selected' : '' }}>
-                        {{ $customer->name }} 
+                        {{ $customer->first_name }} 
                     </option>
                 @endforeach
             </select>
+             @error('customers_id')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
         <div class="col-sm-4">
-            <label for="car_model" class="form-label">Car Model</label>
+            <label for="car_model" class="form-label">Car Model <span class="text-danger">*</span></label>
             <input type="text" class="form-control" placeholder="Eg: Toyota Corolla" id="car_model" name="car_model" value="{{ old('car_model', $car->car_model) }}">
+             @error('car_model')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
         <div class="col-sm-4">
-            <label for="car_type" class="form-label">Car Type</label>
+            <label for="car_type" class="form-label">Car Type <span class="text-danger">*</span></label>
             <select name="car_type" id="car_type" class="form-select">
                 <option value="">-- Select --</option>
                 <option value="Sedan-4" {{ old('car_type', $car->car_type) == 'Sedan-4' ? 'selected' : '' }}>Sedan (4-Seater)</option>
@@ -51,13 +43,15 @@
                 <option value="Hatchback-4" {{ old('car_type', $car->car_type) == 'Hatchback-4' ? 'selected' : '' }}>Hatchback (4-Seater)</option>
                 <option value="Hatchback-5" {{ old('car_type', $car->car_type) == 'Hatchback-5' ? 'selected' : '' }}>Hatchback (5-Seater)</option>
             </select>
+             @error('car_type')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
         </div>
         
         <div class="mb-3 row">
         <div class="col-sm-4">
-            <label for="car_number" class="form-label">Car Number</label>
+            <label for="car_number" class="form-label">Car Number <span class="text-danger">*</span></label>
             <input type="text" class="form-control" placeholder="Eg: TN 01 AB 1234" id="car_number" name="car_number" value="{{ old('car_number', $car->car_number) }}">
+             @error('car_number')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
         <div class="col-sm-4">
             <label for="insurance" class="form-label">Insurance</label>

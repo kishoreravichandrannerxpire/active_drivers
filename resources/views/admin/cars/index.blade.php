@@ -30,7 +30,7 @@
         @forelse($cars as $car)
             <tr>
                 <td>{{ $car->id }}</td>
-                <td>{{ $car->customer ? $car->customer->name : 'N/A' }}</td>
+                <td>{{ $car->customer ? $car->customer->first_name : 'N/A' }}</td>
                 <td>{{ $car->car_model }}</td>
                 <td>{{ $car->car_type }}</td>
                 <td>{{ $car->car_number }}</td>

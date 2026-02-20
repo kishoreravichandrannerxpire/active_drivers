@@ -26,7 +26,7 @@ class CustomerProfile extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'           => 'required|string|max:255',
-            'mobile_number'  => 'required|string|max:10|unique:customers,mobile_number',
+            'mobile_number'  => 'required|string|size:10|unique:customers,mobile_number',
             'password'       => 'required|string|min:6'
         ]);
 
@@ -50,7 +50,7 @@ class CustomerProfile extends Controller
             'first_name'         => 'required|string|max:255',
             'last_name'          => 'required|string|max:255',
             'email'              => 'required|email|unique:users,email,' . $profile->user_id,
-            'mobile_number'      => 'required|string|max:20|unique:users,mobile_number,' . $profile->user_id,
+            'mobile_number'      => 'required|string|size:10|unique:users,mobile_number,' . $profile->user_id,
             'car_model'          => 'required|string|max:255',
             'car_type'           => 'required|string|max:255',
             'car_number'         => 'required|string|max:255',

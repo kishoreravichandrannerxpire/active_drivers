@@ -25,6 +25,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserHistory::class, 'users_id');
     }
+    public function customer()
+    {
+        return $this->hasOne(Customers::class, 'user_id');
+    }
 
     // public function isProfileComplete()
     // {

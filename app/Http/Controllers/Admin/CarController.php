@@ -31,10 +31,10 @@ class CarController extends Controller
             'car_model'         => 'required|string|max:255',
             'car_type'          => 'required|string|max:255',
             'car_number'        => 'required|string|max:20|unique:cars,car_number',
-            'insurance'        => 'required|boolean',
-            'fastag'           => 'required|boolean',
-            'transmission_type' => 'required|in:Automatic,Manual',
-            'fuel_type'        => 'required|in:Petrol,Diesel,Electric,Hybrid',
+            'insurance'        => 'nullable|boolean',
+            'fastag'           => 'nullable|boolean',
+            'transmission_type' => 'nullable|in:Automatic,Manual',
+            'fuel_type'        => 'nullable|in:Petrol,Diesel,Electric,Hybrid',
         ]);
 
         if ($validator->fails()) {
@@ -59,10 +59,10 @@ class CarController extends Controller
             'car_model'         => 'required|string|max:255',
             'car_type'          => 'required|string|max:255',
             'car_number'        => 'required|string|max:20|unique:cars,car_number,' . $car->id,
-            'insurance'        => 'required|boolean',
-            'fastag'           => 'required|boolean',
-            'transmission_type' => 'required|in:Automatic,Manual',
-            'fuel_type'        => 'required|in:Petrol,Diesel,Electric,Hybrid',
+            'insurance'        => 'nullable|boolean',
+            'fastag'           => 'nullable|boolean',
+            'transmission_type' => 'nullable|in:Automatic,Manual',
+            'fuel_type'        => 'nullable|in:Petrol,Diesel,Electric,Hybrid',
         ]);
 
         if ($validator->fails()) {
