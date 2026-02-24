@@ -36,7 +36,7 @@
             <h2 class="text-dark fw-bold m-0">ACTIVE DRIVERS</h2>
             @can('guest-home')
             <div class="ms-auto d-flex align-items-center">
-                <a class="nav-link text-dark ms-5" href="{{ route('guest.home') }}">Home</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('home') }}">Home</a>
                 <a class="nav-link text-dark ms-5" href="#">Our Services</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('signup') }}">Sign Up</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('login') }}">Login</a>

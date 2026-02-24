@@ -1,22 +1,26 @@
 @include('partials.links')
+@include('partials.location_style')
+@include('partials.location_script')
   <body>
+  
     @include('partials.navbar')
     @include('partials.slide_image')
-    
     @can('guest-home')
       <div class="container mt-5">
     <div class="row">
         
         <div class="col-md-6">
-            <form id="guestDriverForm" onsubmit="event.preventDefault(); redirectToLogin();">
+            <form action="{{ route('login') }}" method="GET">
                 <h4>Do You Wanna A driver </h4>
-                <div class="mb-3">
+                <div class="mb-3 position-relative">
                     <label>From </label>
-                    <input type="text" id="guest_from" class="form-control" >
+                    <input type="text" name="from_location" id="from_location" class="form-control" autocomplete="off" required>
+                    <div id="from_suggestions"></div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 position-relative">
                     <label>To</label>
-                    <input type="text" id="guest_to" class="form-control" >
+                    <input type="text" name="to_location" id="to_location" class="form-control" autocomplete="off" required>
+                    <div id="to_suggestions"></div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
@@ -52,20 +56,8 @@
     @can('isDriver')
       @include('partials.conversation')
     @endcan
+
+    @include('partials.footer')
+
+
 </body>
- 
-@include('partials.footer')
- 
-   
-    <script>
-        function redirectToLogin() {
-            const from = document.getElementById('guest_from').value.trim();
-            const to = document.getElementById('guest_to').value.trim();
-            if (!from || !to) 
-                { 
-                    alert('Please fill both From and To');
-                     return; 
-                }
-            window.location = '{{ route('login') }}?from=' + encodeURIComponent(from) + '&to=' + encodeURIComponent(to);
-        }
-    </script>

@@ -43,18 +43,11 @@ class UserController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        // persist booking from/to if provided (guest -> signup) 
-            if ($request->filled('from_location')) {
-                session()->flash('from_location', $request->input('from_location'));
-              }
-            if ($request->filled('to_location')) {
-                session()->flash('to_location', $request->input('to_location'));
-                }
-
-
         // Redirect based on role_id
         if($request->roles_id == 3){
-            return redirect()->route('customer.home');
+            // Persist booking from/to if provided (guest -> signup)
+            return redirect()->route('customer.home')
+                ->withInput($request->only(['from_location', 'to_location']));
         }
         if($request->roles_id == 2){
             return redirect()->route('driver.home');

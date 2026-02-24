@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Driver Availability</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    @include('partials.links')
+    @include('partials.location_style')
+    @include('partials.location_script')
 </head>
 <style>
     body{
@@ -21,27 +22,24 @@
     <form action="{{ route('customer.driver-availability') }}" method="POST">
         @csrf
 
-        @php
-            $from = old('from', session('from_location', ''));
-            $to = old('to', session('to_location', ''));
-        @endphp
-
         <div class="row g-2 align-items-end">
             
-            <div class="col">
+            <div class="mb-3 position-relative col">
                 <label class="form-label">From *</label>
-                <input type="text" id="customer_from" name="from" 
-                       class="form-control" value="{{ $from }}" required>
+                <input type="text" id="from_location" name="from_location" 
+                       class="form-control" value="{{ old('from_location') }}" autocomplete="off" required>
+                       <div id="from_suggestions"></div>
             </div>
 
-            <div class="col">
+            <div class="mb-3 position-relative col">
                 <label class="form-label">To *</label>
-                <input type="text" id="customer_to" name="to" 
-                       class="form-control" value="{{ $to }}" required>
+                <input type="text" id="to_location" name="to_location" 
+                       class="form-control" value="{{ old('to_location') }}" autocomplete="off" required>
+                       <div id="to_suggestions"></div>
             </div>
 
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary" onclick="clearForm()">
+            <div class="col-12">
+                <button type="button" id="resetBtn" class="btn btn-primary">
                     Reset
                 </button>
             </div>
@@ -144,9 +142,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
+    <!-- SCRIPTS -->
     <script>
         $(document).ready(function() {
             // Initialize tooltips
@@ -183,6 +180,12 @@
                 $('#totalCount').text(totalVisible);
                 $('#activeCount').text(activeVisible);
             }
+
+            // Reset form button
+            $('#resetBtn').click(function() {
+                $('#from_location, #to_location').val('');
+                $('#from_suggestions, #to_suggestions').empty();
+            });
         });
     </script>
 
@@ -206,21 +209,6 @@
         }
     </style>
 
-    <script>
-        function redirectToLogin() {
-            const from = document.getElementById('guest_from').value.trim();
-            const to = document.getElementById('guest_to').value.trim();
-            if (!from || !to) 
-                { 
-                    alert('Please fill both From and To');
-                     return; 
-                }
-            window.location = '{{ route('login') }}?from=' + encodeURIComponent(from) + '&to=' + encodeURIComponent(to);
-        }
-        function clearForm() {
-            document.getElementById('customer_from').value = '';
-            document.getElementById('customer_to').value = '';
-        }
-    </script>
+
 </body>
 </html>

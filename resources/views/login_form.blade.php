@@ -24,8 +24,8 @@
         <!-- LOGIN FORM -->
         <form action="{{ route('login.submit') }}" method="POST">
             @csrf
-            <input type="hidden" name="from_location" value="{{ request('from', '') }}">
-            <input type="hidden" name="to_location" value="{{ request('to', '') }}">
+            <input type="hidden" name="from_location" value="{{ request('from_location', '') }}">
+            <input type="hidden" name="to_location" value="{{ request('to_location', '') }}">
 
             <div class="mb-3">
                 <label class="form-label">Mobile or Email</label>
@@ -92,8 +92,8 @@
 
                     <!-- Hidden field to store role_id based on selection -->
                     <input type="hidden" name="roles_id" id="rolesIdField" value="">
-                    <input type="hidden" name="from_location" value="{{ request('from', '') }}">
-                    <input type="hidden" name="to_location" value="{{ request('to', '') }}">
+                    <input type="hidden" name="from_location" value="{{ request('from_location', '') }}">
+                    <input type="hidden" name="to_location" value="{{ request('to_location', '') }}">
 
                     <div class="mb-3">
                         <label class="form-label">Mobile Number</label>

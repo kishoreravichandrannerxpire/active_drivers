@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <section class="py-5 py-lg-8 reveal">
+<section class="py-5 py-lg-8 reveal">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-xl-10 col-12">
@@ -19,19 +11,15 @@
               <form action="{{ route('customer.driver-availability') }}" method="POST">
                 @csrf
 
-                @php
-                  $from = old('from', session('from_location', ''));
-                  $to = old('to', session('to_location', ''));
-                @endphp
-
-                <div class="mb-3">
-                  <label class="form-label">From Location *</label>
-                  <input type="text" id="customer_from" name="from" class="form-control" value="{{ $from }}" required>
+                <div class="mb-3 position-relative">
+                    <label>From </label>
+                    <input type="text" name="from_location" id="from_location" class="form-control" value="{{ old('from_location') }}" autocomplete="off" required>
+                    <div id="from_suggestions"></div>
                 </div>
-
-                <div class="mb-3">
-                  <label class="form-label">To Location *</label>
-                  <input type="text" id="customer_to" name="to" class="form-control" value="{{ $to }}" required>
+                <div class="mb-3 position-relative">
+                    <label>To</label>
+                    <input type="text" name="to_location" id="to_location" class="form-control" value="{{ old('to_location') }}" autocomplete="off" required>
+                    <div id="to_suggestions"></div>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100"> Choose Driver </button>
@@ -53,3 +41,6 @@
 </section>
 </body>
 </html>
+
+@include('partials.location_style')
+@include('partials.location_script')

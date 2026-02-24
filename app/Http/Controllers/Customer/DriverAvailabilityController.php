@@ -13,12 +13,14 @@ class DriverAvailabilityController extends Controller
      */
     public function index(Request $request)
     {
-        // Store from and to locations in session if provided
-        if ($request->has('from') && $request->has('to')) {
-            session(['from_location' => $request->from, 'to_location' => $request->to]);
-        }
-
         $drivers = Drivers::all();
+        
+        // If form was submitted, redirect to preserve input for old() helper
+        if ($request->isMethod('post')) {
+            return redirect('customer/driver-availability')
+            ->withInput($request->only(['from_location', 'to_location']));
+        }
+        
         return view('customer.driver_availability', compact('drivers'));
     }
 
