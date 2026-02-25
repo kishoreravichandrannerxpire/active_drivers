@@ -26,7 +26,6 @@
         <div class="sidebar bg-dark text-white p-3 d-none d-lg-block">
            <h4> <a class="nav-link text-white mb-4" href="{{ url('admin/dashboard') }}"> Dashboard</a> </h4>
             <ul class="nav flex-column">
-                @can('dashboard-rest')
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('admin/user') }}"> User</a>
                 </li>
@@ -68,12 +67,9 @@
                     </ul>
                 </div>
             </li>
-                 @endcan
-                 @can('permissions')
                 <li>
                     <a class="nav-link text-white" href="{{url('admin/permissions')}}">Permissions</a>
                 </li>
-                 @endcan
             </ul>
         </div>
 
@@ -105,7 +101,6 @@
         </div>
         <div class="offcanvas-body">
             <ul class="nav flex-column">
-                @can('dashboard-rest')
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('admin/user/form') }}"> User</a>
                 </li>
@@ -147,12 +142,9 @@
                     </ul>
                 </div>
             </li>
-                @endcan
-                @can('permissions')
                 <li>
                     <a class="nav-link text-white" href="{{url('admin/permissions')}}">Permissions</a>
                 </li>
-                @endcan
             </ul>
         </div>
     </div>

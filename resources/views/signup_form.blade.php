@@ -51,6 +51,8 @@
         @csrf
 
         <input type="hidden" name="roles_id" id="rolesIdField">
+        <input type="hidden" name="from_location" value="{{ request('from_location', '') }}">
+        <input type="hidden" name="to_location" value="{{ request('to_location', '') }}">
 
         <div class="mb-3">
             <label class="form-label">Mobile Number</label>

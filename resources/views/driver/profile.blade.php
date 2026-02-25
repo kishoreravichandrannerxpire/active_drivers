@@ -6,6 +6,7 @@
     <title>My Profile</title>
 </head>
 <body>
+    @include('partials.links')
     @include('partials.navbar')
     <div class="container mt-5">
         @if(session('success'))
@@ -146,97 +147,73 @@
                             <label for="age" class="form-label">Age</label>
                             <input type="number" class="form-control" id="age" name="age" value="{{ old('age', $driver?->age) }}" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
                         <select name="status" class="form-control">
-    <option value="1" {{ old('status',$driver?->status)==1?'selected':'' }}>Active</option>
-    <option value="0" {{ old('status',$driver?->status)==0?'selected':'' }}>Inactive</option>
-</select>
+                        <option value="1" {{ old('status',$driver?->status)==1?'selected':'' }}>Active</option>
+                        <option value="0" {{ old('status',$driver?->status)==0?'selected':'' }}>Inactive</option>
+                        </select>
+                        </div>
 
                         <div class="mb-3">
                             <label for="driver_license_number" class="form-label">Driver License Number</label>
                             <input type="text" class="form-control" id="driver_license_number" name="driver_license_number" value="{{ old('driver_license_number', $driver?->driver_license_number) }}" required>
                         </div>
                         <div class="mb-3">
-    <label for="driver_image" class="form-label">Driver Image</label>
+                        <label for="driver_image" class="form-label">Driver Image</label>
 
-    <input type="file"
-           class="form-control"
-           id="driver_image"
-           name="driver_image"
-           accept="image/*">
+                        <input type="file" class="form-control" id="driver_image" name="driver_image" accept="image/*">
 
-    @if($driver?->driver_image)
-        <small class="text-muted">
-            Current: {{ $driver->driver_image }}
-        </small>
-    @endif
-</div>
+                        @if($driver?->driver_image)
+                        <small class="text-muted">
+                        Current: {{ $driver->driver_image }}
+                        </small>
+                        @endif
+                        </div>
 
                         <div class="mb-3">
                             <label for="total_experience_years" class="form-label">Total Experience Years</label>
                             <input type="number" class="form-control" id="total_experience_years" name="total_experience_years" value="{{ old('total_experience_years', $driver?->total_experience_years) }}" required>
                         </div>
-                        <div class="mb-3">
-    <label for="hill_experience" class="form-label">Hill Experience</label>
-
-    <select class="form-control" id="hill_experience" name="hill_experience">
-        <option value="">-- Select --</option>
-
-        <option value="1"
-            {{ old('hill_experience', $driver?->hill_experience) == '1' ? 'selected' : '' }}>
-            Yes
-        </option>
-
-        <option value="0"
-            {{ old('hill_experience', $driver?->hill_experience) == '0' ? 'selected' : '' }}>
-            No
-        </option>
-    </select>
-</div>
 
                         <div class="mb-3">
-    <label for="accident_history" class="form-label">Accident History</label>
-
-    <select class="form-control" id="accident_history" name="accident_history">
-        <option value="">-- Select --</option>
-
-        <option value="1"
-            {{ old('accident_history', $driver?->accident_history) == '1' ? 'selected' : '' }}>
-            Yes
-        </option>
-
-        <option value="0"
-            {{ old('accident_history', $driver?->accident_history) == '0' ? 'selected' : '' }}>
-            No
-        </option>
-    </select>
-</div>
+                        <label for="hill_experience" class="form-label">Hill Experience</label> 
+                        <select class="form-control" id="hill_experience" name="hill_experience">
+                        <option value="">-- Select --</option>
+                        <option value="1" {{ old('hill_experience', $driver?->hill_experience) == '1' ? 'selected' : '' }}> Yes </option>
+                        <option value="0" {{ old('hill_experience', $driver?->hill_experience) == '0' ? 'selected' : '' }}> No </option>
+                        </select>
+                        </div>
 
                         <div class="mb-3">
-    <label for="luxury_car_experience" class="form-label">Luxury Car Experience</label>
+                        <label for="accident_history" class="form-label">Accident History</label>
 
-    <select class="form-control" id="luxury_car_experience" name="luxury_car_experience">
-        <option value="">-- Select --</option>
+                        <select class="form-control" id="accident_history" name="accident_history">
+                        <option value="">-- Select --</option>
+                        <option value="1" {{ old('accident_history', $driver?->accident_history) == '1' ? 'selected' : '' }}> Yes </option>
+                        <option value="0" {{ old('accident_history', $driver?->accident_history) == '0' ? 'selected' : '' }}> No </option>
+                        </select>
+                        </div>
 
-        <option value="1"
-            {{ old('luxury_car_experience', $driver?->luxury_car_experience) == '1' ? 'selected' : '' }}>
-            Yes
-        </option>
-
-        <option value="0"
-            {{ old('luxury_car_experience', $driver?->luxury_car_experience) == '0' ? 'selected' : '' }}>
-            No
-        </option>
-    </select>
-</div>
+                        <div class="mb-3">
+                        <label for="luxury_car_experience" class="form-label">Luxury Car Experience</label>
+                        <select class="form-control" id="luxury_car_experience" name="luxury_car_experience">
+                        <option value="">-- Select --</option>
+                        <option value="1" {{ old('luxury_car_experience', $driver?->luxury_car_experience) == '1' ? 'selected' : '' }}> Yes </option>
+                        <option value="0" {{ old('luxury_car_experience', $driver?->luxury_car_experience) == '0' ? 'selected' : '' }}> No </option>
+                        </select>
+                        </div>
 
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $driver?->address) }}" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="pincode" class="form-label">Pincode</label>
                             <input type="text" class="form-control" id="pincode" name="pincode" value="{{ old('pincode', $driver?->pincode) }}" required>
                         </div>
+                        
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save Changes</button>

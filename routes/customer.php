@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLogin;
 use App\Http\Controllers\Customer\DashboardCustomer;
 use App\Http\Controllers\Customer\CustomerProfile;
+use App\Http\Controllers\Customer\DriverAvailabilityController;
 use Illuminate\Support\Facades\Auth; 
 
 /*
@@ -28,6 +29,9 @@ Route::middleware(['Customer', 'prevent-back-history'])->group(function () {
     Route::get('/home', fn() => view('customer/home'))->name('home');
     Route::get('/dashboard', [DashboardCustomer::class, 'index'])->name('dashboard');
     Route::get('/myprofile', [CustomerProfile::class, 'show'])->name('myprofile');
+    Route::get('/driver-availability', [DriverAvailabilityController::class, 'index'])->name('driver-availability');
+    Route::post('/driver-availability', [DriverAvailabilityController::class, 'index'])->name('customer.driver-availability');
+    Route::get('/available-drivers', [DriverAvailabilityController::class, 'getAvailableDrivers'])->name('available-drivers');
     
     Route::post('profile/{id}', [CustomerProfile::class, 'update'])->name('profile.update');
 });

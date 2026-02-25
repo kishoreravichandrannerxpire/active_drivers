@@ -51,7 +51,9 @@ class UserController extends Controller
 
         // Redirect based on role_id
         if($request->roles_id == 3){
-            return redirect()->route('customer.home');
+            // Persist booking from/to if provided (guest -> signup)
+            return redirect()->route('customer.home')
+                ->withInput($request->only(['from_location', 'to_location']));
         }
         if($request->roles_id == 2){
             return redirect()->route('driver.home');

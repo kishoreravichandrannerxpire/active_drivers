@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <section class="py-5 py-lg-8 reveal">
+<section class="py-5 py-lg-8 reveal">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-xl-10 col-12">
@@ -16,27 +8,21 @@
 
             <!-- FORM -->
             <div class="col-lg-6 col-12">
-              <form action="{{ route('admin.customers.store') }}" method="POST">
+              <form action="{{ route('customer.driver-availability') }}" method="POST">
                 @csrf
 
-                <div class="mb-3">
-                  <label class="form-label">Name *</label>
-                  <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                <div class="mb-3 position-relative">
+                    <label>From </label>
+                    <input type="text" name="from_location" id="from_location" class="form-control" value="{{ old('from_location') }}" autocomplete="off" required>
+                    <div id="from_suggestions"></div>
+                </div>
+                <div class="mb-3 position-relative">
+                    <label>To</label>
+                    <input type="text" name="to_location" id="to_location" class="form-control" value="{{ old('to_location') }}" autocomplete="off" required>
+                    <div id="to_suggestions"></div>
                 </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Mobile Number *</label>
-                  <input type="text" name="mobile_number" class="form-control" value="{{ old('mobile_number') }}" required>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Password *</label>
-                  <input type="password" name="password" class="form-control" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                  Create Customer
-                </button>
+                <button type="submit" class="btn btn-primary w-100"> Choose Driver </button>
               </form>
             </div>
 
@@ -55,3 +41,6 @@
 </section>
 </body>
 </html>
+
+@include('partials.location_style')
+@include('partials.location_script')

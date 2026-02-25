@@ -1,48 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Active Drivers</title>
-   
-    <!-- Bootstrap CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-     
-     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"integrity="sha512-aW3DgN8w0M0JqTX4yTgjYlS1tFy1D1i6SHe0T6SmUhy9xOaXvjpx6vIikCqB7+/DbGhQmF3a2pDx8VzKjv1Cfw=="crossorigin="anonymous"referrerpolicy="no-referrer">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-     <script> new WOW().init(); </script>
- <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  </head>
- 
-  <style>
-  .carousel-item img {
-    width: 100%;      /* make image span full width */
-    height: 400px;    /* fixed height */
-    object-fit: contain; /* fills container, crops if needed */
-  }
-  </style>
+@include('partials.links')
+@include('partials.location_style')
+@include('partials.location_script')
   <body>
+  
     @include('partials.navbar')
-    
+    @include('partials.slide_image')
     @can('guest-home')
-      @include('partials.guest')
+      <div class="container mt-5">
+    <div class="row">
+        
+        <div class="col-md-6">
+            <form action="{{ route('login') }}" method="GET">
+                <h4>Do You Wanna A driver </h4>
+                <div class="mb-3 position-relative">
+                    <label>From </label>
+                    <input type="text" name="from_location" id="from_location" class="form-control" autocomplete="off" required>
+                    <div id="from_suggestions"></div>
+                </div>
+                <div class="mb-3 position-relative">
+                    <label>To</label>
+                    <input type="text" name="to_location" id="to_location" class="form-control" autocomplete="off" required>
+                    <div id="to_suggestions"></div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <form>
+                <h4>Do You Want A Trip</h4>
+                <div class="mb-3">
+                    <label>From Time</label>
+                    <input type="time" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>To Time</label>
+                    <input type="time" class="form-control">
+                </div>
+                <button class="btn btn-success w-100">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@include('partials.guest')
     @endcan
 
     @can('customer-home')
       @include('partials.customer.driver_booking_form')
-    @endcan
-
-    @can('customer-home')
       @include('partials.customer.addcar_form')
-    @endcan
-
-    @can('customer-home')
       @include('partials.conversation')
     @endcan 
 
@@ -50,8 +57,7 @@
       @include('partials.conversation')
     @endcan
 
-  @extends('partials.footer')
+    @include('partials.footer')
+
+
 </body>
-</html>
- 
- 
