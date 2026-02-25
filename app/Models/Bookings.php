@@ -17,19 +17,20 @@ class Bookings extends Model
         'pickup_date_time',
         'passengers',
         'cars_id',
+        'fare'
     ];
     
     public function customer()
     {
-        return $this->belongsTo(Customers::class, 'customers_id');
+        return $this->belongsTo(Customers::class, 'customers_id')->withTrashed();
     }
     public function driver()
     {
-        return $this->belongsTo(Drivers::class, 'drivers_id');
+        return $this->belongsTo(Drivers::class, 'drivers_id')->withTrashed();
     }
     public function car()
     {
-        return $this->belongsTo(Cars::class, 'cars_id');
+        return $this->belongsTo(Cars::class, 'cars_id')->withTrashed();
     }
 
     public function histories()
@@ -51,6 +52,7 @@ class Bookings extends Model
                 'pickup_date_time'  => $booking->pickup_date_time,
                 'passengers'        => $booking->passengers,
                 'cars_id'           => $booking->cars_id,
+                'fare'              => $booking->fare,
                 'action'            => 'created',
             ]);
         });
@@ -67,6 +69,7 @@ class Bookings extends Model
                 'pickup_date_time'  => $booking->pickup_date_time,
                 'passengers'        => $booking->passengers,
                 'cars_id'           => $booking->cars_id,
+                'fare'              => $booking->fare,
                 'action'            => 'updated',
             ]);
         });
@@ -83,6 +86,7 @@ class Bookings extends Model
                 'pickup_date_time'  => $booking->pickup_date_time,
                 'passengers'        => $booking->passengers,
                 'cars_id'           => $booking->cars_id,
+                'fare'              => $booking->fare,
                 'action'            => 'deleted',
             ]);
         });

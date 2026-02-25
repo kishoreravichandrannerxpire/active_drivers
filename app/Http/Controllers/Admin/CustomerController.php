@@ -116,7 +116,7 @@ class CustomerController extends Controller
         // 1. Get all cars of this customer
         $cars = Cars::where('customers_id', $customer->id)->get();
 
-        // 2. Store each car in cars_history before delete
+        // 2. Store each car in cars_history
         foreach ($cars as $car) {
             CarHistory::create([
                 'cars_id' => $car->id,
@@ -131,12 +131,14 @@ class CustomerController extends Controller
             ]);
         }
 
-        // 3. Delete customer (cars will be deleted by cascade or logic)
+        // 3. Soft delete all cars first
+        Cars::where('customers_id', $customer->id)->delete();
+
+        // 4. Soft delete customer
         $customer->delete();
 
-        // 4. Delete related user
-        $user = User::findOrFail($customer->user_id);
-        $user->delete();
+        // 5. Delete related user
+        $customer->user->delete();
     });
 
     return redirect()->route('admin.customers.index')

@@ -17,6 +17,12 @@ class BookingsController extends Controller
         return view('admin.bookings.index' , compact('bookings'));
     }
 
+    public function getAllBookings()
+    {
+        $bookings = Bookings::all();
+        return view('admin.bookings.all-bookings', compact('bookings'));
+    }
+
     public function create()
    {
         $customers = Customers::all();
@@ -54,6 +60,7 @@ public function store(Request $request)
             'pickup_date_time'=> 'required|date',
             'passengers'      => 'required|integer|min:1',
             'cars_id'         => 'required|exists:cars,id',
+            'fare'            => 'required|numeric|min:0',
         ]);
 
         Bookings::create($request->all());
@@ -82,6 +89,7 @@ public function store(Request $request)
             'pickup_date_time'=> 'required|date',
             'passengers'      => 'required|integer|min:1',
             'cars_id'         => 'required|exists:cars,id',
+            'fare'            => 'required|numeric|min:0',
         ]);
 
         $booking = Bookings::findOrFail($id);

@@ -26,6 +26,7 @@
                 <th>From Postcode</th>
                 <th>To Postcode</th>
                 <th>Pickup Date & Time</th>
+                <th>Completed Date & Time</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -33,9 +34,9 @@
             @forelse($bookings as $booking)
                 <tr>
                     <td>{{ $booking->id }}</td>
-                    <td>{{ $booking->customer ? $booking->customer->name : 'N/A' }}</td>
+                    <td>{{ $booking->customer ? $booking->customer->first_name : 'N/A' }}</td>
                     <td>{{ $booking->car ? $booking->car->car_model : 'N/A' }}</td>
-                    <td>{{ $booking->driver ? $booking->driver->name : 'N/A'}}</td>
+                    <td>{{ $booking->driver ? $booking->driver->first_name : 'N/A'}}</td>
                     <td>{{ $booking->passengers }}</td>
                     <td>{{ $booking->journey_type}}</td>
                     <td>{{ $booking->pickup_location }}</td>
@@ -43,6 +44,7 @@
                     <td>{{ $booking->from_postcode }}</td>
                     <td>{{ $booking->to_postcode }}</td>
                     <td>{{ $booking->pickup_date_time }}</td>
+                    <td>{{ $booking->completed_date_time }}</td>
                     <td>
                         <a href="{{ route('admin.bookings.edit', $booking->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" style="display:inline-block;">

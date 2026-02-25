@@ -19,6 +19,7 @@ class BookingHistory extends Model
         'pickup_date_time',
         'passengers',
         'cars_id',
+        'fare',
         'action'
     ];
 

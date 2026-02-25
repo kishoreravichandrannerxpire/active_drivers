@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Customers;
+use App\Models\Drivers;
+use App\Models\Bookings;
 use App\Models\UserHistory;
 use App\Models\CustomerHistory;
 use Illuminate\Support\Facades\DB;
@@ -87,16 +89,25 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
     }
-    public function destroy(User $user)
+    public function destroy($id)
 {
-    DB::transaction(function () use ($user) {
+    DB::transaction(function () use ($id) {
+
+        $user = User::findOrFail($id);
 
         // get related customer
-        $customer = $user->customer;
+        $customer = $user->customer;   // relationship method in User model
 
-        // delete child first
+        // get related driver
+        $driver = Drivers::where('user_id', $id)->first();
+
+        // delete child records first
         if ($customer) {
             $customer->delete();
+        }
+
+        if ($driver) {
+            $driver->delete();
         }
 
         // then delete parent

@@ -42,9 +42,32 @@
                 <li>
                     <a class="nav-link text-white" href="{{ url('admin/cars') }}"> Cars</a>
                 </li>
-                <li>
-                    <a class="nav-link text-white" href="{{url('admin/bookings')}}">Bookings</a>
-                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse"
+                   href="#bookingMenu"
+                   role="button"
+                   aria-expanded="{{ request()->is('admin/bookings*') ? 'true' : 'false' }}"
+                   aria-controls="bookingMenu">
+                    <span>Bookings</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <div class="collapse {{ request()->is('admin/bookings*') ? 'show' : '' }}" id="bookingMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings/allbookings') }}">
+                                All Bookings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings') }}">
+                                Add Booking
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
                  @endcan
                  @can('permissions')
                 <li>
@@ -98,9 +121,32 @@
                 <li>
                     <a class="nav-link text-white" href="{{ url('admin/cars') }}"> Cars</a>
                 </li>
-                <li>
-                    <a class="nav-link text-white" href="{{url('admin/bookings')}}">Bookings</a>
-                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse"
+                   href="#bookingMenu"
+                   role="button"
+                   aria-expanded="{{ request()->is('admin/bookings*') ? 'true' : 'false' }}"
+                   aria-controls="bookingMenu">
+                    <span>Bookings</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <div class="collapse {{ request()->is('admin/bookings*') ? 'show' : '' }}" id="bookingMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings/allbookings') }}">
+                                All Bookings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings') }}">
+                                Add Booking
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
                 @endcan
                 @can('permissions')
                 <li>

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cars extends Model
 {
+    use SoftDeletes;
     protected $table = 'cars';
     protected $fillable = [
         'customers_id',
@@ -19,7 +21,7 @@ class Cars extends Model
     ];
     public function customer()
     {
-        return $this->belongsTo(Customers::class, 'customers_id');
+        return $this->belongsTo(Customers::class, 'customers_id')->withTrashed();
     }
     public function histories()
     {

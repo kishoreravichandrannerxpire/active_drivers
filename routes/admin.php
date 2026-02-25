@@ -52,6 +52,7 @@ Route::middleware(['admin', 'prevent-back-history'])->group(function () {
     // Bookings
     Route::resource('bookings', BookingsController::class)->except(['show']);
     Route::get('customers/{id}/cars', [BookingsController::class, 'getCustomerCars'])->name('customers.cars');
+    Route::get('bookings/allbookings', [BookingsController::class, 'getAllBookings'])->name('bookings.all-bookings');
 
     // Permissions
     Route::resource('permissions', PermissionController::class)->except(['show']);

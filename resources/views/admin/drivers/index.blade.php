@@ -7,6 +7,10 @@
         <a href="{{ route('admin.drivers.create') }}" class="btn btn-primary mb-2">Add New Driver</a>
     </div>
 
+    @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
