@@ -8,9 +8,8 @@ class DriverAvailability extends Model
     protected $table = 'driver_availability';
     protected $fillable = [
         'drivers_id',
-        'available_date',
-        'start_time',
-        'end_time',
+        'from_date_time',
+        'to_date_time',
         'status'
     ];
     public function driver()
@@ -26,9 +25,8 @@ class DriverAvailability extends Model
         static::created(function ($availability) {
             $availability->histories()->create([
                 'drivers_id'      => $availability->drivers_id,
-                'available_date'  => $availability->available_date,
-                'start_time'      => $availability->start_time,
-                'end_time'        => $availability->end_time,
+                'from_date_time'  => $availability->from_date_time,
+                'to_date_time'    => $availability->to_date_time,
                 'status'          => $availability->status,
                 'action'          => 'created',
             ]);
@@ -37,9 +35,8 @@ class DriverAvailability extends Model
         static::updated(function ($availability) {
             $availability->histories()->create([
                 'drivers_id'      => $availability->drivers_id,
-                'available_date'  => $availability->available_date,
-                'start_time'      => $availability->start_time,
-                'end_time'        => $availability->end_time,
+                'from_date_time'  => $availability->from_date_time,
+                'to_date_time'    => $availability->to_date_time,
                 'status'          => $availability->status,
                 'action'          => 'updated',
             ]);
@@ -48,9 +45,8 @@ class DriverAvailability extends Model
         static::deleting(function ($availability) {
             $availability->histories()->create([
                 'drivers_id'      => $availability->drivers_id,
-                'available_date'  => $availability->available_date,
-                'start_time'      => $availability->start_time,
-                'end_time'        => $availability->end_time,
+                'from_date_time'  => $availability->from_date_time,
+                'to_date_time'    => $availability->to_date_time,
                 'status'          => $availability->status,
                 'action'          => 'deleted',
             ]);

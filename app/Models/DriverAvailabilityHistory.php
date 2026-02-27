@@ -10,9 +10,8 @@ class DriverAvailabilityHistory extends Model
     protected $fillable = [
         'driver_availability_id',
         'drivers_id',
-        'available_date',
-        'start_time',
-        'end_time',
+        'from_date_time',
+        'to_date_time',
         'status',
         'action'
     ];

@@ -1,28 +1,3 @@
-@php
-use App\Models\Bookings;
-use Carbon\Carbon;
-
-// All bookings
-$allBookings = Bookings::with(['customer','driver','car'])
-    ->latest()
-    ->get();
-
-// Today bookings
-$todayBookings = Bookings::with(['customer','driver','car'])
-    ->whereDate('booking_time', Carbon::today())
-    ->get();
-
-// Completed bookings
-$completedBookings = Bookings::with(['customer','driver','car'])
-    ->where('status','completed')
-    ->get();
-
-// Counts
-$allCount = $allBookings->count();
-$todayCount = $todayBookings->count();
-$completedCount = $completedBookings->count();
-@endphp
-
 <!-- Tabs -->
 <ul class="nav nav-tabs">
     <li class="nav-item">

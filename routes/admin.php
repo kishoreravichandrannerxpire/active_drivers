@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\DriverAvailabilityController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoginController;
@@ -35,6 +36,7 @@ Route::middleware(['admin', 'prevent-back-history'])->group(function () {
 
     // Drivers
     Route::resource('drivers', DriverController::class)->except(['show']);
+    Route::resource('drivers/availability', DriverAvailabilityController::class)->except(['show']);
 
     // Banners
     Route::resource('banners', BannerController::class)->except(['show']);

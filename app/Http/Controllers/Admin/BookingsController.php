@@ -8,6 +8,7 @@ use App\Models\Bookings;
 use App\Models\Customers;
 use App\Models\Cars;
 use App\Models\Drivers;
+use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
@@ -19,8 +20,28 @@ class BookingsController extends Controller
 
     public function getAllBookings()
     {
-        $bookings = Bookings::all();
-        return view('admin.bookings.all-bookings', compact('bookings'));
+        // All bookings
+        $allBookings = Bookings::latest()->get();
+
+        // Today bookings (based on pickup_date_time)
+        $todayBookings = Bookings::whereDate('booking_time', Carbon::today())->latest()->get();
+
+        // Completed bookings
+        $completedBookings = Bookings::where('status', 'completed')->latest()->get();
+
+        // Counts for badges
+        $allCount = $allBookings->count();
+        $todayCount = $todayBookings->count();
+        $completedCount = $completedBookings->count();
+
+        return view('admin.bookings.all-bookings', compact(
+            'allBookings',
+            'todayBookings',
+            'completedBookings',
+            'allCount',
+            'todayCount',
+            'completedCount'
+        ));
     }
 
     public function create()
