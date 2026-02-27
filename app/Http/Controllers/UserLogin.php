@@ -30,7 +30,7 @@ class UserLogin extends Controller
             // Role based redirect
             if ($user->role?->role_name === 'Customer') {
                 return redirect()->route('customer.home')
-                ->withInput($request->only(['from_location', 'to_location']));
+                ->withInput($request->only(['from_location', 'to_location','from_datetime','to_datetime']));
             }
 
             if ($user->role?->role_name === 'Driver') {

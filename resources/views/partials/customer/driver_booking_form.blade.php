@@ -12,27 +12,26 @@
                 @csrf
 
                 <div class="mb-3 position-relative">
-                    <label>From </label>
+                    <label>From Location* </label>
                     <input type="text" name="from_location" id="from_location" class="form-control" value="{{ old('from_location') }}" autocomplete="off" required>
                     <div id="from_suggestions"></div>
                 </div>
                 <div class="mb-3 position-relative">
-                    <label>To</label>
+                    <label>To Location* </label>
                     <input type="text" name="to_location" id="to_location" class="form-control" value="{{ old('to_location') }}" autocomplete="off" required>
                     <div id="to_suggestions"></div>
                 </div>
+                <div>
+                  <label>From Date & Time*</label>
+                  <input type="datetime-local" name="from_datetime" class="form-control" value="{{ old('from_datetime') }}" autocomplete="off" required>
+                </div>
+                <div class="mt-3">
+                  <label>To Date & Time*</label>
+                  <input type="datetime-local" name="to_datetime" class="form-control" value="{{ old('to_datetime') }}" autocomplete="off" required>
 
-                <button type="submit" class="btn btn-primary w-100"> Choose Driver </button>
+                <button type="submit" class="btn btn-primary w-100 mt-3"> Choose Driver </button>
               </form>
             </div>
-
-            <!-- IMAGE -->
-            <div class="col-lg-6 col-12 text-center">
-              <div class="image-frame">
-                <img src="{{ asset('storage/banners/car2.png') }}" alt="learning" class="img-fluid">
-              </div>
-            </div>
-
           </div>
         </div>
       </div>

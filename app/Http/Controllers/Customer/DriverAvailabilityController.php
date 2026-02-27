@@ -18,7 +18,7 @@ class DriverAvailabilityController extends Controller
         // If form was submitted, redirect to preserve input for old() helper
         if ($request->isMethod('post')) {
             return redirect('customer/driver-availability')
-            ->withInput($request->only(['from_location', 'to_location']));
+            ->withInput($request->only(['from_location', 'to_location', 'from_datetime', 'to_datetime']));
         }
         
         return view('customer.driver_availability', compact('drivers'));

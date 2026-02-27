@@ -16,39 +16,63 @@
 <body>
     @include('partials.navbar')
 
-    <div class="container mt-4">
-        <div class="row">
-    <div class="col-lg-6 col-12">
-    <form action="{{ route('customer.driver-availability') }}" method="POST">
-        @csrf
+   <div class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-body py-3 px-4">
 
-        <div class="row g-2 align-items-end">
-            
-            <div class="mb-3 position-relative col">
-                <label class="form-label">From *</label>
-                <input type="text" id="from_location" name="from_location" 
-                       class="form-control" value="{{ old('from_location') }}" autocomplete="off" required>
-                       <div id="from_suggestions"></div>
-            </div>
+            <form action="{{ route('customer.driver-availability') }}" method="POST">
+                @csrf
 
-            <div class="mb-3 position-relative col">
-                <label class="form-label">To *</label>
-                <input type="text" id="to_location" name="to_location" 
-                       class="form-control" value="{{ old('to_location') }}" autocomplete="off" required>
-                       <div id="to_suggestions"></div>
-            </div>
+                <div class="row g-2 align-items-end">
 
-            <div class="col-12">
-                <button type="button" id="resetBtn" class="btn btn-primary">
-                    Reset
-                </button>
-            </div>
+                    <!-- From -->
+                    <div class="col-md">
+                        <label class="form-label mb-1">From</label>
+                        <input type="text" id="from_location" name="from_location"
+                            class="form-control form-control-sm"
+                            value="{{ old('from_location') }}" autocomplete="off" required>
+                        <div id="from_suggestions" class="position-absolute w-100"></div>
+                    </div>
+
+                    <!-- To -->
+                    <div class="col-md">
+                        <label class="form-label mb-1">To</label>
+                        <input type="text" id="to_location" name="to_location"
+                            class="form-control form-control-sm"
+                            value="{{ old('to_location') }}" autocomplete="off" required>
+                        <div id="to_suggestions" class="position-absolute w-100"></div>
+                    </div>
+
+                    <!-- From Date -->
+                    <div class="col-md">
+                        <label class="form-label mb-1">From Date</label>
+                        <input type="datetime-local" name="from_datetime"
+                            class="form-control form-control-sm"
+                            value="{{ old('from_datetime') }}" required>
+                    </div>
+
+                    <!-- To Date -->
+                    <div class="col-md">
+                        <label class="form-label mb-1">To Date</label>
+                        <input type="datetime-local" name="to_datetime"
+                            class="form-control form-control-sm"
+                            value="{{ old('to_datetime') }}" required>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="col-md-auto d-flex gap-2">
+                        <button type="button" id="resetBtn"
+                            class="btn btn-secondary btn-sm px-3">
+                            Reset
+                        </button>
+                    </div>
+
+                </div>
+            </form>
 
         </div>
-    </form>
     </div>
-    </div>
-    </div>
+</div>
 
 
 

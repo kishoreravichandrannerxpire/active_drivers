@@ -53,7 +53,7 @@ class UserController extends Controller
         if($request->roles_id == 3){
             // Persist booking from/to if provided (guest -> signup)
             return redirect()->route('customer.home')
-                ->withInput($request->only(['from_location', 'to_location']));
+                ->withInput($request->only(['from_location', 'to_location','from_datetime','to_datetime']));
         }
         if($request->roles_id == 2){
             return redirect()->route('driver.home');

@@ -5,6 +5,7 @@ use App\Http\Controllers\UserLogin;
 use App\Http\Controllers\Customer\DashboardCustomer;
 use App\Http\Controllers\Customer\CustomerProfile;
 use App\Http\Controllers\Customer\DriverAvailabilityController;
+use App\Http\Controllers\Customer\CustomerCarsController;
 use Illuminate\Support\Facades\Auth; 
 
 /*
@@ -34,6 +35,7 @@ Route::middleware(['Customer', 'prevent-back-history'])->group(function () {
     Route::get('/available-drivers', [DriverAvailabilityController::class, 'getAvailableDrivers'])->name('available-drivers');
     
     Route::post('profile/{id}', [CustomerProfile::class, 'update'])->name('profile.update');
+    Route::resource('mycars', CustomerCarsController::class)->except(['show']);
 });
 
 Route::middleware(['auth', 'can:customer-home'])->group(function () {
