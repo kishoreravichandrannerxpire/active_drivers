@@ -3,7 +3,6 @@
 // Admin Routes
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\DriverAvailabilityController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserController;
@@ -25,9 +24,6 @@ Route::get('/', function () {
     }
     return view('home');
 }); //removed welcome page
-
-Route::get('/driver/availability/form', fn() => view('driver_availability'));
-Route::post('/driver/availability', [DriverAvailabilityController::class, 'store'])->name('availability.store');
 
 Route::get('/customer/create/form', fn() => view('customer_create_form'));
 
