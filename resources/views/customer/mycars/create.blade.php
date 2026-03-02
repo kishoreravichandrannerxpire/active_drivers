@@ -1,86 +1,86 @@
 @include('partials.links')
 @include('partials.navbar')
 
-<section class="py-5 bg-light min-vh-100">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-xl-6">
+<!-- Add Car Modal -->
+<div class="modal fade" id="addCarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 bg-transparent">
 
-                <div class="card border-0 shadow-lg rounded-4">
-                    <div class="card-body p-3 p-lg-5">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
 
-                        {{-- Success Message --}}
+                <!-- Card Header -->
+                <div class="card-header bg-white border-0 text-center py-4 position-relative">
+                    <button type="button"
+                            class="btn-close position-absolute end-0 top-0 m-3"
+                            data-bs-dismiss="modal"></button>
 
-                        <!-- Header -->
-                        <div class="text-center mb-4">
-                            <div class="icon-circle bg-primary text-white mb-3">
-                                <i class="bi bi-car-front-fill"></i>
+                    <div class="icon-circle bg-primary text-white mb-3 mx-auto">
+                        <i class="bi bi-car-front-fill"></i>
+                    </div>
+
+                    <h5 class="fw-bold mb-1">Add New Car</h5>
+                    <small class="text-muted">Enter your vehicle details below</small>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body p-4 p-lg-5">
+
+                    <form action="{{ route('customer.mycars.store') }}" method="POST">
+                        @csrf
+
+                        @if($errors->any())
+                            <div class="alert alert-danger small">
+                                <ul class="mb-0">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                            <h4 class="fw-bold mb-1">Add New Car</h4>
-                            <p class="text-muted small mb-0">
-                                Enter your vehicle details below
-                            </p>
-                        </div>
+                        @endif
 
-                        <form action="{{ route('customer.mycars.store') }}" method="POST">
-                            @csrf
-
-                            {{-- Validation Errors --}}
-                            @if($errors->any())
-                                <div class="alert alert-danger shadow-sm">
-                                    <ul class="mb-0 small">
-                                        @foreach($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+                        <div class="row g-3">
 
                             <!-- Car Model -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Car Model</label>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Car Model</label>
                                 <input type="text"
                                        name="car_model"
                                        value="{{ old('car_model') }}"
-                                       class="form-control form-control-lg"
+                                       class="form-control form-control-sm"
                                        placeholder="Eg: Toyota Corolla"
                                        required>
                             </div>
 
-                            <!-- Car Type -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Car Type</label>
-                                <select name="car_type"
-                                        class="form-select form-select-lg"
-                                        required>
-                                    <option value="">Select Car Type</option>
-                                    <option value="Sedan (4-Seater)" {{ old('car_type')=='Sedan (4-Seater)'?'selected':'' }}>Sedan (4-Seater)</option>
-                                    <option value="Sedan (5-Seater)" {{ old('car_type')=='Sedan (5-Seater)'?'selected':'' }}>Sedan (5-Seater)</option>
-                                    <option value="SUV (5-Seater)" {{ old('car_type')=='SUV (5-Seater)'?'selected':'' }}>SUV (5-Seater)</option>
-                                    <option value="SUV (7-Seater)" {{ old('car_type')=='SUV (7-Seater)'?'selected':'' }}>SUV (7-Seater)</option>
-                                    <option value="MUV (7-Seater)" {{ old('car_type')=='MUV (7-Seater)'?'selected':'' }}>MUV (7-Seater)</option>
-                                    <option value="MUV (8-Seater)" {{ old('car_type')=='MUV (8-Seater)'?'selected':'' }}>MUV (8-Seater)</option>
-                                    <option value="Hatchback (4-Seater)" {{ old('car_type')=='Hatchback (4-Seater)'?'selected':'' }}>Hatchback (4-Seater)</option>
-                                    <option value="Hatchback (5-Seater)" {{ old('car_type')=='Hatchback (5-Seater)'?'selected':'' }}>Hatchback (5-Seater)</option>
-                                </select>
-                            </div>
-
                             <!-- Car Number -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Car Number</label>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Car Number</label>
                                 <input type="text"
                                        name="car_number"
                                        value="{{ old('car_number') }}"
-                                       class="form-control form-control-lg text-uppercase"
+                                       class="form-control form-control-sm text-uppercase"
                                        placeholder="TN 01 AB 1234"
                                        required>
                             </div>
 
+                            <!-- Car Type -->
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Car Type</label>
+                                <select name="car_type"
+                                        class="form-select form-select-sm"
+                                        required>
+                                    <option value="">Select Car Type</option>
+                                    <option value="Sedan (4-Seater)" {{ old('car_type')=='Sedan (4-Seater)'?'selected':'' }}>Sedan (4-Seater)</option>
+                                    <option value="SUV (5-Seater)" {{ old('car_type')=='SUV (5-Seater)'?'selected':'' }}>SUV (5-Seater)</option>
+                                    <option value="SUV (7-Seater)" {{ old('car_type')=='SUV (7-Seater)'?'selected':'' }}>SUV (7-Seater)</option>
+                                    <option value="Hatchback (5-Seater)" {{ old('car_type')=='Hatchback (5-Seater)'?'selected':'' }}>Hatchback (5-Seater)</option>
+                                </select>
+                            </div>
+
                             <!-- Transmission -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Transmission Type</label>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Transmission</label>
                                 <select name="transmission_type"
-                                        class="form-select form-select-lg"
+                                        class="form-select form-select-sm"
                                         required>
                                     <option value="">Select Transmission</option>
                                     <option value="Manual" {{ old('transmission_type')=='Manual'?'selected':'' }}>Manual</option>
@@ -89,10 +89,10 @@
                             </div>
 
                             <!-- Fuel -->
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold">Fuel Type</label>
+                            <div class="col-12">
+                                <label class="form-label small fw-semibold">Fuel Type</label>
                                 <select name="fuel_type"
-                                        class="form-select form-select-lg"
+                                        class="form-select form-select-sm"
                                         required>
                                     <option value="">Select Fuel Type</option>
                                     <option value="Petrol" {{ old('fuel_type')=='Petrol'?'selected':'' }}>Petrol</option>
@@ -101,48 +101,56 @@
                                 </select>
                             </div>
 
-                            <!-- Buttons -->
-                            <div class="d-flex justify-content-between gap-3">
-                                <a href="{{ route('customer.mycars.index') }}"
-                                   class="btn btn-light w-50">
-                                    Back
-                                </a>
+                        </div>
 
-                                <button type="submit"
-                                        class="btn btn-primary w-50 shadow-sm">
-                                    <i class="bi bi-check-circle"></i> Add Car
-                                </button>
-                            </div>
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button"
+                                    class="btn btn-light btn-sm"
+                                    data-bs-dismiss="modal">
+                                Cancel
+                            </button>
 
-                        </form>
+                            <button type="submit"
+                                    class="btn btn-primary btn-sm px-4">
+                                <i class="bi bi-check-circle"></i> Add Car
+                            </button>
+                        </div>
 
-                    </div>
+                    </form>
+
                 </div>
 
             </div>
+
         </div>
     </div>
-</section>
+</div>
 
 <style>
     .icon-circle {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    margin: 0 auto;
+    font-size: 22px;
 }
 
 .card {
     border-radius: 18px;
 }
 
-.form-control:focus,
-.form-select:focus {
-    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
 }
 
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
 </style>

@@ -23,11 +23,11 @@
                 </div>
                 <div>
                   <label>From Date & Time*</label>
-                  <input type="datetime-local" name="from_datetime" class="form-control" value="{{ old('from_datetime') }}" autocomplete="off" required>
+                  <input type="datetime-local" id="from_datetime" name="from_datetime" class="form-control" value="{{ old('from_datetime') }}" autocomplete="off" required>
                 </div>
                 <div class="mt-3">
                   <label>To Date & Time*</label>
-                  <input type="datetime-local" name="to_datetime" class="form-control" value="{{ old('to_datetime') }}" autocomplete="off" required>
+                  <input type="datetime-local" id="to_datetime" name="to_datetime" class="form-control" value="{{ old('to_datetime') }}" autocomplete="off" required>
 
                 <button type="submit" class="btn btn-primary w-100 mt-3"> Choose Driver </button>
               </form>

@@ -5,9 +5,9 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">My Cars</h2>
-        <a href="{{ route('customer.mycars.create') }}" class="btn btn-primary shadow-sm">
+        <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#addCarModal">
             <i class="bi bi-plus-circle"></i> Add New Car
-        </a>
+        </button>
     </div>
 
     @if(session('success'))
@@ -42,7 +42,7 @@
                         <!-- Buttons -->
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('customer.mycars.edit', $car->id) }}"
-                               class="btn btn-outline-secondary btn-sm w-50 me-2">
+                               class="btn btn-outline-secondary btn-sm w-50 me-2" data-bs-toggle="modal" data-bs-target="#editCarModal{{ $car->id }}">
                                 <i class="bi bi-pencil"></i> Edit
                             </a>
 
@@ -77,7 +77,8 @@
     </div>
 
 </div>
-
+@include('customer.mycars.create')
+@include('customer.mycars.edit')
 <style>
     .car-card {
     border-radius: 15px;

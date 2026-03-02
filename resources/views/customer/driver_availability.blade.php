@@ -46,17 +46,17 @@
                     <!-- From Date -->
                     <div class="col-md">
                         <label class="form-label mb-1">From Date</label>
-                        <input type="datetime-local" name="from_datetime"
+                        <input type="datetime-local" id="from_datetime" name="from_datetime"
                             class="form-control form-control-sm"
-                            value="{{ old('from_datetime') }}" required>
+                            value="{{ old('from_datetime') }}" autocomplete="off" required>
                     </div>
 
                     <!-- To Date -->
                     <div class="col-md">
                         <label class="form-label mb-1">To Date</label>
-                        <input type="datetime-local" name="to_datetime"
+                        <input type="datetime-local" id="to_datetime" name="to_datetime"
                             class="form-control form-control-sm"
-                            value="{{ old('to_datetime') }}" required>
+                            value="{{ old('to_datetime') }}" autocomplete="off" required>
                     </div>
 
                     <!-- Buttons -->
@@ -207,8 +207,8 @@
 
             // Reset form button
             $('#resetBtn').click(function() {
-                $('#from_location, #to_location').val('');
-                $('#from_suggestions, #to_suggestions').empty();
+                $('#from_location, #to_location, #from_datetime, #to_datetime').val('');
+                $('#from_suggestions, #to_suggestions, #from_datetime, #to_datetime').empty();
             });
         });
     </script>
