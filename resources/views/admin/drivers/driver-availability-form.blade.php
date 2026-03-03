@@ -41,6 +41,10 @@
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        <a href="{{ route('admin.availability.index') }}" class="btn btn-secondary mt-3">Back</a>
+        @if(request('source') == 'drivers')
+            <a href="{{ route('admin.drivers.index') }}" class="btn btn-secondary mt-3">Back</a>
+        @else
+            <a href="{{ route('admin.availability.index') }}" class="btn btn-secondary mt-3">Back</a>
+        @endif   
     </form>
 @endsection

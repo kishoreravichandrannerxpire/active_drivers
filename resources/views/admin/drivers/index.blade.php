@@ -46,7 +46,7 @@
                 <td>{{ $driver->total_experience_years }} years</td>
                 <td>{{ $driver->pincode }}</td>
                 <td><a href="{{ route('admin.availability.index', ['driver_id' => $driver->id]) }}" class="btn btn-sm btn-info">View Availability</a>
-                    <a href="{{ route('admin.availability.create', ['driver_id' => $driver->id]) }}" class="btn btn-sm btn-danger">Add Availability</a>
+                    <a href="{{ route('admin.availability.create', ['driver_id' => $driver->id, 'source' => 'drivers']) }}" class="btn btn-sm btn-danger">Add Availability</a>
                  </td>
                 <td>
                     <a href="{{ route('admin.drivers.edit', $driver->id) }}" class="btn btn-sm btn-warning">Edit</a>

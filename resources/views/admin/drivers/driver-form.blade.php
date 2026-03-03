@@ -48,6 +48,7 @@
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Email</label>
                         <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+                        @error('email')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
 
                     <div class="col-md-6">
@@ -64,6 +65,7 @@
                     <div class="col-md-6">
                         <label class="form-label fw-bold">License Number</label>
                         <input type="text" name="driver_license_number" class="form-control" value="{{ old('driver_license_number') }}">
+                        @error('driver_license_number')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
 
                     <div class="col-md-6">

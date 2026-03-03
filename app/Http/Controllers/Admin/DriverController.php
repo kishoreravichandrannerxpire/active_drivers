@@ -36,6 +36,7 @@ class DriverController extends Controller
             'mobile_number'  => 'required|string|max:15|unique:users,mobile_number',
             'password'       => 'required|string|min:6',
         // DRIVER TABLE (all optional for submission)
+            'last_name'      => 'nullable|string|max:255',
             'age'            => 'nullable|integer|min:18',
             'driver_license_number' => 'nullable|string|max:50|unique:drivers,driver_license_number',
             'driver_image'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -113,6 +114,7 @@ class DriverController extends Controller
             'password'       => ['nullable','string','min:6'],
         // DRIVER TABLE (all optional for update)
             'first_name'     => 'required|string|max:255',
+            'last_name'      => 'nullable|string|max:255',
             'age'            => 'nullable|integer|min:18',
             'driver_license_number' => ['nullable','string','max:50', Rule::unique('drivers','driver_license_number')->ignore($driver->id)],
             'driver_image'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

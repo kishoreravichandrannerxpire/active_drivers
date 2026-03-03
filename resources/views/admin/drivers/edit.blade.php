@@ -57,7 +57,6 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email"
                    value="{{ old('email', $driver->email) }}" >
-                        @error('email')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
 
         <!-- Password -->
