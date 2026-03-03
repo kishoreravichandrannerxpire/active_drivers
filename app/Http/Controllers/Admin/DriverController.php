@@ -32,7 +32,7 @@ class DriverController extends Controller
         $validator = Validator::make($request->all(), [
         // USER TABLE
             'first_name'     => 'required|string|max:255',
-            'email'          => 'required|email|unique:users,email',
+            'email'          => 'nullable|email|unique:users,email',
             'mobile_number'  => 'required|string|max:15|unique:users,mobile_number',
             'password'       => 'required|string|min:6',
         // DRIVER TABLE (all optional for submission)
@@ -108,7 +108,7 @@ class DriverController extends Controller
     {
         $request->validate([
            // USER TABLE
-            'email'          => ['required','email', Rule::unique('users','email')->ignore($driver->user_id)],
+            'email'          => ['nullable','email', Rule::unique('users','email')->ignore($driver->user_id)],
             'mobile_number'  => ['required','string','max:15', Rule::unique('users','mobile_number')->ignore($driver->user_id)],
             'password'       => ['nullable','string','min:6'],
         // DRIVER TABLE (all optional for update)

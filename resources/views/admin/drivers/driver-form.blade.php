@@ -31,7 +31,7 @@
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">First Name</label>
+                        <label class="form-label fw-bold">First Name<span class="text-danger">*</span></label>
                         <input type="text" name="first_name" class="form-control" value="{{ old('first_name') }}">
                         @error('first_name')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
@@ -48,16 +48,15 @@
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Email</label>
                         <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-                        @error('email')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Mobile Number</label>
+                        <label class="form-label fw-bold">Mobile Number<span class="text-danger">*</span></label>
                         <input type="text" name="mobile_number" class="form-control" value="{{ old('mobile_number') }}">
                         @error('mobile_number')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-bold">Password</label>
+                        <label class="form-label fw-bold">Password<span class="text-danger">*</span></label>
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                         @error('password')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
