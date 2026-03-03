@@ -19,7 +19,7 @@
                 <select name="drivers_id" class="form-control">
                     <option value="">Select Driver</option>
                     @foreach($drivers as $driver)
-                        <option value="{{ $driver->id }}" {{ old('drivers_id') == $driver->id ? 'selected' : '' }}>
+                        <option value="{{ $driver->id }}" {{ old('drivers_id') == $driver->id ? 'selected' : ($selectedDriverId == $driver->id ? 'selected' : '') }}>
                             {{ $driver->first_name }}
                         </option>
                     @endforeach

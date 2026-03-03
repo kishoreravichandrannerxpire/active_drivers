@@ -10,16 +10,30 @@ use Illuminate\Http\Request;
 class DriverAvailabilityController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $drivers = DriverAvailability::all();
-        return view('admin.drivers.driver-availability', compact('drivers'));
-    }
+        $driver_id = $request->driver_id;
 
-    public function create()
+        if ($driver_id) {
+            $drivers = DriverAvailability::with('driver')
+                ->where('drivers_id', $driver_id)
+                ->get();
+        } else {
+            $drivers = DriverAvailability::with('driver')->get();
+        }
+
+        return view('admin.drivers.driver-availability', compact('drivers'));
+    }       
+    public function create(Request $request)
     {
-        $drivers = Drivers::all();
-        return view('admin.drivers.driver-availability-form', compact('drivers'));
+         $selectedDriverId= $request->driver_id;
+        if ($selectedDriverId) {
+            $drivers = Drivers::where('id', $selectedDriverId)->get();
+        } else {
+            $drivers = Drivers::all();
+        }
+
+        return view('admin.drivers.driver-availability-form', compact('drivers', 'selectedDriverId'));
     }
 
     public function store(Request $request)
