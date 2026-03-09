@@ -47,7 +47,7 @@
             <div class="ms-auto d-flex align-items-center">
                 <a class="nav-link text-dark ms-5" href="{{ route('customer.home') }}">Home</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('customer.mycars.index') }}">My Cars</a>
-                <a class="nav-link text-dark ms-5" href="#">My Bookings</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('customer.my-bookings') }}">My Bookings</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('customer.myprofile') }}">My Profile</a>
                  <form method="POST" action="{{ route ('logout') }}" class="ms-5">
                     @csrf
@@ -59,7 +59,7 @@
             @can('isDriver')
             <div class="ms-auto d-flex align-items-center">
                 <a class="nav-link text-dark ms-5" href="{{ route('driver.home') }}">Home</a>
-                <a class="nav-link text-dark ms-5" href="#">My Trip</a>
+                <a class="nav-link text-dark ms-5" href="{{ route('driver.my-trip') }}">My Trip</a>
                 <a class="nav-link text-dark ms-5" href="{{ route('driver.profile') }}">Profile</a>
                  <form method="POST" action="{{ route ('logout') }}" class="ms-5">
                     @csrf

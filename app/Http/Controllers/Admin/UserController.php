@@ -56,7 +56,7 @@ class UserController extends Controller
                 ->withInput($request->only(['from_location', 'to_location','from_datetime','to_datetime']));
         }
         if($request->roles_id == 2){
-            return redirect()->route('driver.home');
+            return redirect()->intended('driver/home');
         } 
         else {
             return redirect()->route('admin.user.index')->with('success', 'User created successfully!');

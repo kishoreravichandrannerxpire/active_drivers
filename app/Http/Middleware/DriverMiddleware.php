@@ -18,6 +18,7 @@ class DriverMiddleware
     {
         // Not logged in → redirect to driver login
         if (!Auth::check()) {
+            session()->put('url.intended', $request->fullUrl());
             return redirect()->route('driver.login')->with('error', 'Please login to access Driver Portal');
         }
 

@@ -4,16 +4,6 @@
 <div class="container">
     <h2>Edit Driver</h2>
 
-    <!-- @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif -->
-
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -57,6 +47,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email"
                    value="{{ old('email', $driver->email) }}" >
+                    @error('email')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
 
         <!-- Password -->
@@ -73,6 +64,7 @@
             <label for="driver_license_number" class="form-label">Driver License Number</label>
             <input type="text" class="form-control" id="driver_license_number" name="driver_license_number"
                    value="{{ old('driver_license_number', $driver->driver_license_number) }}" >
+            @error('driver_license_number')<small class="text-danger">{{ $message }}</small>@enderror
         </div>
 
         <!-- Image -->

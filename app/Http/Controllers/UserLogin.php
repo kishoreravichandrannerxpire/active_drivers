@@ -34,7 +34,7 @@ class UserLogin extends Controller
             }
 
             if ($user->role?->role_name === 'Driver') {
-                return redirect()->route('driver.home');
+                return redirect()->intended('driver/home');
             }
 
             Auth::logout();

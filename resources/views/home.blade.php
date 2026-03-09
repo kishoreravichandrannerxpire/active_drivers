@@ -27,15 +27,15 @@
         </div>
 
         <div class="col-md-6">
-            <form>
+            <form action="{{ route('driver.home') }}" method="GET">
                 <h4>Do You Want A Trip</h4>
                 <div class="mb-3">
                     <label>From Time</label>
-                    <input type="time" class="form-control">
+                    <input type="datetime-local" name="from_date_time" class="form-control" autocomplete="off" required>
                 </div>
                 <div class="mb-3">
                     <label>To Time</label>
-                    <input type="time" class="form-control">
+                    <input type="datetime-local" name="to_date_time" class="form-control" autocomplete="off" required>
                 </div>
                 <button class="btn btn-success w-100">Submit</button>
             </form>
@@ -45,16 +45,6 @@
 </div>
 
 @include('partials.guest')
-    @endcan
-
-    @can('customer-home')
-      @include('partials.customer.driver_booking_form')
-      @include('partials.customer.addcar_form')
-      @include('partials.conversation')
-    @endcan 
-
-    @can('isDriver')
-      @include('partials.conversation')
     @endcan
 
     @include('partials.footer')

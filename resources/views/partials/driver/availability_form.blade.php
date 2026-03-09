@@ -22,7 +22,8 @@
                                 <input type="datetime-local"
                                        class="form-control form-control-lg @error('from_date_time') is-invalid @enderror"
                                        name="from_date_time"
-                                       value="{{ old('from_date_time') }}"
+                                       value="{{ session('from_date_time') }}"
+                                       autocomplete="off"
                                        required>
 
                                 @error('from_date_time')
@@ -37,7 +38,8 @@
                                 <input type="datetime-local"
                                        class="form-control form-control-lg @error('to_date_time') is-invalid @enderror"
                                        name="to_date_time"
-                                       value="{{ old('to_date_time') }}"
+                                       value="{{ session('to_date_time') }}"
+                                       autocomplete="off"
                                        required>
 
                                 @error('to_date_time')

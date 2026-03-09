@@ -67,7 +67,7 @@ class CustomerCarsController extends Controller
             'fuel_type'         => $request->fuel_type,
         ]);
 
-        return redirect()->route('customer.home')->with('success', 'Your Car added successfully');
+        return redirect()->route('customer.mycars.index')->with('success', 'Your Car added successfully');
     }
 
     public function edit($id)

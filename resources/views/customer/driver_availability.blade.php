@@ -20,7 +20,7 @@
     <div class="card shadow-sm border-0">
         <div class="card-body py-3 px-4">
 
-            <form action="{{ route('customer.driver-availability') }}" method="POST">
+            <form action="{{ url('/customer/driver-availability') }}" method="POST">
                 @csrf
 
                 <div class="row g-2 align-items-end">
@@ -30,7 +30,7 @@
                         <label class="form-label mb-1">From</label>
                         <input type="text" id="from_location" name="from_location"
                             class="form-control form-control-sm"
-                            value="{{ old('from_location') }}" autocomplete="off" required>
+                            value="{{ request('from_location') ?? old('from_location') }}" autocomplete="off" required>
                         <div id="from_suggestions" class="position-absolute w-100"></div>
                     </div>
 
@@ -39,7 +39,7 @@
                         <label class="form-label mb-1">To</label>
                         <input type="text" id="to_location" name="to_location"
                             class="form-control form-control-sm"
-                            value="{{ old('to_location') }}" autocomplete="off" required>
+                            value="{{ request('to_location') ?? old('to_location') }}" autocomplete="off" required>
                         <div id="to_suggestions" class="position-absolute w-100"></div>
                     </div>
 
@@ -48,7 +48,7 @@
                         <label class="form-label mb-1">From Date</label>
                         <input type="datetime-local" id="from_datetime" name="from_datetime"
                             class="form-control form-control-sm"
-                            value="{{ old('from_datetime') }}" autocomplete="off" required>
+                            value="{{ request('from_datetime') ?? old('from_datetime') }}" autocomplete="off" required>
                     </div>
 
                     <!-- To Date -->
@@ -56,11 +56,14 @@
                         <label class="form-label mb-1">To Date</label>
                         <input type="datetime-local" id="to_datetime" name="to_datetime"
                             class="form-control form-control-sm"
-                            value="{{ old('to_datetime') }}" autocomplete="off" required>
+                            value="{{ request('to_datetime') ?? old('to_datetime') }}" autocomplete="off" required>
                     </div>
 
                     <!-- Buttons -->
                     <div class="col-md-auto d-flex gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm px-3">
+                            Search
+                        </button>
                         <button type="button" id="resetBtn"
                             class="btn btn-secondary btn-sm px-3">
                             Reset
@@ -79,18 +82,22 @@
     <div class="container mt-5 mb-5">
         <div class="card shadow p-4">
             <h2 class="mb-4">
-                <i class="bi bi-car-front"></i> Driver Availability
+                <i class="bi bi-car-front"></i> Available Drivers
             </h2>
 
-            {{-- Filter Buttons --}}
-            <div class="mb-4">
-                <button id="showAllBtn" class="btn btn-primary me-2">
-                    <i class="bi bi-list"></i> Show All Drivers
-                </button>
-                <button id="showAvailableBtn" class="btn btn-success">
-                    <i class="bi bi-check-circle"></i> Show Available Drivers (Active)
-                </button>
-            </div>
+            {{-- Show search criteria if form was submitted --}}
+            @php
+                $fromDisplay = request('from_datetime') ?? old('from_datetime');
+                $toDisplay = request('to_datetime') ?? old('to_datetime');
+            @endphp
+            @if($fromDisplay && $toDisplay)
+                <div class="alert alert-info mb-4" role="alert">
+                    <strong>Search Results:</strong> Showing drivers available from 
+                    <strong>{{ \Carbon\Carbon::parse($fromDisplay)->format('M d, Y @ h:i A') }}</strong> 
+                    to 
+                    <strong>{{ \Carbon\Carbon::parse($toDisplay)->format('M d, Y @ h:i A') }}</strong>
+                </div>
+            @endif
 
             {{-- Drivers Table --}}
             <div class="table-responsive">
@@ -99,8 +106,6 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Age</th>
-                            <th>Status</th>
                             <th>Experience (Years)</th>
                             <th>Hill Experience</th>
                             <th>Luxury Car Experience</th>
@@ -113,14 +118,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
                                     <strong>{{ $driver->first_name }} {{ $driver->last_name }}</strong>
-                                </td>
-                                <td>{{ $driver->age ?? 'N/A' }}</td>
-                                <td>
-                                    @if($driver->status == 1)
-                                        <span class="badge bg-success">Active</span>
-                                    @else
-                                        <span class="badge bg-danger">Inactive</span>
-                                    @endif
                                 </td>
                                 <td>{{ $driver->total_experience_years ?? 'N/A' }}</td>
                                 <td>
@@ -142,9 +139,18 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-info" data-bs-toggle="tooltip">
+                                    @php
+                                        $query = http_build_query([
+                                            'driver_id' => $driver->id,
+                                            'from_location' => request('from_location'),
+                                            'to_location' => request('to_location'),
+                                            'from_datetime' => request('from_datetime'),
+                                            'to_datetime' => request('to_datetime'),
+                                        ]);
+                                    @endphp
+                                    <a href="{{ url('/customer/booking') }}?{{ $query }}" class="btn btn-sm btn-info">
                                         Confirm
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @empty
@@ -158,52 +164,12 @@
                 </table>
             </div>
 
-            {{-- Summary Info --}}
-            <div class="alert alert-info mt-4" id="summaryAlert">
-                Total Drivers: <strong id="totalCount">{{ count($drivers) }}</strong> | 
-                Active Drivers: <strong id="activeCount">{{ $drivers->where('status', 1)->count() }}</strong>
-            </div>
         </div>
     </div>
 
     
     <!-- SCRIPTS -->
     <script>
-        $(document).ready(function() {
-            // Initialize tooltips
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-
-            // Show All Drivers
-            $('#showAllBtn').click(function() {
-                $('.driver-row').show();
-                updateSummary();
-                $(this).addClass('active');
-                $('#showAvailableBtn').removeClass('active');
-            });
-
-            // Show Available Drivers (Status = 1)
-            $('#showAvailableBtn').click(function() {
-                $('.driver-row').each(function() {
-                    if($(this).data('status') == 1) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-                updateSummary();
-                $(this).addClass('active');
-                $('#showAllBtn').removeClass('active');
-            });
-
-            function updateSummary() {
-                const totalVisible = $('.driver-row:visible').length;
-                const activeVisible = $('.driver-row:visible[data-status="1"]').length;
-                $('#totalCount').text(totalVisible);
-                $('#activeCount').text(activeVisible);
-            }
 
             // Reset form button
             $('#resetBtn').click(function() {

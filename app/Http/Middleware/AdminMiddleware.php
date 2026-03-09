@@ -18,6 +18,7 @@ class AdminMiddleware
 {
     // Not logged in → redirect to admin login
     if (!Auth::check()) {
+        session()->put('url.intended', $request->fullUrl());
         return redirect()->route('admin.login')->with('error','Please login to accesss Admin Portal');
     }
 

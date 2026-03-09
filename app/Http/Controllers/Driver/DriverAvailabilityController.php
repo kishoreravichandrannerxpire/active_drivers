@@ -16,7 +16,7 @@ class DriverAvailabilityController extends Controller
             'to_date_time' => 'required|date|after:from_date_time',
         ]);
 
-        $driver = Drivers::where('user_id', auth()->id())->firstOrFail();
+        $driver = Drivers::where('user_id', auth()->id())->first();
 
         DriverAvailability::create([
             'drivers_id' => $driver->id,
@@ -24,12 +24,24 @@ class DriverAvailabilityController extends Controller
             'to_date_time' => $request->to_date_time,
         ]);
 
+        session()->forget(['from_date_time', 'to_date_time']);
+
         return redirect()->route('driver.home')->with('success', 'Availability added successfully');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-    $driver = Drivers::where('user_id', auth()->id())->firstOrFail();
+    
+    if ($request->from_date_time && $request->to_date_time) {
+        session()->put('from_date_time', $request->from_date_time);
+        session()->put('to_date_time', $request->to_date_time);       
+    }
+
+    $driver = Drivers::where('user_id', auth()->id())->first();
+
+    if(!$driver) {
+        return redirect()->route('driver.profile')->with('error', 'Driver profile not found. Please create your profile first.');
+    }
 
     $availabilities = DriverAvailability::where('drivers_id', $driver->id)
         ->orderBy('from_date_time', 'asc')
@@ -55,6 +67,8 @@ class DriverAvailabilityController extends Controller
             'from_date_time' => $request->from_date_time,
             'to_date_time' => $request->to_date_time,
         ]);
+
+        session()->forget(['from_date_time', 'to_date_time']);
 
         return redirect()->route('driver.home')->with('success', 'Availability updated successfully');
     }

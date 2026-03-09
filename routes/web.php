@@ -39,8 +39,6 @@ Route::get('/test-middleware', function () {
     return 'Middleware exists: ' . get_class($middleware);
 });
 
-Route::get('/home/driver', fn() => view('driver_home'))->name('driver.home');
-
 //Trial routes
 use App\Http\Controllers\TrialController;
 

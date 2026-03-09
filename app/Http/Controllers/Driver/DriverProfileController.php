@@ -26,20 +26,15 @@ class DriverProfileController extends Controller
         'age'        => 18,
         'status'     => 1,
         'driver_image' => '',
-
-        'driver_license_number' => '',
-
         'total_experience_years' => 0,
-
         'hill_experience' => 0,
         'accident_history' => 0,
         'luxury_car_experience' => 0,
-
         'address' => '',
         'pincode' => '',
     ]);
    }
-
+        session()->keep(['from_date_time', 'to_date_time']);
         return view('driver.profile', compact('driver'));
     }
 

@@ -18,6 +18,7 @@ class CustomerMiddleware
     {
         // Not logged in → redirect to customer login
         if (!Auth::check()) {
+            session()->put('url.intended', $request->fullUrl());
             return redirect()->route('customer.login')->with('error', 'Please login to access Customer Portal');
         }
 
