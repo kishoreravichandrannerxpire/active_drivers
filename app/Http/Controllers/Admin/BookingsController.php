@@ -12,9 +12,14 @@ use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Bookings::all();
+        $customerId = $request->customer_id;
+         if ($customerId) {
+            $bookings = Bookings::where('customers_id', $customerId)->get();
+        } else {
+            $bookings = Bookings::all();
+        }
         return view('admin.bookings.index' , compact('bookings'));
     }
 
