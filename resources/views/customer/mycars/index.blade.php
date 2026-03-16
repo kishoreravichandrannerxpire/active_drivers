@@ -1,7 +1,7 @@
 @include('partials.links')
 @include('partials.navbar')
 
-<div class="container py-5">
+<div class="container"style="margin-top:150px;">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">My Cars</h2>
@@ -11,7 +11,7 @@
     </div>
 
     @if(session('success'))
-        <div class="alert alert-success shadow-sm">
+        <div class="alert alert-success shadow-sm" role="alert" aria-label="Success">
             <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
         </div>
     @endif
@@ -67,10 +67,10 @@
                 <div class="card border-0 shadow-sm text-center p-5">
                     <h5 class="fw-bold mb-3">No Cars Added Yet</h5>
                     <p class="text-muted">Start by adding your first car.</p>
-                    <a href="{{ route('customer.mycars.create') }}"
+                    <button data-bs-toggle="modal" data-bs-target="#addCarModal"
                        class="btn btn-primary">
                         <i class="bi bi-plus-circle"></i> Add Car
-                    </a>
+                    </button>
                 </div>
             </div>
         @endforelse

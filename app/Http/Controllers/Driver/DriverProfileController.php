@@ -12,33 +12,10 @@ class DriverProfileController extends Controller
     // Show profile
     public function show()
     {
-        $driver = Drivers::where('user_id', auth()->id())->first();
-
-        // Create if not exists (like customer)
-        if (!$driver) {
-
-    $driver = Drivers::create([
-
-        'user_id' => auth()->id(),
-
-        'first_name' => '',
-        'last_name'  => '',
-        'age'        => 18,
-        'status'     => 1,
-        'driver_image' => '',
-        'total_experience_years' => 0,
-        'hill_experience' => 0,
-        'accident_history' => 0,
-        'luxury_car_experience' => 0,
-        'address' => '',
-        'pincode' => '',
-    ]);
-   }
+        $driver = Drivers::where('user_id', auth()->id())->firstOrFail();
         session()->keep(['from_date_time', 'to_date_time']);
         return view('driver.profile', compact('driver'));
     }
-
-
     // Update profile
     public function update(Request $request)
     {

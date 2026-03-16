@@ -1,6 +1,6 @@
 @include('partials.links')
 @include('partials.navbar')
-<div class="container mt-4">
+<div class="container" style="margin-top:100px;">
     <div class="card p-4">
         <h3>My Trips</h3>
 

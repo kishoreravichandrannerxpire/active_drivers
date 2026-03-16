@@ -30,38 +30,64 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'roles_id' => 'required|exists:roles,id',
-            'email' => 'nullable|string|email|max:255|unique:users,email',
-            'mobile_number' => 'required|string|size:10|unique:users,mobile_number',
-            'password' => 'required|string|min:6',
+{
+    $request->validate([
+        'roles_id' => 'required|exists:roles,id',
+        'email' => 'nullable|string|email|max:255|unique:users,email',
+        'mobile_number' => 'required|string|size:10|unique:users,mobile_number',
+        'password' => 'required|string|min:6',
+    ]);
+
+    $user = User::create([
+        'roles_id' => $request->roles_id,
+        'email' => $request->email,
+        'mobile_number' => $request->mobile_number,
+        'password' => bcrypt($request->password),
+    ]);
+
+    /* CREATE CUSTOMER OR DRIVER RECORD */
+
+    if ($request->roles_id == 3) { // CUSTOMER
+        Customers::create([
+            'user_id' => $user->id,
+            'first_name' => '',
+            'last_name' => '',
         ]);
-
-        $user = User::create([
-            'roles_id' => $request->roles_id,
-            'email' => $request->email,
-            'mobile_number' => $request->mobile_number,
-            'password' => bcrypt($request->password),
-        ]);
-
-        // Login the user
-        Auth::login($user);
-        $request->session()->regenerate();
-
-        // Redirect based on role_id
-        if($request->roles_id == 3){
-            // Persist booking from/to if provided (guest -> signup)
-            return redirect()->route('customer.home')
-                ->withInput($request->only(['from_location', 'to_location','from_datetime','to_datetime']));
-        }
-        if($request->roles_id == 2){
-            return redirect()->intended('driver/home');
-        } 
-        else {
-            return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
-        }
     }
+
+    if ($request->roles_id == 2) { // DRIVER
+        Drivers::create([
+            'user_id' => $user->id,
+            'first_name' => '',
+            'last_name'  => '',
+            'age'        => 18,
+            'status'     => 1,
+            'driver_image' => '',
+            'total_experience_years' => 0,
+            'hill_experience' => 0,
+            'accident_history' => 0,
+            'luxury_car_experience' => 0,
+            'address' => '',
+            'pincode' => '',
+        ]);
+    }
+
+    // Login user
+    Auth::login($user);
+    $request->session()->regenerate();
+
+    if($request->roles_id == 3){
+        return redirect()->route('customer.home')
+            ->withInput($request->only(['from_location', 'to_location','from_datetime','to_datetime']));
+    }
+
+    if($request->roles_id == 2){
+        return redirect()->intended('driver/home');
+    }
+
+    return redirect()->route('admin.user.index')->with('success', 'User created successfully!');
+}
+
     public function edit($id)
     {
         $user = User::findOrFail($id);

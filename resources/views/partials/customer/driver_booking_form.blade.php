@@ -3,8 +3,13 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 col-12">
         <h2 class="display-5 fw-bold mb-3"> Do You Wanna Driver?</h2>
-        <div class="bg-dark text-white rounded-4 p-4 p-lg-5">
+        <div class="bg-secondary text-white rounded-4 p-4 p-lg-5">
           <div class="row align-items-center g-4">
+            <div class="col-lg-6 col-12 text-center">
+              <img src="{{ asset('storage/image/logo.png') }}"
+                   alt="Driver Booking"
+                   class="img-fluid">
+            </div>
 
             <!-- FORM -->
             <div class="col-lg-6 col-12">
@@ -28,10 +33,12 @@
                 <div class="mt-3">
                   <label>To Date & Time*</label>
                   <input type="datetime-local" id="to_datetime" name="to_datetime" class="form-control" value="{{ old('to_datetime') }}" autocomplete="off" required>
-
-                <button type="submit" class="btn btn-primary w-100 mt-3"> Choose Driver </button>
+                </div>
+                <button type="submit" class="btn btn-dark w-100 mt-3"> Choose Driver </button>
               </form>
             </div>
+             <!-- IMAGE LEFT -->
+            
           </div>
         </div>
       </div>

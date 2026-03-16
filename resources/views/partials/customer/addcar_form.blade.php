@@ -30,10 +30,10 @@
           </div>
 <!-- FORM -->
     <div class="col-lg-6 offset-lg-1 col-12" style="display:none;" id="carForm">
-        <div class="p-4 bg-white rounded-4 shadow-sm">
+        <div class="p-4 bg-secondary rounded-4 shadow-sm">
           <form class="card shadow-sm border-0 p-4" style="max-width:520px;" action="{{ route('customer.mycars.store') }}" method="POST">
             @csrf
-            <h5 class="mb-4 text-primary"><i class="bi bi-car-front-fill"></i> Car Information</h5>
+            <h5 class="mb-4 text-dark"><i class="bi bi-car-front-fill"></i> Car Information</h5>
 
             {{-- validation errors --}}
             @if($errors->any())

@@ -16,7 +16,7 @@
 <body>
     @include('partials.navbar')
 
-   <div class="container mt-4">
+   <div class="container" style="margin-top:50px;">
     <div class="card shadow-sm border-0">
         <div class="card-body py-3 px-4">
 

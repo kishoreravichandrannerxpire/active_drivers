@@ -8,8 +8,9 @@
 </head>
 <body>
     @include('partials.navbar')
+    @include('customer.mycars.create')
 
-    <div class="container mt-5">
+    <div class="container" style="margin-top:150px;">
         <div class="card p-4">
             <h3>Confirm Booking</h3>
 
@@ -60,12 +61,19 @@
 
                     <div class="col-12 col-md-4">
                         <label class="form-label">Car</label>
-                        <select name="cars_id" class="form-select">
-                            <option value="">Select Your Car</option>
-                            @foreach($cars as $car)
-                                <option value="{{ $car->id }}">{{ $car->car_model }} ({{ $car->car_type }}) (Reg: {{ $car->car_number }})</option>
-                            @endforeach
-                        </select>
+                        @if($cars->count() == 0)
+                            <div class="alert alert-warning">No cars available for the selected driver.</div>
+                        @else
+                            <select name="cars_id" class="form-select">
+                                <option value="">Select Your Car</option>
+                                @foreach($cars as $car)
+                                    <option value="{{ $car->id }}">{{ $car->car_model }} ({{ $car->car_type }}) (Reg: {{ $car->car_number }})</option>
+                                @endforeach
+                            </select>
+                        @endif
+                        <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#addCarModal">
+            <i class="bi bi-plus-circle"></i> Add New Car
+        </button>
                         @error('cars_id')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
 

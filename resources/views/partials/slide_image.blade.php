@@ -1,12 +1,23 @@
 <style>
   .carousel-item img {
-    height: 630px;
+    height: 640px;
     object-fit: cover;
 }
 
 .carousel-caption  {
-    margin-bottom: 275px;
-    color: #fff;
+    margin-bottom: 250px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.carousel-item::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(177, 175, 175, 0.53);
 }
   </style>
 <body>

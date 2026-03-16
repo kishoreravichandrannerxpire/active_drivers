@@ -39,10 +39,6 @@ class DriverAvailabilityController extends Controller
 
     $driver = Drivers::where('user_id', auth()->id())->first();
 
-    if(!$driver) {
-        return redirect()->route('driver.profile')->with('error', 'Driver profile not found. Please create your profile first.');
-    }
-
     $availabilities = DriverAvailability::where('drivers_id', $driver->id)
         ->orderBy('from_date_time', 'asc')
         ->get();

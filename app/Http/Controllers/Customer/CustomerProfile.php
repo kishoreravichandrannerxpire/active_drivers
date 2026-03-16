@@ -51,13 +51,6 @@ class CustomerProfile extends Controller
             'last_name'          => 'required|string|max:255',
             'email'              => 'required|email|unique:users,email,' . $profile->user_id,
             'mobile_number'      => 'required|string|size:10|unique:users,mobile_number,' . $profile->user_id,
-            'car_model'          => 'required|string|max:255',
-            'car_type'           => 'required|string|max:255',
-            'car_number'         => 'required|string|max:255',
-            'insurance'          => 'nullable|in:0,1',
-            'fastag'             => 'nullable|in:0,1',
-            'transmission_type'  => 'nullable|string|max:255',
-            'fuel_type'          => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -76,30 +69,6 @@ class CustomerProfile extends Controller
             'mobile_number' => $request->mobile_number,
         ]);
 
-        // Update or Create Car (assuming one car per customer)
-        $car = $profile->cars()->first();
-        if ($car) {
-            $car->update([
-                'car_model'         => $request->car_model,
-                'car_type'          => $request->car_type,
-                'car_number'        => $request->car_number,
-                'insurance'         => $request->insurance,
-                'fastag'            => $request->fastag,
-                'transmission_type' => $request->transmission_type,
-                'fuel_type'         => $request->fuel_type,
-            ]);
-        } else {
-            $profile->cars()->create([
-                'car_model'         => $request->car_model,
-                'car_type'          => $request->car_type,
-                'car_number'        => $request->car_number,
-                'insurance'         => $request->insurance,
-                'fastag'            => $request->fastag,
-                'transmission_type' => $request->transmission_type,
-                'fuel_type'         => $request->fuel_type,
-            ]);
-        }
-
         return redirect()->route('customer.home')->with('success', 'Profile updated successfully!');
     }
 
@@ -111,28 +80,13 @@ class CustomerProfile extends Controller
 
     public function show()
     {
-        $customer = Customers::where('user_id', auth()->id())->first();
-        if (!$customer) {
-            // Create customer record if it doesn't exist
-            $customer = Customers::create([
-                'user_id' => auth()->id(),
-                'first_name' => '', // Or get from user name if available
-                'last_name' => '',
-            ]);
-        }
+        $customer = Customers::where('user_id', auth()->id())->firstOrFail();
         return view('customer.myprofile', compact('customer'));
     }
 
     public function completion()
     {
-        $customer = Customers::where('user_id', auth()->id())->first();
-        if (!$customer) {
-            $customer = Customers::create([
-                'user_id' => auth()->id(),
-                'first_name' => '',
-                'last_name' => '',
-            ]);
-        }
+        $customer = Customers::where('user_id', auth()->id())->firstOrFail();
         return view('customer.profilecompletion', compact('customer'));
     }
  
@@ -146,13 +100,6 @@ class CustomerProfile extends Controller
             'last_name'          => 'required|string|max:255',
             'email'              => 'required|email|unique:users,email,' . $profile->user_id,
             'mobile_number'      => 'required|string|max:20|unique:users,mobile_number,' . $profile->user_id,
-            'car_model'          => 'required|string|max:255',
-            'car_type'           => 'required|string|max:255',
-            'car_number'         => 'required|string|max:255',
-            'insurance'          => 'nullable|string|max:255',
-            'fastag'             => 'nullable|string|max:255',
-            'transmission_type'  => 'nullable|string|max:255',
-            'fuel_type'          => 'nullable|string|max:255',
         ]);
  
         if ($validator->fails()) {
@@ -171,108 +118,8 @@ class CustomerProfile extends Controller
             'email'         => $request->email,
             'mobile_number' => $request->mobile_number,
         ]);
- 
-        // Update or Create Car (assuming one car per customer)
-        $car = $profile->cars()->first();
-        if ($car) {
-            $car->update([
-                'car_model'         => $request->car_model,
-                'car_type'          => $request->car_type,
-                'car_number'        => $request->car_number,
-                'insurance'         => $request->insurance,
-                'fastag'            => $request->fastag,
-                'transmission_type' => $request->transmission_type,
-                'fuel_type'         => $request->fuel_type,
-            ]);
-        } else {
-            $profile->cars()->create([
-                'car_model'         => $request->car_model,
-                'car_type'          => $request->car_type,
-                'car_number'        => $request->car_number,
-                'insurance'         => $request->insurance,
-                'fastag'            => $request->fastag,
-                'transmission_type' => $request->transmission_type,
-                'fuel_type'         => $request->fuel_type,
-            ]);
-        }
- 
+
         return redirect()->route('home')->with('success', 'Profile completed successfully!');
     }
 
-    // Show the profile completion page (full-page form)
-    // public function completion()
-    // {
-    //     $customer = Customers::where('user_id', auth()->id())->first();
-    //     if (!$customer) {
-    //         $customer = Customers::create([
-    //             'user_id' => auth()->id(),
-    //             'first_name' => '',
-    //             'last_name' => '',
-    //         ]);
-    //     }
-    //     return view('customer.profilecompletion', compact('customer'));
-    // }
-
-    // // Store profile completion data (route name: customer.profile.store)
-    // public function storeProfile(Request $request)
-    // {
-    //     $profile = Customers::where('user_id', auth()->id())->firstOrFail();
-
-    //     $validator = Validator::make($request->all(), [
-    //         'first_name'         => 'required|string|max:255',
-    //         'last_name'          => 'required|string|max:255',
-    //         'email'              => 'required|email|unique:users,email,' . $profile->user_id,
-    //         'mobile_number'      => 'required|string|max:20|unique:users,mobile_number,' . $profile->user_id,
-    //         'car_model'          => 'required|string|max:255',
-    //         'car_type'           => 'required|string|max:255',
-    //         'car_number'         => 'required|string|max:255',
-    //         'insurance'          => 'nullable|string|max:255',
-    //         'fastag'             => 'nullable|string|max:255',
-    //         'transmission_type'  => 'nullable|string|max:255',
-    //         'fuel_type'          => 'nullable|string|max:255',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return redirect()->back()->withErrors($validator)->withInput();
-    //     }
-
-    //     // Update Customer
-    //     $profile->update([
-    //         'first_name' => $request->first_name,
-    //         'last_name'  => $request->last_name,
-    //     ]);
-
-    //     // Update User
-    //     $user = $profile->user ?? auth()->user();
-    //     $user->update([
-    //         'email'         => $request->email,
-    //         'mobile_number' => $request->mobile_number,
-    //     ]);
-
-    //     // Update or Create Car (assuming one car per customer)
-    //     $car = $profile->cars()->first();
-    //     if ($car) {
-    //         $car->update([
-    //             'car_model'         => $request->car_model,
-    //             'car_type'          => $request->car_type,
-    //             'car_number'        => $request->car_number,
-    //             'insurance'         => $request->insurance,
-    //             'fastag'            => $request->fastag,
-    //             'transmission_type' => $request->transmission_type,
-    //             'fuel_type'         => $request->fuel_type,
-    //         ]);
-    //     } else {
-    //         $profile->cars()->create([
-    //             'car_model'         => $request->car_model,
-    //             'car_type'          => $request->car_type,
-    //             'car_number'        => $request->car_number,
-    //             'insurance'         => $request->insurance,
-    //             'fastag'            => $request->fastag,
-    //             'transmission_type' => $request->transmission_type,
-    //             'fuel_type'         => $request->fuel_type,
-    //         ]);
-    //     }
-
-    //     return redirect()->route('home')->with('success', 'Profile completed successfully!');
-    // }
 }
