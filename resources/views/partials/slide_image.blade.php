@@ -1,55 +1,128 @@
 <style>
-  .carousel-item img {
-    height: 640px;
+/* Wrapper */
+.banner-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Banner Image */
+.banner-img {
+    height: 650px;
     object-fit: cover;
 }
 
-.carousel-caption  {
-    margin-bottom: 250px;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+/* Dark overlay for better text visibility */
+.carousel-item {
+    position: relative;
 }
 
-.carousel-item::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(177, 175, 175, 0.53);
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Caption Styling */
+.carousel-caption {
+    bottom: 20%;
+    z-index: 2;
+}
+
+.carousel-caption h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 18px;
+}
+
+/* Indicators (Dots) */
+.carousel-indicators {
+    bottom: 20px;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.5;
+    margin: 0 5px;
+}
+
+.carousel-indicators .active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .banner-img {
+        height: 300px;
+    }
+
+    .carousel-caption {
+        bottom: 10%;
+        padding: 10px;
+    }
+
+    .carousel-caption h1 {
+        font-size: 18px;
+    }
+
+    .carousel-caption p {
+        font-size: 12px;
+    }
 }
   </style>
 <body>
-   
-       <div class="banner-wrapper">
-     
-    @if($banners->count())
-    <div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-inner">
+
+<div class="banner-wrapper">
+
+@if($banners->count())
+<div id="bannerCarousel"
+     class="carousel slide carousel-fade"
+     data-bs-ride="carousel"
+     data-bs-interval="3000"
+     data-bs-wrap="true">
+
+    <!-- Slides -->
+    <div class="carousel-inner">
         @foreach($banners as $index => $banner)
         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-          <img src="{{ asset('storage/' . $banner->image)}}" class="d-block w-100" alt="{{ $banner->title }}">
-          <div class="carousel-caption d-none d-md-block text-center">
-            <h1>{{ $banner->title }}</h1>
-            <p>{{ $banner->description }}</p>
-          </div>
+            
+            <img src="{{ asset('storage/' . $banner->image) }}" 
+                 class="d-block w-100 banner-img" 
+                 alt="{{ $banner->title }}">
+
+            <!-- Caption -->
+            <div class="carousel-caption text-center">
+                <h1>{{ $banner->title }}</h1>
+                <p>{{ $banner->description }}</p>
+            </div>
+
         </div>
         @endforeach
-      </div>
     </div>
+
+    <!-- Bottom Dots -->
+    <div class="carousel-indicators">
+        @foreach($banners as $index => $banner)
+        <button type="button"
+                data-bs-target="#bannerCarousel"
+                data-bs-slide-to="{{ $index }}"
+                class="{{ $index == 0 ? 'active' : '' }}"
+                aria-current="{{ $index == 0 ? 'true' : 'false' }}">
+        </button>
+        @endforeach
     </div>
- 
-      <!-- Controls -->
-       <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    @endif
+
+</div>
+@endif
+
+</div>
+
 </body>
 </html>
