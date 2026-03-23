@@ -150,20 +150,20 @@
     <ul class="navbar-nav ms-auto">
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('home') }}">Home</a>
+            <a class="nav-link ms-lg-5" href="{{ route('home') }}">Home</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="#services">Our Services</a>
+            <a class="nav-link ms-lg-5" href="#services">Our Services</a>
         </li>
 
         <!-- Desktop only -->
         <li class="nav-item d-none d-lg-block">
-            <a class="nav-link ps-lg-5" href="{{ route('signup') }}">Sign Up</a>
+            <a class="nav-link ms-lg-5" href="{{ route('signup') }}">Sign Up</a>
         </li>
 
         <li class="nav-item d-none d-lg-block">
-            <a class="nav-link ps-lg-5" href="{{ route('login') }}">Login</a>
+            <a class="nav-link ms-lg-5" href="{{ route('login') }}">Login</a>
         </li>
 
     </ul>
@@ -174,25 +174,25 @@
     <ul class="navbar-nav ms-auto">
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('customer.home') }}">Home</a>
+            <a class="nav-link" href="{{ route('customer.home') }}">Home</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('customer.mycars.index') }}">My Cars</a>
+            <a class="nav-link" href="{{ route('customer.mycars.index') }}">My Cars</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('customer.my-bookings') }}">My Bookings</a>
+            <a class="nav-link" href="{{ route('customer.my-bookings') }}">My Bookings</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('customer.myprofile') }}">My Profile</a>
+            <a class="nav-link" href="{{ route('customer.myprofile') }}">My Profile</a>
         </li>
 
         <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="nav-link btn w-100 text-start ps-lg-5">Logout</button>
+                <button type="submit" class="nav-link btn w-100 text-start">Logout</button>
             </form>
         </li>
 
@@ -204,21 +204,21 @@
     <ul class="navbar-nav ms-auto">
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('driver.home') }}">Home</a>
+            <a class="nav-link ms-lg-5" href="{{ route('driver.home') }}">Home</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('driver.my-trip') }}">My Trip</a>
+            <a class="nav-link ms-lg-5" href="{{ route('driver.my-trip') }}">My Trip</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link ps-lg-5" href="{{ route('driver.profile') }}">Profile</a>
+            <a class="nav-link ms-lg-5" href="{{ route('driver.profile') }}">Profile</a>
         </li>
 
         <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="nav-link btn w-100 text-start ps-lg-5">Logout</button>
+                <button type="submit" class="nav-link btn w-100 text-start">Logout</button>
             </form>
         </li>
 
@@ -233,13 +233,17 @@
 </body>
 
 <script>
+
 const navbar = document.getElementById("mainNavbar");
 
 window.addEventListener("scroll", () => {
+
     if (window.scrollY > 80) {
         navbar.classList.add("scrolled");
     } else {
         navbar.classList.remove("scrolled");
     }
+
 });
+
 </script>
