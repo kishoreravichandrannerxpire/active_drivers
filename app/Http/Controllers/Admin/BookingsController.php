@@ -104,26 +104,35 @@ public function store(Request $request)
     }
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'customers_id'    => 'required|exists:customers,id',
-            'drivers_id'      => 'required|exists:drivers,id',
-            'journey_type'    => 'required|string|max:100',
-            'pickup_location' => 'required|string|max:255',
-            'drop_location'   => 'required|string|max:255',
-            'from_postcode'   => 'required|string|max:20',
-            'to_postcode'     => 'required|string|max:20',
-            'pickup_date_time'=> 'required|date',
-            'passengers'      => 'required|integer|min:1',
-            'cars_id'         => 'required|exists:cars,id',
-            'fare'            => 'required|numeric|min:0',
-        ]);
+    $validated = $request->validate([
+        'customers_id'    => 'required|exists:customers,id',
+        'drivers_id'      => 'required|exists:drivers,id',
+        'journey_type'    => 'required|string|max:100',
+        'pickup_location' => 'required|string|max:255',
+        'drop_location'   => 'required|string|max:255',
+        'from_postcode'   => 'required|string|max:20',
+        'to_postcode'     => 'required|string|max:20',
+        'pickup_date_time'=> 'required|date',
+        'passengers'      => 'required|integer|min:1',
+        'cars_id'         => 'required|exists:cars,id',
+        'fare'            => 'required|numeric|min:0',
+        'status'          => 'required|string|max:100',
+        'payment_status'  => 'required|in:paid,unpaid',
+    ]);
 
-        $booking = Bookings::findOrFail($id);
-        $booking->update($request->all());
-        return redirect()->route('admin.bookings.index')
-            ->with('success', 'Booking updated successfully.');
+    $paymentMap = [
+        'paid' => 0,
+        'unpaid' => 1,
+    ];
 
-    }
+    $validated['payment_status'] = $paymentMap[$validated['payment_status']];
+
+    $booking = Bookings::findOrFail($id);
+    $booking->update($validated);
+
+    return redirect()->route('admin.bookings.index')
+        ->with('success', 'Booking updated successfully.');
+}
     public function destroy($id)
     {
         $booking = Bookings::findOrFail($id);

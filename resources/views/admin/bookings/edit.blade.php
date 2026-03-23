@@ -115,7 +115,27 @@
         @error('to_postcode')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
 
-    <div class="col-12 col-md-4"></div>
+    <div class="col-12 col-md-4">
+        <label class="form-label">Status</label>
+        <select name="status" class="form-select">
+            <option value="">-- Select --</option>
+            <option value="pending" {{ old('status', $booking->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="confirmed" {{ old('status', $booking->status) == 'confirmed' ? 'selected' : '' }}>Accepted</option>
+            <option value="completed" {{ old('status', $booking->status) == 'completed' ? 'selected' : '' }}>Completed</option>
+            <option value="cancelled" {{ old('status', $booking->status) == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+        </select>
+        @error('status')<small class="text-danger">{{ $message }}</small>@enderror
+    </div>
+
+    <div class="col-12 col-md-4">
+        <label class="form-label">Payment Status</label>
+        <select name="payment_status" class="form-select">
+            <option value="">-- Select --</option>
+            <option value="unpaid" {{ old('payment_status', $booking->payment_status) == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
+            <option value="paid" {{ old('payment_status', $booking->payment_status) == 'paid' ? 'selected' : '' }}>Paid</option>
+        </select>
+        @error('payment_status')<small class="text-danger">{{ $message }}</small>@enderror
+    </div>
 </div>
 
 <div class="row">

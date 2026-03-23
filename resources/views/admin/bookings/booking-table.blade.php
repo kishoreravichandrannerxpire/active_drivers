@@ -32,15 +32,25 @@
                 <td>₹{{ $booking->fare }}</td>
 
                 <td>
-                    {{ $booking->payment_status ? 'Paid' : 'Unpaid' }}
+                    {{ $booking->payment_status ? 'Unpaid' : 'Paid' }}
                 </td>
                 <td>
-                    <span class="badge bg-{{ 
-                        $booking->status == 'completed' ? 'success' :
-                        ($booking->status == 'cancelled' ? 'danger' :
-                        ($booking->status == 'accepted' ? 'info' : 'secondary'))
-                    }}">
-                        {{ ucfirst($booking->status) }}
+                    @php
+                        $rawStatus = strtolower(trim($booking->status ?? ''));
+                        $statusClass = 'secondary';
+
+                        if ($rawStatus === 'completed') {
+                            $statusClass = 'success';
+                        } elseif ($rawStatus === 'cancelled') {
+                            $statusClass = 'danger';
+                        } elseif (in_array($rawStatus, ['accepted','confirmed'], true)) {
+                            $statusClass = 'info';
+                        } elseif ($rawStatus === 'pending') {
+                            $statusClass = 'warning';
+                        }
+                    @endphp
+                    <span class="badge bg-{{ $statusClass }}">
+                        {{ $rawStatus ? ucfirst($rawStatus) : 'N/A' }}
                     </span>
                 </td>
             </tr>

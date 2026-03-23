@@ -17,7 +17,9 @@ class Bookings extends Model
         'pickup_date_time',
         'passengers',
         'cars_id',
-        'fare'
+        'fare',
+        'status',
+        'payment_status'
     ];
     
     public function customer()
