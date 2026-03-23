@@ -34,7 +34,7 @@
             </div>
             
             <!-- Driver Form -->
-             <div class="col-lg-5">
+             <div class="col-lg-5 col-md-6">
                 <div class="booking-card">
                     <h4 class="card-title">🚗 Do You Wanna A Trip</h4>
                     <form action="{{ route('driver.home') }}" method="GET">
