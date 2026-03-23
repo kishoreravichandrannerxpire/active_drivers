@@ -1,25 +1,66 @@
 <style>
-  .carousel-item img {
-    height: 640px;
+
+/* Wrapper */
+.banner-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Banner Image */
+.banner-img,
+.carousel-item img {
+    height: 650px;
     object-fit: cover;
 }
 
-.carousel-caption h1 {
-    margin-bottom: 250px;
-    color: orange;
-    font-family: Arial Black;
+/* Carousel item */
+.carousel-item {
+    position: relative;
 }
 
-.carousel-item::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(177, 175, 175, 0.53);
+/* Overlay (merged both styles) */
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* cleaner overlay */
 }
-  </style>
+
+/* Caption container */
+.carousel-caption {
+    bottom: 20%;
+    text-align: center;
+}
+
+/* Heading style */
+.carousel-caption h1 {
+    margin-bottom: 20px;
+    color: white;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+/* Optional paragraph text */
+.carousel-caption p {
+    color: #fff;
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+    .banner-img,
+    .carousel-item img {
+        height: 400px;
+    }
+
+    .carousel-caption {
+        bottom: 10%;
+    }
+
+    .carousel-caption h1 {
+        font-size: 22px;
+    }
+}
+
+</style>
 <body>
    
        <div class="banner-wrapper">
