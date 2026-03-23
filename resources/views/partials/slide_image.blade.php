@@ -4,10 +4,10 @@
     object-fit: cover;
 }
 
-.carousel-caption  {
+.carousel-caption h1 {
     margin-bottom: 250px;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+    color: orange;
+    font-family: Arial Black;
 }
 
 .carousel-item::before{
@@ -30,7 +30,7 @@
         @foreach($banners as $index => $banner)
         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
           <img src="{{ asset('storage/' . $banner->image)}}" class="d-block w-100" alt="{{ $banner->title }}">
-          <div class="carousel-caption d-none d-md-block text-center">
+          <div class="carousel-caption text-center">
             <h1>{{ $banner->title }}</h1>
             <p>{{ $banner->description }}</p>
           </div>
