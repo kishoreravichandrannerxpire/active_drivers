@@ -5,14 +5,47 @@
 
 <script>
 $(document).ready(function () {
-    if ($.fn.DataTable.isDataTable('#table')) {
-        $('#table').DataTable().destroy();
+
+    let initializedTables = [];
+
+    function initDataTable(table) {
+        let tableId = $(table).attr('id');
+
+        // Skip if no ID (safety)
+        if (!tableId) return;
+
+        // Prevent duplicate initialization
+        if (initializedTables.includes(tableId)) return;
+
+        // Initialize ALWAYS (let DataTables handle empty state)
+        $(table).DataTable({
+            info: true,
+            paging: true,
+            searching: true,
+            lengthChange: true,
+            destroy: true
+        });
+
+        initializedTables.push(tableId);
     }
 
-    if($('#table tbody tr').length > 1 || !$('#table tbody td').attr('colspan')) {
-        $('#table').DataTable({
-            info: false,
+    // ✅ Initialize ALL visible tables on load
+    $('table').each(function () {
+        if ($(this).is(':visible')) {
+            initDataTable(this);
+        }
+    });
+
+    // ✅ Initialize tables when tab is shown
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function () {
+
+        $('.tab-pane.active table').each(function () {
+            initDataTable(this);
         });
-    }
+
+        // Fix column width issue
+        $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+    });
+
 });
 </script>

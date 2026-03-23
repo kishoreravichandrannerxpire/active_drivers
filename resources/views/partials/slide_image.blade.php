@@ -28,8 +28,18 @@
 
 /* Caption container */
 .carousel-caption {
+<<<<<<< HEAD
     bottom: 20%;
     text-align: center;
+=======
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* KEY */
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+>>>>>>> b2f83b9 (fix admin portal all bookings)
 }
 
 /* Heading style */
@@ -51,9 +61,14 @@
 
 /* Responsive fix */
 @media (max-width: 768px) {
+<<<<<<< HEAD
     .banner-img,
     .carousel-item img {
         height: 400px;
+=======
+    .banner-img {
+        height: 600px;
+>>>>>>> b2f83b9 (fix admin portal all bookings)
     }
 
     .carousel-caption {

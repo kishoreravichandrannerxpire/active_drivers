@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped" id="table">
+<table class="table table-bordered table-striped" id="{{ $tableId ?? 'table' }}">
     <thead class="table-dark">
         <tr>
             <th>ID</th>
@@ -27,7 +27,9 @@
                 <td>{{ $booking->drop_location }}</td>
 
                 <td>{{ \Carbon\Carbon::parse($booking->pickup_date_time)->format('d-m-Y H:i') }}</td>
-                <td>{{ \Carbon\Carbon::parse($booking->completed_date_time)->format('d-m-Y H:i') }}</td>
+                <td> {{ !empty($booking->completed_date_time)
+                ? \Carbon\Carbon::parse($booking->completed_date_time)->format('d-m-Y H:i')
+                : 'N/A' }}</td>
 
                 <td>₹{{ $booking->fare }}</td>
 
