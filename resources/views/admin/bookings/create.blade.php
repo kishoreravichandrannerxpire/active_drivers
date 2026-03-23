@@ -12,7 +12,7 @@
 
 <div class="row mb-3">
     <div class="col-12 col-md-4">
-        <label class="form-label">Customer</label>
+        <label class="form-label">Customer <span class="text-danger">*</span></label>
         <select name="customers_id" id="customers_id" class="form-select">
             <option value="">-- Select Customer --</option>
             @foreach($customers as $customer)
@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-12 col-md-4">
-        <label class="form-label">Car</label>
+        <label class="form-label">Car <span class="text-danger">*</span></label>
         <select name="cars_id" id="cars_id" class="form-select">
             <option value="">Select Your Car</option>
         </select>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="col-12 col-md-4">
-        <label class="form-label">Driver</label>
+        <label class="form-label">Driver <span class="text-danger">*</span></label>
         <select name="drivers_id" class="form-select">
             <option value="">Choose Driver</option>
             @foreach($drivers as $driver)
@@ -44,13 +44,13 @@
 
 <div class="row mb-3">
     <div class="col-12 col-md-4">
-        <label class="form-label">Passengers</label>
+        <label class="form-label">Passengers <span class="text-danger">*</span></label>
         <input type="number" name="passengers" class="form-control" min="1">
         @error('passengers')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
 
     <div class="col-12 col-md-4">
-        <label class="form-label">Journey Type</label>
+        <label class="form-label">Journey Type <span class="text-danger">*</span></label>
         <select name="journey_type" class="form-select">
             <option value="">-- Select --</option>
             <option value="1">One Way</option>
@@ -61,7 +61,7 @@
 
     @can('permissions')
     <div class="col-12 col-md-4">
-        <label class="form-label">Fare</label>
+        <label class="form-label">Fare <span class="text-danger">*</span></label>
         <input type="number" step="1" name="fare" class="form-control">
         @error('fare')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
@@ -70,19 +70,19 @@
 
 <div class="row mb-3">
     <div class="col-12 col-md-4">
-        <label class="form-label">Pickup Date & Time</label>
+        <label class="form-label">Pickup Date & Time <span class="text-danger">*</span></label>
         <input type="datetime-local" name="pickup_date_time" class="form-control">
         @error('pickup_date_time')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
 
     <div class="col-12 col-md-4">
-        <label class="form-label">Pickup Location</label>
+        <label class="form-label">Pickup Location <span class="text-danger">*</span></label>
         <input type="text" name="pickup_location" class="form-control">
         @error('pickup_location')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
 
     <div class="col-12 col-md-4">
-        <label class="form-label">Drop Location</label>
+        <label class="form-label">Drop Location <span class="text-danger">*</span></label>
         <input type="text" name="drop_location" class="form-control">
         @error('drop_location')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
@@ -90,13 +90,13 @@
 
 <div class="row mb-3">
     <div class="col-12 col-md-4">
-        <label class="form-label">From Postcode</label>
+        <label class="form-label">From Postcode <span class="text-danger">*</span></label>
         <input type="text" name="from_postcode" class="form-control">
         @error('from_postcode')<small class="text-danger">{{ $message }}</small>@enderror
     </div>
 
     <div class="col-12 col-md-4">
-        <label class="form-label">To Postcode</label>
+        <label class="form-label">To Postcode <span class="text-danger">*</span></label>
         <input type="text" name="to_postcode" class="form-control">
         @error('to_postcode')<small class="text-danger">{{ $message }}</small>@enderror
     </div>

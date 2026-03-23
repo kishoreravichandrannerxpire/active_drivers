@@ -25,7 +25,12 @@
 
 /* Caption Styling */
 .carousel-caption {
-    bottom: 20%;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* KEY */
+    text-align: center;
+    width: 100%;
     z-index: 2;
 }
 
@@ -60,7 +65,7 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .banner-img {
-        height: 300px;
+        height: 600px;
     }
 
     .carousel-caption {
