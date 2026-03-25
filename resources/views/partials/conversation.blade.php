@@ -5,9 +5,6 @@
       <!-- LEFT : CONVERSATION FORM -->
       <div class="col-lg-7">
         <h2 class="mb-3">Let's Start a Conversation</h2>
-        <p class="text-muted mb-4">
-          Tell us about your requirements and we'll get back to you shortly.
-        </p>
  
         <form>
           <div class="row">
@@ -37,9 +34,7 @@
  
             <div class="col-12 mb-4">
               <label class="form-label text-uppercase small">Message</label>
-              <textarea rows="4"
-                        class="form-control border-0 border-bottom rounded-0"
-                        placeholder="Tell us about your project"></textarea>
+              <textarea rows="4" class="form-control border-0 border-bottom rounded-0"></textarea>
             </div>
  
             <div class="col-12">
@@ -67,8 +62,7 @@
             <div>
               <h6 class="mb-1">Address</h6>
               <p class="mb-0 text-muted">
-                892 Park Avenue, Manhattan<br>
-                New York, NY 10075
+                6/192.2/2 Paraikal Madai, Railway, Sattion Road, Kottar, Nagercoil
               </p>
             </div>
           </div>
@@ -79,7 +73,7 @@
             </div>
             <div>
               <h6 class="mb-1">Email</h6>
-              <p class="mb-0 text-muted">hello@businessdemo.com</p>
+              <p class="mb-0 text-muted">support@activedrivers.in</p>
             </div>
           </div>
  
@@ -89,7 +83,7 @@
             </div>
             <div>
               <h6 class="mb-1">Phone</h6>
-              <p class="mb-0 text-muted">+1 (555) 789-2468</p>
+              <p class="mb-0 text-muted">+91 7708080876</p>
             </div>
           </div>
  

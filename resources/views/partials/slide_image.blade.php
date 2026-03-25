@@ -23,7 +23,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* cleaner overlay */
+    background: rgba(0, 0, 0, 0.60); /* cleaner overlay */
 }
 
 /* Caption container */
@@ -35,13 +35,18 @@
 /* Heading style */
 .carousel-caption h1 {
     margin-bottom: 20px;
-    color: white;
     font-family: 'Arial Black', Arial, sans-serif;
+     background: linear-gradient(90deg, #ff810b, #f8fafc, #06032e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Optional paragraph text */
 .carousel-caption p {
-    color: #fff;
+    font-family: 'Arial Black', Arial, sans-serif;
+     background: linear-gradient(to top, #ff7c01, #f8fafc, #161436);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Responsive fix */

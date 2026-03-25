@@ -76,14 +76,13 @@
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0, 0, 0, 0.90);
-    color:white;
+    background:rgb(11, 13, 31);
+    color: #ee8a2c;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     padding:20px;
-
     opacity:0;
     transition:opacity .4s ease;
 }
@@ -91,7 +90,7 @@
 .service-overlay h5{
     transform:translateY(20px);
     transition:.4s;
-    font-family: Arial, sans-serif;
+    font-weight: 700;
 }
 
 /* hover effects */

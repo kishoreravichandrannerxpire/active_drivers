@@ -19,7 +19,7 @@
         </ul>
     </div>
 @endif
-
+  <img src="{{ asset('storage/image/logo.png') }}" alt="Logo" class="d-block mx-auto mt-4" style="width: 200px;">
 <div class="container mt-5">
     <h2 class="text-center mb-4">Sign Up</h2>
 
@@ -73,6 +73,8 @@
         <input type="hidden" name="from_datetime" value="{{ request('from_datetime', '') }}">
         <input type="hidden" name="to_datetime" value="{{ request('to_datetime', '') }}">
 
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-2"
+            onclick="closeForm()"></button>
         <div class="mb-3">
             <label class="form-label">Mobile Number</label>
             <input type="text" name="mobile_number" class="form-control" required>
@@ -113,7 +115,10 @@
         rolesIdField.value = 2;
     }
 }
-</script>
 
+function closeForm() {
+  document.getElementById("registerForm").style.display = "none";
+}
+</script>
 </body>
 </html>

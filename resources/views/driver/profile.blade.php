@@ -1,235 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Driver Profile</title>
+        
+        @include('partials.links')
 <style>
-    body {
-    padding-top: 60px;
+body {
+    background: #eef2f7;
+    padding-top: 80px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Layout */
+.profile-wrapper {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+/* Sidebar */
+.profile-sidebar {
+    background: #1e293b;
+    color: #fff;
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Avatar */
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #334155;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 3px solid #475569;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Name & Status */
+.profile-name {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.profile-status {
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.status-active { background: #22c55e; }
+.status-inactive { background: #64748b; }
+
+/* Right Panel */
+.profile-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* Title */
+.section-title {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 25px;
+}
+
+/* Info box */
+.info-box {
+    background: #f8fafc;
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.info-box:hover {
+    background: #f1f5f9;
+}
+
+/* Labels */
+.info-label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+/* Values */
+.info-value {
+    font-weight: 500;
+}
+
+/* Inputs */
+.info-box input,
+.info-box select {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-weight: 500;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 16px;
+}
+
+/* Image preview */
+.preview-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Button */
+.btn {
+    border-radius: 8px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+    .profile-wrapper {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
+
+    .profile-sidebar {
+        padding: 20px 15px;
+    }
+
+    .profile-avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .profile-content {
+        padding: 18px 15px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .info-box {
+        padding: 10px 12px;
+    }
+
+    .profile-name {
+        font-size: 16px;
+    }
+
+    .profile-status {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .info-value {
+        font-size: 14px;
+    }
+
+    .preview-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .modal-dialog {
+        margin: 10px;
+    }
+}
+
 </style>
+    </head>
 <body>
-    @include('partials.links')
-    @include('partials.navbar')
+    @include('partials.navbar') 
     <div class="container mt-5">
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="row justify-content-center">
-        <div class="col-md-5">
-
-            <div class="card border-0 shadow rounded-4">
-
-                <div class="card-body p-4">
-
-                    <h4 class="fw-semibold text-center mb-4">
-                        My Profile
-                    </h4>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">First Name</span>
-                        <span>{{ $driver?->first_name }}</span>
+         @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+        <div class="profile-wrapper">
+            <!-- LEFT -->
+             <div class="profile-sidebar">
+                <div class="profile-avatar">
+                    @if($driver?->driver_image)
+                    <img src="{{ asset('storage/drivers/'.$driver->driver_image) }}">
+                    @else
+                    <div style="line-height:90px; font-size:30px;">
+                        {{ strtoupper(substr($driver?->first_name,0,1)) }}
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Last Name</span>
-                        <span>{{ $driver?->last_name }}</span>
+                    @endif
+                </div>
+                
+                <div class="profile-name">
+                    {{ $driver?->first_name }} {{ $driver?->last_name }}
+                </div>
+                
+                <div class="profile-status {{ $driver?->status ? 'status-active' : 'status-inactive' }}">
+                    {{ $driver?->status ? 'Active' : 'Inactive' }}
+                </div>
+                
+                <hr class="my-4" style="border-color:#334155">
+                <div class="text-start small">
+                    <p><strong>Email:</strong><br>{{ $driver?->email }}</p>
+                    <p><strong>Mobile:</strong><br>{{ $driver?->mobile_number }}</p>
+                </div>
+                
+                <button class="btn btn-light mt-3 w-100" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                    Edit Profile
+                </button>
+            </div>
+            
+            <!-- RIGHT -->
+             
+            <div class="profile-content">
+                <h5 class="section-title">Driver Details</h5>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <div class="info-label">Age</div>
+                        <div class="info-value">{{ $driver?->age }}</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Mobile Number</span>
-                        <span>{{ $driver?->mobile_number }}</span>
+                    <div class="info-box">
+                        <div class="info-label">License</div>
+                        <div class="info-value">{{ $driver?->driver_license_number }}</div>
                     </div>
                     
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Email</span>
-                        <span>{{ $driver?->email }}</span>
-                    </div>    
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Age</span>
-                        <span>{{ $driver?->age }}</span>
+                    <div class="info-box">
+                        <div class="info-label">Experience</div>
+                        <div class="info-value">{{ $driver?->total_experience_years }} Years</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Status</span>
-                        <span>{{ $driver?->status }}</span>
+                    
+                    <div class="info-box">
+                        <div class="info-label">Hill Experience</div>
+                        <div class="info-value">{{ $driver?->hill_experience ? 'Yes' : 'No' }}</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">License Number</span>
-                        <span>{{ $driver?->driver_license_number }}</span>
+                    
+                    <div class="info-box">
+                        <div class="info-label">Accident History</div>
+                        <div class="info-value">{{ $driver?->accident_history ? 'Yes' : 'No' }}</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Image</span>
-                        <span>{{ $driver?->driver_image }}</span>
+                    
+                    <div class="info-box">
+                        <div class="info-label">Luxury Car</div>
+                        <div class="info-value">{{ $driver?->luxury_car_experience ? 'Yes' : 'No' }}</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Total Experience Years</span>
-                        <span>{{ $driver?->total_experience_years }}</span>
+                    
+                    
+                    <div class="info-box">
+                        <div class="info-label">Address</div>
+                        <div class="info-value">{{ $driver?->address }}</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Hill Experience</span>
-                        <span>{{ $driver?->hill_experience }}</span>
+                    
+                    <div class="info-box">
+                        <div class="info-label">Pincode</div>
+                        <div class="info-value">{{ $driver?->pincode }}</div>
                     </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Accident History</span>
-                        <span>{{ $driver?->accident_history }}</span>
-                    </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Luxury Car Experience</span>
-                        <span>{{ $driver?->luxury_car_experience }}</span>
-                    </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Address</span>
-                        <span>{{ $driver?->address }}</span>
-                    </div>
-
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span class="text-muted">Pincode</span>
-                        <span>{{ $driver?->pincode }}</span>
-                    </div>
-
-                    <div class="mt-4 text-center">
-                        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                            Edit Profile
-                        </button>
-                    </div>
-
                 </div>
             </div>
         </div>
-        </div>
-
-        <!-- Edit Profile Modal -->
-    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    </div>
+    
+    <!-- MODAL (MATCHING UI) -->
+     <div class="modal fade" id="editProfileModal">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="{{ route('driver.profile.update') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name', $driver?->first_name) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name', $driver?->last_name) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="mobile_number" class="form-label">Mobile Number</label>
-                            <input type="text" class="form-control" id="mobile_number" name="mobile_number" value="{{ old('mobile_number', auth()->user()->mobile_number) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}" required>
-                        </div>    
-                        <div class="mb-3">
-                            <label for="age" class="form-label">Age</label>
-                            <input type="number" class="form-control" id="age" name="age" value="{{ old('age', $driver?->age) }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                        <select name="status" class="form-control">
-                        <option value="1" {{ old('status',$driver?->status)==1?'selected':'' }}>Active</option>
-                        <option value="0" {{ old('status',$driver?->status)==0?'selected':'' }}>Inactive</option>
-                        </select>
-                        </div>
 
-                        <div class="mb-3">
-                            <label for="driver_license_number" class="form-label">Driver License Number</label>
-                            <input type="text" class="form-control" id="driver_license_number" name="driver_license_number" value="{{ old('driver_license_number', $driver?->driver_license_number) }}" required>
-                        </div>
-                        <div class="mb-3">
-                        <label for="driver_image" class="form-label">Driver Image</label>
-
-                        <input type="file" class="form-control" id="driver_image" name="driver_image" accept="image/*">
-
-                        @if($driver?->driver_image)
-                        <small class="text-muted">
-                        Current: {{ $driver->driver_image }}
-                        </small>
-                        @endif
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="total_experience_years" class="form-label">Total Experience Years</label>
-                            <input type="number" class="form-control" id="total_experience_years" name="total_experience_years" value="{{ old('total_experience_years', $driver?->total_experience_years) }}" required>
-                        </div>
-
-                        <div class="mb-3">
-                        <label for="hill_experience" class="form-label">Hill Experience</label> 
-                        <select class="form-control" id="hill_experience" name="hill_experience">
-                        <option value="">-- Select --</option>
-                        <option value="1" {{ old('hill_experience', $driver?->hill_experience) == '1' ? 'selected' : '' }}> Yes </option>
-                        <option value="0" {{ old('hill_experience', $driver?->hill_experience) == '0' ? 'selected' : '' }}> No </option>
-                        </select>
-                        </div>
-
-                        <div class="mb-3">
-                        <label for="accident_history" class="form-label">Accident History</label>
-
-                        <select class="form-control" id="accident_history" name="accident_history">
-                        <option value="">-- Select --</option>
-                        <option value="1" {{ old('accident_history', $driver?->accident_history) == '1' ? 'selected' : '' }}> Yes </option>
-                        <option value="0" {{ old('accident_history', $driver?->accident_history) == '0' ? 'selected' : '' }}> No </option>
-                        </select>
-                        </div>
-
-                        <div class="mb-3">
-                        <label for="luxury_car_experience" class="form-label">Luxury Car Experience</label>
-                        <select class="form-control" id="luxury_car_experience" name="luxury_car_experience">
-                        <option value="">-- Select --</option>
-                        <option value="1" {{ old('luxury_car_experience', $driver?->luxury_car_experience) == '1' ? 'selected' : '' }}> Yes </option>
-                        <option value="0" {{ old('luxury_car_experience', $driver?->luxury_car_experience) == '0' ? 'selected' : '' }}> No </option>
-                        </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $driver?->address) }}" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="pincode" class="form-label">Pincode</label>
-                            <input type="text" class="form-control" id="pincode" name="pincode" value="{{ old('pincode', $driver?->pincode) }}" required>
+            <div class="modal-header">
+                <h5>Edit Profile</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="POST" action="{{ route('driver.profile.update') }}" enctype="multipart/form-data">
+                @csrf
+                
+                <div class="modal-body">
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <div class="info-label">First Name</div>
+                            <input type="text" name="first_name" value="{{ old('first_name',$driver?->first_name) }}">
                         </div>
                         
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <div class="info-box">
+                            <div class="info-label">Last Name</div>
+                            <input type="text" name="last_name" value="{{ old('last_name',$driver?->last_name) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Mobile</div>
+                            <input type="text" name="mobile_number" value="{{ old('mobile_number',auth()->user()->mobile_number) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Email</div>
+                            <input type="email" name="email" value="{{ old('email',auth()->user()->email) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Age</div>
+                            <input type="number" name="age" value="{{ old('age',$driver?->age) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Status</div>
+                            <select name="status">
+                                <option value="1" {{ old('status',$driver?->status)==1?'selected':'' }}>Active</option>
+                                <option value="0" {{ old('status',$driver?->status)==0?'selected':'' }}>Inactive</option>
+                            </select>
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">License</div>
+                            <input type="text" name="driver_license_number" value="{{ old('driver_license_number',$driver?->driver_license_number) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Image</div>
+                            <input type="file" name="driver_image">
+                            @if($driver?->driver_image)
+                            <img src="{{ asset('storage/drivers/'.$driver->driver_image) }}" class="preview-img">
+                            @endif
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Experience</div>
+                            <input type="number" name="total_experience_years" value="{{ old('total_experience_years',$driver?->total_experience_years) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Hill</div>
+                            <select name="hill_experience">
+                                <option value="1" {{ old('hill_experience',$driver?->hill_experience)=='1'?'selected':'' }}>Yes</option>
+                                <option value="0" {{ old('hill_experience',$driver?->hill_experience)=='0'?'selected':'' }}>No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Accident</div>
+                            <select name="accident_history">
+                                <option value="1" {{ old('accident_history',$driver?->accident_history)=='1'?'selected':'' }}>Yes</option>
+                                <option value="0" {{ old('accident_history',$driver?->accident_history)=='0'?'selected':'' }}>No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Luxury</div>
+                            <select name="luxury_car_experience">
+                                <option value="1" {{ old('luxury_car_experience',$driver?->luxury_car_experience)=='1'?'selected':'' }}>Yes</option>
+                                <option value="0" {{ old('luxury_car_experience',$driver?->luxury_car_experience)=='0'?'selected':'' }}>No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Address</div>
+                            <input type="text" name="address" value="{{ old('address',$driver?->address) }}">
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-label">Pincode</div>
+                            <input type="text" name="pincode" value="{{ old('pincode',$driver?->pincode) }}">
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary px-4">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    </div>
-                    
-
+</div>
 </body>
 </html>

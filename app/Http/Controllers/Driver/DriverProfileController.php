@@ -56,6 +56,7 @@ class DriverProfileController extends Controller
 
 
         /* ---------- Upload Image ---------- */
+        $name=$driver->driver_image; // Keep existing image if no new image is uploaded
 
         if ($request->hasFile('driver_image')) {
 
@@ -63,9 +64,7 @@ class DriverProfileController extends Controller
 
             $name = time() . '_' . $image->getClientOriginalName();
 
-            $image->move(public_path('uploads/drivers'), $name);
-
-            $driver->driver_image = 'uploads/drivers/' . $name;
+            $image->move(public_path('storage/drivers'), $name);
         }
 
 
@@ -86,6 +85,7 @@ class DriverProfileController extends Controller
             'hill_experience' => $request->hill_experience,
             'accident_history' => $request->accident_history,
             'luxury_car_experience' => $request->luxury_car_experience,
+            'driver_image' => $name,
 
             'address' => $request->address,
             'pincode' => $request->pincode,
