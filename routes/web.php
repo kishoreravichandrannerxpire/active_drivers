@@ -1,27 +1,59 @@
 <?php
 
+// Admin Routes
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\BookingsController;
+use App\Http\Controllers\Admin\PermissionController;
 
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check() && Auth::user()->role && in_array(Auth::user()->role->role_name, ['Admin','prevent-back-history'])) {
+        return redirect()->route('admin.dashboard');
+    }
+    return view('home');
+}); //removed welcome page
+
+Route::get('/customer/create/form', fn() => view('customer_create_form'));
+
+Route::get('/home', function () {
+    if (Auth::check() && Auth::user()->role && in_array(Auth::user()->role->role_name, ['Admin','prevent-back-history'])) {
+        return redirect()->route('admin.dashboard');
+    }
+    return view('home');
+})->name('home');
+
+Route::get('/test-middleware', function () {
+    $middleware = app()->make(\App\Http\Middleware\AdminMiddleware::class);
+    return 'Middleware exists: ' . get_class($middleware);
 });
 
-use App\Http\Controllers\DriverAvailabilityController;
+//Trial routes
+use App\Http\Controllers\TrialController;
 
-Route::get('/driver/availability/form', function () {
-    return view('driver_availability');
-});
+Route::get('/trial', [TrialController::class, 'index'])
+    ->name('trial');
+Route::get('/trial2', [TrialController::class, 'second'])
+    ->name('trial2');        
 
-Route::post('/driver/availability', [DriverAvailabilityController::class, 'store'])->name('availability.store');
+// login routes
+use App\Http\Controllers\UserLogin;
+Route::get('/login', [UserLogin::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserLogin::class, 'login'])->name('login.submit');
+Route::post('/logout', [UserLogin::class, 'logout'])->name('logout');
 
 
-use App\Http\Controllers\DriverController;
-
-Route::get('/driver-form', [DriverController::class, 'showForm'])->name('driver.form');
-Route::post('/driver-form', [DriverController::class, 'submitForm'])->name('driver.submit');
-
-
-use App\Http\Controllers\BannerController;
-
-Route::resource('banners', BannerController::class);
-Route::get('/view-banners', [BannerController::class, 'viewActive'])->name('banners.view');
+// Signup route
+Route::get('/signup', fn() => view('signup_form'))->name('signup');
+Route::post('/signup', [UserController::class, 'store'])->name('signup.store');

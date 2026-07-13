@@ -1,0 +1,63 @@
+@extends(Gate::allows('permissions') ? 'layouts.app' : 'layouts.customer')
+ 
+@section('content')
+<div class="container">
+    <div class="mb-3 d-flex justify-content-between">
+        <h2>Cars List</h2>
+        <a href="{{ route('admin.cars.create') }}" class="btn btn-primary mb-2">Add New Car</a>
+    </div>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <table class="table table-bordered table-striped" id="table">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Car Model</th>
+                <th>Car Type</th>
+                <th>Car Number</th>
+                <th>Insurance</th>
+                <th>Fastag</th>
+                <th>Transmission Type</th>
+                <th>Fuel Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @forelse($cars as $car)
+            <tr>
+                <td>{{ $car->id }}</td>
+                <td>{{ $car->customer ? $car->customer->first_name : 'N/A' }}</td>
+                <td>{{ $car->car_model }}</td>
+                <td>{{ $car->car_type }}</td>
+                <td>{{ $car->car_number }}</td>
+                <td>{{ $car->insurance ? 'Yes' : 'No' }}</td>
+                <td>{{ $car->fastag ? 'Yes' : 'No' }}</td>
+                <td>{{ $car->transmission_type }}</td>
+                <td>{{ $car->fuel_type }}</td>
+                <td>
+                    <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ route('admin.cars.destroy', $car->id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="9" class="text-center">No cars found</td>
+            </tr>
+        @endforelse
+        </tbody>
+    </table>
+</div>
+
+@endsection
+
+@section('scripts')
+  @include('partials.datatables')
+@endsection

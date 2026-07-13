@@ -2,19 +2,201 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Banner Management</title>
+    <title>Active Drivers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        .sidebar {
+            min-height: 100vh;
+            width: 220px;
+        }
+        /* Hide sidebar on small screens */
+        @media (max-width: 991px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">Active Drivers</a>
-            <!-- <a class="nav-link text-white" href="{{ route('banners.index') }}">Banners</a> -->
-        </div>
-    </nav>
+    <div class="d-flex">
+        <!-- Sidebar (visible on desktop) -->
+        <div class="sidebar bg-dark text-white p-3 d-none d-lg-block">
+           <h4> <a class="nav-link text-white mb-4" href="{{ url('admin/dashboard') }}"> Dashboard</a> </h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('admin/user') }}"> User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('admin/banners') }}"> Banners</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse"
+                   href="#driversMenu"
+                   role="button"
+                   aria-expanded="{{ request()->is('admin/drivers*') ? 'true' : 'false' }}"
+                   aria-controls="driversMenu">
+                    <span>Drivers</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
 
-    <div class="container">
-        @yield('content')
+                <div class="collapse {{ request()->is('admin/drivers*') ? 'show' : '' }}" id="driversMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/drivers') }}">
+                                Drivers List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/drivers/availability') }}">
+                                Driver Availability
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+                <li>
+                    <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
+                </li>
+                <li>
+                    <a class="nav-link text-white" href="{{ url('admin/cars') }}"> Cars</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse"
+                   href="#bookingMenu"
+                   role="button"
+                   aria-expanded="{{ request()->is('admin/bookings*') ? 'true' : 'false' }}"
+                   aria-controls="bookingMenu">
+                    <span>Bookings</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <div class="collapse {{ request()->is('admin/bookings*') ? 'show' : '' }}" id="bookingMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings/allbookings') }}">
+                                All Bookings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings') }}">
+                                Add Booking
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+                <li>
+                    <a class="nav-link text-white" href="{{url('admin/permissions')}}">Permissions</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-grow-1">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <!-- Sidebar toggle button (only on mobile) -->
+                    <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar"><span class="navbar-toggler-icon"></span> </button>
+
+                    <a class="navbar-brand">Active Drivers</a>
+                    <a class="navbar-brand" href="{{ url('admin/logout') }}">Logout</a>
+                </div>
+            </nav>
+
+            <!-- Page Content -->
+            <div class="container mt-4">
+                @yield('content')
+            </div>
+        </div>
     </div>
+
+    <!-- Offcanvas Sidebar (for mobile) -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Dashboard</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('admin/user/form') }}"> User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('admin/banners') }}"> Banners</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse"
+                   href="#driversMenu"
+                   role="button"
+                   aria-expanded="{{ request()->is('admin/drivers*') ? 'true' : 'false' }}"
+                   aria-controls="driversMenu">
+                    <span>Drivers</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <div class="collapse {{ request()->is('admin/drivers*') ? 'show' : '' }}" id="driversMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/drivers') }}">
+                                Drivers List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/drivers/availability') }}">
+                                Driver Availability
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+                <li>
+                    <a class="nav-link text-white" href="{{ url('admin/customers') }}"> Customers</a>
+                </li>
+                <li>
+                    <a class="nav-link text-white" href="{{ url('admin/cars') }}"> Cars</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse"
+                   href="#bookingMenu"
+                   role="button"
+                   aria-expanded="{{ request()->is('admin/bookings*') ? 'true' : 'false' }}"
+                   aria-controls="bookingMenu">
+                    <span>Bookings</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <div class="collapse {{ request()->is('admin/bookings*') ? 'show' : '' }}" id="bookingMenu">
+                    <ul class="nav flex-column ms-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings/allbookings') }}">
+                                All Bookings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ url('admin/bookings') }}">
+                                Add Booking
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+                <li>
+                    <a class="nav-link text-white" href="{{url('admin/permissions')}}">Permissions</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+@yield('scripts')
